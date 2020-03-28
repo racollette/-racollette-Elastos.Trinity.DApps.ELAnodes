@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # About
 
 This is a basic sample / quickstart application for **Elastos Trinity**. 
@@ -8,3 +9,6 @@ install that application first on your mobile device).
 
 Read more on [the Elastos developer website](https://developer.elastos.org) to learn more about building and running 
 your own Trinity applications.
+=======
+# -racollette-Elastos.Trinity.DApps.ELAnodes
+>>>>>>> 057610e0fc748069190763570bb4043ba0226c2b
