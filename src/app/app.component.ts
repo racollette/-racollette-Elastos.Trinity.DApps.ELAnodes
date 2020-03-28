@@ -33,13 +33,13 @@ export class MyApp {
       this.splashScreen.hide();
       this.nodesService.init();
       this.data.init();
-     // this.data.loaded.subscribe(load => this.loaded = load)
+      this.data.loaded.subscribe(load => this.loaded = load)
     });
   }
 
-  // menuOpened() {
-  //   this.votePage.pushMenu();
-  // }
+  menuOpened() {
+    this.votePage.pushMenu();
+  }
 
 }
 
