@@ -1,0 +1,24 @@
+* {
+    background: #000000;
+  }
+  
+  ion-tab-bar {
+    height: 8vh;
+    vertical-align: middle;
+  
+    fa-icon {
+      color: #989aa2;
+      font-size: 0.7rem;
+      padding-top: 0.2vh;
+    }
+  
+    ion-label {
+      font-size: 0.6rem;
+      margin-top: 0.8vh;
+      margin-bottom: 0;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+  }
+  

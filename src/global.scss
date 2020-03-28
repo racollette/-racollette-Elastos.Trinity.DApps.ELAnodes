@@ -1,0 +1,442 @@
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+@import "~@swimlane/ngx-datatable/themes/material.scss";
+@import "~@swimlane/ngx-datatable/themes/dark.scss";
+@import "~@swimlane/ngx-datatable/themes/bootstrap.scss";
+
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 300;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-Light.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 400;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 500;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-Medium.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 600;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-SemiBold.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 700;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-Bold.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 800;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-ExtraBold.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "Raleway";
+//   font-weight: 900;
+//   font-style: normal;
+//   src: url("assets/fonts/Raleway-Black.ttf") format("truetype");
+// }
+
+// * {
+//   font-family: "Raleway" !important;
+// }
+
+ion-title {
+  font-weight: 700;
+}
+
+
+ion-content {
+  --background: transparent;
+}
+
+ion-toast {
+  --background: #0096ab;
+  --color: #fff;
+  //--box-shadow: 0px 0px 4px 2px #000000;
+  --border-radius: 6px;
+  // --border-color: #fff;
+  // --border-width: 1px;
+  // --border-style: solid;
+}
+
+:root {
+  ion-tab-button {
+    --ripple-color: #00ffff;
+  }
+
+  ion-tab-button.tab-selected {
+    ion-icon,
+    ion-label {
+      color: #e8007f !important;
+
+    }
+  }
+
+  ion-tab-button:hover {
+    ion-icon,
+    ion-label {
+      color: #e8007f !important;
+
+    }
+  }
+
+   --ion-color-secondary: #252525;
+   --ion-color-primary: linear-gradient(360deg, #66e0ff 0%, #00a3cc 100%)
+}
+
+ion-searchbar {
+  .searchbar-input-container {
+    .searchbar-input {
+      border-radius: 30px !important;
+    }
+  }
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+.inactive {
+  color: rgb(231, 81, 81) !important;
+}
+
+.refreshStats {
+  margin-top: 45%;
+  .refresher-pulling-text,
+  .refresher-refreshing-text,
+  .refresher-refreshing-icon,
+  .refresher-pulling-icon {
+    font-weight: 500;
+    color: #666666;
+  }
+}
+
+@media screen and (min-height: 750px) {
+  .refreshStats {
+    margin-top: 50%;
+  }
+}
+
+
+/// Supernode Datatable
+.node-table-container {
+
+.ngx-datatable {
+  box-shadow: none;
+  color: #fff;
+  font-size: 12.5px;
+
+  .datatable-header {
+    color: #fff;
+
+    .datatable-header-cell {
+      text-align: left;
+      padding: 0.5rem 0;
+      font-weight: bold;
+      font-size: 0.8rem;
+
+      .datatable-header-cell-label {
+        line-height: 24px;
+      }
+    }
+  }
+
+  .datatable-body {
+
+    .datatable-body-row {
+      font-weight: 400;
+      border: none;
+      
+      .datatable-row-group {
+        background-image: linear-gradient(#4d4d4d, #272727);
+        box-shadow: 0px 0px 10px 0px #000000;
+        border-width: 2px;
+        border-color: #000;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        //border-radius: 12px;
+      }
+
+      .datatable-body-cell {
+        text-align: left;
+        padding: 0.5rem 0;
+
+        .datatable-body-cell-label {
+          height: 100%;
+        }
+      }
+
+    }
+  }
+
+  .datatable-footer {
+    background: #202020;
+    color: #72809b;
+    margin-top: -1px;
+
+    .page-count {
+      line-height: 50px;
+      height: 50px;
+      padding: 0 1.2rem;
+    }
+
+    .datatable-pager {
+      margin: 0 10px;
+      vertical-align: top;
+
+      ul {
+        li {
+          margin: 10px 0px;
+
+          &:not(.disabled) {
+            &.active a,
+            &:hover a {
+              background-color: #455066;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      a {
+        height: 22px;
+        min-width: 24px;
+        line-height: 22px;
+        padding: 0;
+        border-radius: 3px;
+        margin: 0 3px;
+        text-align: center;
+        vertical-align: top;
+        text-decoration: none;
+        vertical-align: bottom;
+        color: #72809b;
+      }
+
+      .datatable-icon-left,
+      .datatable-icon-skip,
+      .datatable-icon-right,
+      .datatable-icon-prev {
+        font-size: 18px;
+        line-height: 27px;
+        padding: 0 3px;
+      }
+    }
+  }
+
+  .datatable-summary-row {
+    .datatable-body-row {
+      background-color: #14171f;
+
+      &:hover {
+        background-color: #14171f;
+      }
+
+      .datatable-body-cell {
+        font-weight: bold;
+      }
+    }
+  }
+
+}
+
+.datatable-header .datatable-header-cell:nth-child(1) {
+  margin-left: 0.75rem !important;
+}
+
+.datatable-body-row .datatable-row-center.datatable-row-group .datatable-body-cell:nth-child(1) {
+  margin-left: 0.75rem !important;
+}
+
+.datatable-header .datatable-header-cell:nth-child(4) {
+  margin-right: 0.25rem !important;
+}
+
+.datatable-body-row .datatable-row-center.datatable-row-group .datatable-body-cell:nth-child(4) {
+  margin-right: 0.25rem !important;
+}
+
+// .datatable-header > div > div.datatable-row-center > datatable-header-cell:nth-child(5) {
+//   display: none !important;
+// }
+
+.ngx-datatable.multi-click-selection .datatable-body-row.active .datatable-row-group {
+  background-color: #1c1c1c;
+  background-image: none;
+  box-shadow: inset 0px 0px 10px 0px #000000;
+  //border-radius: 10px;
+}
+
+}
+
+
+/// Rewards History Datatable
+.rewards-table-container {
+
+  .ngx-datatable {
+    color: #fff;
+    font-size: 12.5px;
+  
+    .datatable-header {
+      color: #fff;
+      border-bottom: 0.75px solid #a6a6a6;
+  
+      .datatable-header-cell {
+        text-align: left;
+        font-weight: bold;
+        font-size: 14px;
+  
+        .datatable-header-cell-label {
+          line-height: 24px;
+        }
+      }
+    }
+  
+    .datatable-body {
+  
+      .datatable-body-row {
+        font-weight: 400;
+        border-bottom: 1px solid #a6a6a6;
+        
+        .datatable-row-group {
+          border-width: 2px;
+          margin-top: 6px;
+          margin-bottom: 6px;
+          //border-radius: 12px;
+        }
+  
+        .datatable-body-cell {
+          text-align: left;
+          display: flex !important;
+          align-items: center !important;
+          //padding: 0.5rem 0;
+  
+          // .datatable-body-cell-label {
+          //   //height: 100%;
+          // }
+        }
+  
+      }
+    }
+  
+    .datatable-footer {
+      background: #1a1a1a;
+      color: #fff;
+      margin-top: 1px;
+  
+      .page-count {
+        //line-height: 50px;
+        //height: 50px;
+        //padding: 0 1.2rem;
+        display: none;
+      }
+  
+      .datatable-pager {
+        margin: 0 10px;
+        vertical-align: top;
+  
+        ul {
+          li {
+            margin: 10px 0px;
+  
+            &:not(.disabled) {
+              &.active a,
+              &:hover a {
+                color: #e8007f;
+                font-weight: bold;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+  
+        a {
+          height: 22px;
+          min-width: 24px;
+          line-height: 22px;
+          padding: 0;
+          border-radius: 3px;
+          margin: 0 3px;
+          font-size: 0.85rem;
+          text-align: center;
+          vertical-align: top;
+          text-decoration: none;
+          vertical-align: bottom;
+          color: #fff;
+        }
+  
+        .datatable-icon-left,
+        .datatable-icon-skip,
+        .datatable-icon-right,
+        .datatable-icon-prev {
+          font-size: 18px;
+          line-height: 27px;
+          padding: 0 3px;
+        }
+      }
+    }
+  
+    // .datatable-summary-row {
+    //   .datatable-body-row {
+    //     background-color: #14171f;
+  
+    //     &:hover {
+    //       background-color: #14171f;
+    //     }
+  
+    //     .datatable-body-cell {
+    //       font-weight: bold;
+    //     }
+    //   }
+    //  }
+  
+  }
+
+  .datatable-header .datatable-header-cell:nth-child(1) {
+    margin-left: 0.75rem !important;
+  }
+  
+//  datatable-header > div > div.datatable-row-center > datatable-header-cell:nth-child(1) > div > span.datatable-header-cell-wrapper > span {
+//     padding-left: 0.75rem !important;
+//  }
+
+//  datatable-header > div > div.datatable-row-center > datatable-header-cell:nth-child(2) > div > span.datatable-header-cell-wrapper > span {
+//   padding-left: 0.75rem !important;
+// }
+
+// datatable-header > div > div.datatable-row-center > datatable-header-cell:nth-child(3) > div > span.datatable-header-cell-wrapper > span {
+//   padding-left: 0.75rem !important;
+// }
+  
+ .datatable-body-row .datatable-row-center.datatable-row-group .datatable-body-cell:nth-child(1) {
+    margin-left: 0.75rem !important;
+  }
+  
+  }

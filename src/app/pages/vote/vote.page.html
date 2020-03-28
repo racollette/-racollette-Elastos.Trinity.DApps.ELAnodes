@@ -1,0 +1,124 @@
+<ion-content *ngIf="nodesService._nodes.length === 0">
+  <ion-row class="img-container">
+    <img-loader useImg><img style="position:absolute; top: 0; left: 0; height: 100%; width: 100%" src="../assets/images/SplashBackgroundI.png"></img-loader>
+  </ion-row>
+</ion-content>
+
+<section *ngIf="nodesService._nodes.length > 0" id="header" (click)="return()">
+<!-- <section *ngIf="loaded" id="header" (click)="return()">
+&& nodesService._nodes.length > 0 -->
+  
+  <ion-header>
+    <header-bar title="Supernodes"></header-bar>
+  </ion-header>
+</section>
+
+<ion-content *ngIf="nodesService._nodes.length > 0">
+
+  <app-node-slider 
+  *ngIf="showDetails" 
+  [showDetails]="showDetails"
+  [nodeIndex]="nodeIndex" 
+  [node]="node" 
+  [_nodes]="nodesService._nodes"
+  (updateSlideToggle)="getMessage($event)">
+  </app-node-slider>
+
+  <ion-list class="node-table-container">
+    <ngx-datatable #nodeTable [rows]="nodesService._nodes" [rowHeight]="auto"
+       [headerHeight]="30" [columnMode]="'flex'" [selectionType]="'multiClick'"
+      (select)="onSelect($event)" (onclick)="onSelect($event)">
+      <ngx-datatable-column name="Rank" prop="Rank" [flexGrow]="0.7">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <p class="ion-no-margin rank">{{ row.Rank }}</p>
+          <ion-icon class="arrow" src="../../../assets/icon/arrow-up-outline.svg" *ngIf="row.rankChange == true">
+          </ion-icon>
+          <ion-icon class="arrow" src="../../../assets/icon/arrow-down-outline.svg" *ngIf="row.rankChange == false">
+          </ion-icon>
+          <p [ngStyle]="{'color': row.rankChange ? '#00cc88' : '#e8007f'}" class="ion-no-margin rank">
+            {{ deltaStatus(row.deltaRank) }}</p>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="0.8">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <img-loader *ngIf="row.imageUrl" useImg><img class="logo" [src]="row.imageUrl"></img-loader>
+          <img-loader *ngIf="!row.imageUrl" useImg><img class="logo" src="../../../assets/logos/Default.png">
+          </img-loader>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Delegate" prop="Nickname" [flexGrow]="2.6">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <p class="ion-no-margin">{{ truncateNames(row.Nickname) }}</p>
+          <div class="nodes-small">{{ row.Country }}&nbsp;|&nbsp;{{ formatVotes(row.Votes) }}&nbsp;
+            <span class="nodes-small" *ngIf="row.votesChange == true"
+              [ngStyle]="{'color':'#00cc88'}">(+{{ deltaStatus(row.deltaVotes) }})</span>
+            <span class="nodes-small" *ngIf="row.votesChange == false"
+              [ngStyle]="{'color':'#e8007f'}">(-{{ deltaStatus(row.deltaVotes) }})</span>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Rewards" prop="AnnualROI" [flexGrow]="1">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <p class="ion-no-margin">{{ arrPercent(row.AnnualROI) }}</p>
+          <p class="ion-no-margin nodes-small">{{ payPercent(row.PercentPayout) }}&nbsp;</p>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="0.4">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <ion-button class="ion-no-margin ion-no-padding" fill="clear" (click)="_showDetails(row.Rank, row)">
+            <ion-icon class="details-arrow" slot="icon-only" name="ios-arrow-forward"></ion-icon>
+          </ion-button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </ion-list>
+
+</ion-content>
+
+<!-- <ion-content *ngIf="nodesService._nodes.length === 0">
+  <ion-list>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px;"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 30px"></ion-skeleton-text>
+    </ion-item>
+  </ion-list>
+</ion-content> -->
+
+  <!-- <ion-footer>
+    <nav></nav>
+  </ion-footer> -->

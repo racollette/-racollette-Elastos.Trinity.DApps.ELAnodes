@@ -1,0 +1,49 @@
+//@import "../../functions.scss";
+
+#logo {
+    text-align: center;
+    img {
+        margin-top: 20px;
+        width: 70px;
+        height: 70px;
+    }
+    div {
+        margin-top: px2rem(25px);
+        color: #999999;
+        font-size: 14px;
+    }
+}
+
+ion-list {
+    margin-top: px2rem(75px);
+}
+
+* { 
+    color: #fff;
+    --background: #1a1a1a;
+}
+
+fa-icon {
+    color: #fff;
+    width: 32px !important;
+    height: 32px !important;
+}
+
+ion-list {
+    background-color: #1a1a1a !important;
+    ion-item {
+        height: px2rem(104px);
+    }
+    ion-icon {
+        margin: 10px;
+        width: px2rem(32px);
+        height: px2rem(32px);
+    }
+    ion-label {
+        font-size: 15px;
+    }
+    ion-note {
+        font-size: 13px;
+    }
+
+}

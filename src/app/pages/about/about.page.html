@@ -1,0 +1,48 @@
+<ion-header>
+  <header-bar title="About"></header-bar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-button style="position:relative; top: 0px; left: -10px;" fill="clear"  [routerLink]="['/settings']">
+      <ion-icon
+        class="slider-back"
+        slot="icon-only"
+        name="arrow-round-back"
+      ></ion-icon>
+    </ion-button>
+</ion-item>
+  <div id="logo">
+    <img src="../assets/images/logo.png" />
+    <div>{{('Version') + ' ' + version}}</div>
+  </div>
+  <ion-list>
+    <ion-item style="--border-color: #a6a6a6">
+      <ion-label>Commit</ion-label>
+      <ion-note slot="end">{{commitVersion}}</ion-note>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label>Authors</ion-label>
+      <ion-note slot="end">Starfish Labs</ion-note>
+    </ion-item> -->
+    <ion-item style="--border-color: #a6a6a6" detail (click)="goWebsite()">
+      <ion-label>
+        <h2>{{'Website'}}</h2>
+        <p>starfish-supernode.tech</p>
+      </ion-label>
+    </ion-item>
+    <ion-item style="--border-color: #1a1a1a;">
+      <ion-label style="margin-bottom: 0;">
+        <h2>{{'Community'}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item style="--border-color: #1a1a1a;" class="ion-justify-content-evenly">
+        <ion-col><a href="https://t.me/starfish_supernode"><fa-icon style="color: #fff" [icon]="['fab', 'telegram']" size="2x"></fa-icon></a></ion-col>
+        <ion-col><a href="http://twitter.com/StarfishSN"><fa-icon style="color: #fff" [icon]="['fab', 'twitter']" size="2x"></fa-icon></a></ion-col>
+        <ion-col><a href="https://medium.com/starfish-supernode"><fa-icon style="color: #fff" [icon]="['fab', 'medium']" size="2x"></fa-icon></a></ion-col>
+        <ion-col><a href="https://www.reddit.com/user/starfish_supernode"><fa-icon style="color: #fff"  [icon]="['fab', 'reddit-alien']" size="2x"></fa-icon></a></ion-col>
+        <ion-col><a href="https://www.youtube.com/channel/UCr_NyLSC2hiYQvPtQmhGyfw/videos"><fa-icon style="color: #fff" [icon]="['fab', 'youtube']" size="2x"></fa-icon></a></ion-col>
+        <ion-col><a href="mailto:contact@starfish-supernode.tech"><fa-icon style="color: #fff" [icon]="['fas', 'envelope']" size="2x"></fa-icon></a></ion-col>
+    </ion-item>
+  </ion-list>
+</ion-content>

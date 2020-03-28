@@ -1,0 +1,17 @@
+<ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-toggle fill="clear">
+            <ion-icon class="voting-menu" name="ios-construct"></ion-icon>
+        </ion-menu-toggle>
+        <ion-img class="elanodes" src="../assets/images/logo-1.png"></ion-img>
+    </ion-buttons>
+    <ion-title>{{_title }}</ion-title>
+    <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="launcher()">
+            <ion-icon slot="icon-only" name="apps"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="close()">
+            <ion-icon slot="icon-only" name="ios-exit"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>

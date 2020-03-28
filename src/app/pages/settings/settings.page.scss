@@ -1,0 +1,28 @@
+* { 
+    color: #fff;
+}
+
+ion-content {
+    --background: #1a1a1a;
+}
+
+ion-list {
+    background-color: #1a1a1a !important;
+    ion-item {
+        height: px2rem(104px);
+        --background: #1a1a1a !important;
+    }
+    ion-icon {
+        margin: 10px;
+        width: px2rem(32px);
+        height: px2rem(32px);
+        color: #fff;
+    }
+    ion-label {
+        font-size: 18px;
+    }
+    ion-note {
+        font-size: 16px;
+    }
+
+}

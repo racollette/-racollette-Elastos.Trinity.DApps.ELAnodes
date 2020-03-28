@@ -1,0 +1,13 @@
+<ion-header>
+  <header-bar title="Settings"></header-bar>
+</ion-header>
+
+<ion-content>
+  <ion-list style="margin-top: 2.5vh;" lines="none">
+      <ion-item *ngFor="let item of settings" detail [routerLink]="[item.route]" routerDirection="forward">
+          <ion-icon name="{{item.icon}}"></ion-icon>
+          <ion-label>{{ item.label }}</ion-label>
+          <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
+      </ion-item>
+  </ion-list>
+</ion-content>

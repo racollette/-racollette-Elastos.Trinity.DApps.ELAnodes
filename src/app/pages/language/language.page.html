@@ -1,0 +1,27 @@
+<ion-header>
+  <header-bar title="Language"></header-bar>
+</ion-header>
+
+<ion-content padding>
+<ion-list style="padding-top: 0">
+  <ion-item style="--border-color: #a6a6a6">
+    <ion-button style="position:relative; top: 0px; left: -10px;" fill="clear"  [routerLink]="['/settings']">
+      <ion-icon
+        class="slider-back"
+        slot="icon-only"
+        name="arrow-round-back"
+      ></ion-icon>
+    </ion-button>
+</ion-item>
+<ion-radio-group value="English"  (ionChange)="mcqAnswer($event)">
+  <ion-item style="--border-color: #a6a6a6">
+    <ion-label>English</ion-label>
+    <ion-radio slot="end" value="English"></ion-radio>
+  </ion-item>
+  <ion-item style="--border-color: #a6a6a6">
+    <ion-label>中文</ion-label>
+    <ion-radio slot="end" value="Chinese"></ion-radio>
+  </ion-item>
+</ion-radio-group> 
+</ion-list>
+</ion-content>

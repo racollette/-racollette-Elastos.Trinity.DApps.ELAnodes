@@ -1,0 +1,690 @@
+<ion-header>
+  <header-bar title="Analytics"></header-bar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-refresher slot="fixed" (ionRefresh)="updateStats($event)" pullMin="100" pullMax="150">
+    <ion-refresher-content pullingIcon="arrow-round-up" pullingText="Refresh Data">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row style="margin-top: 10px;">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px;">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">STAKING PARTICIPATION</p>
+      </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="dataset-button" (click)="selectCoins()" [ngStyle]="{'background-color': colorCoins }">
+            <strong>
+              COINS
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="dataset-button" (click)="selectSupply()" [ngStyle]="{'background-color': colorSupply }">
+            <strong>
+              SUPPLY
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="dataset-button" (click)="selectVoters()" [ngStyle]="{'background-color': colorVoters }">
+            <strong>
+              VOTERS
+            </strong>
+          </ion-button>
+        </ion-col>  
+      </ion-row>
+      <ion-row style="margin-top: 15px;">
+        <div style="display: block; width: 100%; height: 35vh;">
+          <canvas 
+          #coinChart
+          ></canvas>
+        </div>
+      </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch1M()" [ngStyle]="{'background-color': color1M }">
+            <strong>
+              1M
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch6M()" [ngStyle]="{'background-color': color6M }">
+            <strong>
+              6M
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch1Y()" [ngStyle]="{'background-color': color1Y }">
+            <strong>
+              1Y
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">    
+          <ion-button class="chart-button" (click)="switchAll()" [ngStyle]="{'background-color': colorAll }">
+            <strong>
+              ALL
+            </strong>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+
+
+  <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0px; margin-bottom: 15px;">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">STAKED SUPPLY</p>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <div style="width: 100px; height: 100px; float: left; position: relative;  margin-top: 10px; margin-bottom: 10px;">
+          <div style="font-size: 11.5px; font-weight: 500; width: 100%; height: 40px; position: absolute; top: 50%; left: 0; margin-top: -10px; line-height:19px; text-align: center; z-index: -10">
+              {{ staked }}%
+          </div>
+          <canvas #stakedChart></canvas>
+        </div>
+      </ion-row>
+    </ion-col>
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">HASHRATE</p>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+          <canvas style="width: 100px; height: 100px" #stackedBarChart></canvas>
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-bottom: 20px">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0px; margin-bottom: 15px;">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">MAINCHAIN ACTIVITY</p>
+      </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="mainchain-button" (click)="selectHashrate()" [ngStyle]="{'background-color': colorHashrate }">
+            <strong>
+              HASHRATE
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="mainchain-button" (click)="selectAA()" [ngStyle]="{'background-color': colorAA }">
+            <strong>
+              ADDRESSES
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="mainchain-button" (click)="selectTPH()" [ngStyle]="{'background-color': colorTPH }">
+            <strong>
+              TX PER HR
+            </strong>
+          </ion-button>
+        </ion-col>  
+      </ion-row>
+      <ion-row style="margin-top: 15px;">
+        <div style="display: block; width: 100%; height: 35vh;">
+          <canvas 
+          #mainchainChart
+          ></canvas>
+        </div>
+      </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="mainchainSwitch1M()" [ngStyle]="{'background-color': mainchainColor1M }">
+            <strong>
+              1M
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="mainchainSwitch6M()" [ngStyle]="{'background-color': mainchainColor6M }">
+            <strong>
+              6M
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="mainchainSwitch1Y()" [ngStyle]="{'background-color': mainchainColor1Y }">
+            <strong>
+              1Y
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">    
+          <ion-button class="chart-button" (click)="mainchainSwitchAll()" [ngStyle]="{'background-color': mainchainColorAll }">
+            <strong>
+              ALL
+            </strong>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<!-- <ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="updateStats($event)">
+    <ion-refresher-content
+      class="refreshStats"
+      pullingIcon="arrow-round-up"
+      pullingText="Update Stats"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid *ngIf="nodesService._nodes.length > 0" class="container" no-padding no-margin>
+    <ion-list>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/validator.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="3" class="stat-container">
+              <ion-label>
+                <h4>Last Validator</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="7" class="number-container" padding-end>
+              <h4>{{ nodesService.block.validator }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/voters.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Total Voters</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixTotalVoters() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/vote.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Total Votes</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixTotalVotes() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/security.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Total ELA Staking</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixTotalEla() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/percent.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>ELA Voted vs Circulation</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ nodesService.voters.percent }}%</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/ratio.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Active Supernodes</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ nodesService.activeNodes.length }} / {{ nodesService._nodes.length }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/address.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Active Addresses</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ fixActiveAddresses() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/send.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Transactions per Hour</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ nodesService.mainchain.txperhr }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/mining.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Bitcoin Hashrate Used</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ nodesService.block.percentBTChashrate }}%</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/block.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Block Height</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixHeight() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/rank.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Coin Rank</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>Top #{{ nodesService.price.rank }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/supply.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Circulation Supply</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixSupply() }} ELA</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/price.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Price per ELA</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>${{ nodesService.price.usd }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/bitcoin.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Sats per ELA</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ nodesService.price.btc }} BTC</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/volume.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="5" class="stat-container">
+              <ion-label>
+                <h4>Total Volume</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <h4>{{ fixVolume() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+       <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-thumbnail>
+                <ion-img src="../assets/icon/pad.png"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7" class="stat-container">
+              <ion-label>
+                <h4>Daily ELA Inflation</h4>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3" class="number-container" padding-end>
+              <h4>{{ getTotalRewards() }}</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+    </ion-list>
+  </ion-grid>
+
+  <ion-grid *ngIf="nodesService._nodes.length === 0" class="container" no-padding>
+    <ion-list>
+      <ion-item color="light" class="first">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light" class="first">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light" class="first">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item color="light">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col size="2" class="img-container">
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="5">
+              <ion-label>
+                <ion-skeleton-text animated style="width: 100%; height: 100%;"></ion-skeleton-text>
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="number-container" padding-end>
+              <ion-skeleton-text animated style="width: 40%; height: 100%;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+</ion-content> -->

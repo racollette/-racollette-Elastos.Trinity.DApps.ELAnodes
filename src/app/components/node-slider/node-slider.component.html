@@ -1,0 +1,230 @@
+<ion-slides
+  *ngIf="showDetails"
+  #slider
+  [options]="slideOpts"
+  (ionSlideNextEnd)="loadNext()"
+  class="node-slides"
+>
+  <ion-slide *ngFor="let node of displayedArr" scrollY="true">
+    <ion-card text-center>
+      <ion-grid>
+        <ion-row class="header-container ion-no-padding">
+          <ion-col size="2.25" class="ion-no-margin" style="padding-right: 0">
+            <ion-button fill="clear" (click)="sendtoParent()">
+              <ion-icon
+                class="slider-back"
+                slot="icon-only"
+                name="arrow-round-back"
+              ></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col
+            size="2"
+            class="ion-no-margin"
+            style="padding-right: 0; align-self: center;"
+          >
+            <div *ngIf="node">
+              <img-loader *ngIf="node.imageUrl" useImg
+                ><img class="logo" [src]="node.imageUrl"
+              /></img-loader>
+            </div>
+            <img-loader *ngIf="!node.imageUrl" useImg
+              ><img
+                style="height:30px; width: 35px"
+                src="../../assets/images/elastOS.png"
+            /></img-loader>
+          </ion-col>
+          <ion-col
+            size="7.75"
+            class="name-container ion-no-margin"
+            style="padding-left: 0"
+          >
+            <ion-row>
+              <ion-col>
+                <div style="text-align:left">
+                  <ion-card-title>
+                    {{ node.Nickname }}
+                  </ion-card-title>
+                </div>
+                <div style="text-align:left; padding-top: 2.5px">
+                  <span
+                    ><a href="{{ node.Url }}"
+                      ><fa-icon [icon]="['fab', 'chrome']"></fa-icon></a
+                  ></span>
+                  <span
+                    *ngIf="node.socials"
+                    style="text-align:left; padding-top: 2.5px"
+                  >
+                    <a
+                      *ngIf="node.socials.twitter"
+                      href="{{ node.socials.twitter }}"
+                      ><fa-icon [icon]="['fab', 'twitter']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.telegram"
+                      href="{{ node.socials.telegram }}"
+                      ><fa-icon [icon]="['fab', 'telegram']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.weixin"
+                      href="{{ node.socials.weixin }}"
+                      ><fa-icon [icon]="['fab', 'weixin']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.weibo"
+                      href="{{ node.socials.weibo }}"
+                      ><fa-icon [icon]="['fab', 'weibo']"></fa-icon
+                    ></a>
+                    <a *ngIf="node.socials.qq" href="{{ node.socials.qq }}"
+                      ><fa-icon [icon]="['fab', 'qq']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.medium"
+                      href="{{ node.socials.medium }}"
+                      ><fa-icon [icon]="['fab', 'medium']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.facebook"
+                      href="{{ node.socials.facebook }}"
+                      ><fa-icon [icon]="['fab', 'facebook']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.youtube"
+                      href="{{ node.socials.youtube }}"
+                      ><fa-icon [icon]="['fab', 'youtube']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.linkedin"
+                      href="{{ node.socials.linkedin }}"
+                      ><fa-icon [icon]="['fab', 'linkedin']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.github"
+                      href="{{ node.socials.github }}"
+                      ><fa-icon [icon]="['fab', 'github']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.reddit"
+                      href="{{ node.socials.reddit }}"
+                      ><fa-icon [icon]="['fab', 'reddit']"></fa-icon
+                    ></a>
+                    <a
+                      *ngIf="node.socials.envelope"
+                      href="{{ node.socials.envelope }}"
+                      ><fa-icon [icon]="['fas', 'envelope']"></fa-icon
+                    ></a>
+                  </span>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-card-content>
+          <ion-row class="ion-align-items-end ion-justify-content-center" style="border-bottom: solid 0.5px #e9e9e9; padding-bottom: 10px;">
+            <ion-col size="4">
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">#{{node.Rank}}</div>
+                  <div class="stat-label">Rank</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{ formatVotes(node.Votes) }}
+                    <span *ngIf="node.votesChange == true"
+                    [ngStyle]="{'color':'#00cc88', 'font-weight':'500', 'font-size':'0.75rem'}">(+{{ deltaStatus(node.deltaVotes) }})</span>
+                   <span  *ngIf="node.votesChange == false"
+                    [ngStyle]="{'color':'#e8007f', 'font-weight':'500', 'font-size':'0.75rem'}">(-{{ deltaStatus(node.deltaVotes) }})</span>
+                  </div>
+                  <div class="stat-label">Votes</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{ formatVoters(node.Voters) }}
+                    <span *ngIf="node.votersChange == true"
+                    [ngStyle]="{'color':'#00cc88', 'font-weight':'500', 'font-size':'0.75rem'}">(+{{ deltaStatus(node.deltaVoters) }})</span>
+                   <span  *ngIf="node.votersChange == false"
+                    [ngStyle]="{'color':'#e8007f', 'font-weight':'500', 'font-size':'0.75rem'}">(-{{ deltaStatus(node.deltaVoters) }})</span>
+                  </div>
+                  <div class="stat-label">Voters</div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4">
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div *ngIf="node.Rank <= 24 && node.State == 'Active'" [ngStyle]="{'color': '#ffc34d'}" class="stat">Active</div>
+                  <div *ngIf="node.Rank > 24 && node.State == 'Active'" [ngStyle]="{'color': '#cc66ff'}" class="stat">Standby</div>
+                  <div *ngIf="node.State == 'Inactive'" [ngStyle]="{'color': '#e8007f'}" class="stat">Inactive</div>
+                  <div class="stat-label">State</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{ votePercent( node )}}</div>
+                  <div class="stat-label">of Votes</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{ payPercent(node.PercentPayout) }}</div>
+                  <div class="stat-label">Payout</div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4">
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{node.Country}}</div>
+                  <div class="stat-label">Location</div>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">
+                    {{ getRewards(node.EstRewardPerYear) }} ELA
+                  </div>
+                  <div class="stat-label">Daily Reward</div>
+                </ion-col>
+              </ion-row>             
+              <ion-row class="ion-no-margin">
+                <ion-col class="ion-no-margin inner-col">
+                  <div class="stat">{{ arrPercent(node.AnnualROI) }}</div>
+                  <div class="stat-label">Annual Return</div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="node.details" class="row0">
+            <ion-col class="ion-no-margin inner-col">
+            <h3 class="stat-label" style="text-align: left; padding-left: 20px;">About</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="node.details" class="row1 description" style="border-bottom: solid 0.5px #e9e9e9; padding-bottom: 10px;">
+            <ion-col class="ion-no-margin inner-col">
+            <h3 *ngIf="node.details.Description.length <= limit">
+              {{node.details.Description}}
+            </h3>
+            <h3 *ngIf="truncating && node.details.Description.length > limit">
+              {{ node.details.Description | truncate : limit : ''}}
+              <a style="color: #e8007f" (click)="truncating = false"
+                >...show more</a
+              >
+            </h3>
+            <h3 *ngIf="!truncating && node.details.Description.length > limit">
+              {{ node.details.Description }}
+              <a style="color: #e8007f" (click)="truncating = true"
+                >...show less</a
+              >
+            </h3>
+            </ion-col>
+          </ion-row>
+    
+        </ion-card-content>
+      </ion-grid>
+    </ion-card>
+  </ion-slide>
+</ion-slides>

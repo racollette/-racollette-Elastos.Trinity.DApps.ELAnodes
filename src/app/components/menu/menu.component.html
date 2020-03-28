@@ -1,0 +1,159 @@
+  <!-- <ion-menu side="end" menuId='m1' (ionDrag)="menuOpened()"> -->
+    <ion-header color=primary no-border>
+      <ion-toolbar>
+        <ion-title>
+          Staking Tools
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content class="vote-menu-content">
+      <ion-grid>
+
+        <!-- <ion-row class="row-fill ion-align-items-end ion-justify-content-center">
+          <ion-col>
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
+          <ion-col class="col0">
+            <p class="section-label ion-no-margin">STATISTICS</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row1 ion-align-items-end ion-justify-content-center">
+          <ion-col>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ input }}/36</div>
+                <div class="stat-label">NODES</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat"> {{ input3 }}%</div>
+                <div class="stat-label">OF VOTES</div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat"> {{ input1 }}%</div>
+                <div class="stat-label">ANNUAL RETURN</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ input2 }}%</div>
+                <div class="stat-label">AVG. EARNINGS SHARE</div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
+          <ion-col class="col0">
+            <p class="section-label ion-no-margin">GEOGRAPHY</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row1 ion-align-items-end ion-justify-content-center">
+          <ion-col>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ NA }}</div>
+                <div class="stat-label">NORTH AMERICA</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ SA }}</div>
+                <div class="stat-label">SOUTH AMERICA</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ EU }}</div>
+                <div class="stat-label">EUROPE</div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ AS }}</div>
+                <div class="stat-label">ASIA</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin ">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ OC }}</div>
+                <div class="stat-label">OCEANIA</div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-no-margin">
+              <ion-col class="ion-no-margin inner-col">
+                <div class="stat">{{ AF }}</div>
+                <div class="stat-label">AFRICA</div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
+          <ion-col class="col0">
+            <p class="section-label ion-no-margin">PRESET BUNDLES</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row2 ion-align-items-end ion-justify-content-center">
+          <ion-col class="ion-no-margin">
+            <ion-button class="green-button" (click)="maxReturn()">
+              <strong>
+                Max Return
+              </strong>
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-no-margin">
+            <ion-button class="green-button" (click)="top36()">
+              <strong>
+                Top 36
+              </strong>
+            </ion-button>
+            <ion-button class="pink-button" (click)="clearSelections()">
+              <strong>
+                Clear
+              </strong>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
+          <ion-col class="col0">
+            <p class="section-label ion-no-margin">Vote</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="row2 ion-align-items-end ion-justify-content-center">
+          <ion-col class="ion-no-margin">
+            <ion-button class="blue-button" (click)="elastOSVote()" [color]="tertiary">
+              <strong>
+                elastOS
+              </strong>
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-no-margin">
+            <ion-button class="purple-button" (click)="elephantVote()" [color]="tertiary">
+              <ion-img class="wallet-logo" src="../assets/logos/Elephant Wallet.png"></ion-img>
+              <strong>
+                Elephant
+              </strong>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+
+  <!-- </ion-menu> -->

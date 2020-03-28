@@ -1,0 +1,110 @@
+* {
+  color: #fff;
+}
+
+ion-header {
+  ion-title {
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+ion-content {
+  height: 100vh;
+}
+
+ion-label {
+  font-weight: 600;
+}
+
+ion-icon {
+  color: #989aa2;
+  font-size: 36px;
+}
+
+ion-toolbar {
+  --background: #0096ab;
+}
+
+ion-grid {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-row {
+  margin: 5px;
+  border-radius: 7px;
+}
+
+.row-fill {
+  flex: 0;
+  margin: 5px 5px 0px 5px;
+}
+.row0 {
+  flex: 0;
+  margin: 0px 5px 0px 5px;
+}
+.col0 {
+  padding: 5px 5px 0px 5px;
+}
+.row1 {
+  flex: 0;
+  background-color: #202020;
+}
+.row2 {
+  flex: 0;
+  background-color: #202020;
+}
+.inner-col {
+  padding: 0px 5px 0px 5px;
+}
+
+
+
+.section-label {
+  font-size: 0.75rem;
+  color: #a6a6a6;
+}
+
+.stat {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  color: #a6a6a6;
+}
+
+ion-button.pink-button {
+  --background: #e8007f;
+}
+
+ion-button.green-button {
+  --background:  #29a329;
+}
+
+ion-button.blue-button {
+  --background:  #0096ab;
+  text-transform: none;
+  font-size: 0.9rem;
+}
+
+ion-button.purple-button {
+  --background:  #b31aff;
+  text-transform: none;
+  font-size: 0.9rem;
+}
+
+.wallet-logo {
+ width: 23.5%;
+ padding-right: 7px;
+}
+

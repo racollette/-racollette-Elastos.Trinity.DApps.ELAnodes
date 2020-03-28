@@ -1,0 +1,35 @@
+* {
+    color: #fff;
+}
+
+ion-title {
+    position: absolute;
+    left: 0px !important;
+    top: 0px !important;
+    width: 100%;
+    height: 100%;
+    text-align: center !important;
+    // margin-left: 0px !important;
+    // margin-top: 0px !important;
+}
+
+.elanodes {
+    position: absolute;
+    left: 22vw !important;
+    bottom: -2vh !important;
+    width: 24px;
+    height: 24px;
+}
+
+.voting-menu {
+    position: absolute;
+    left: 4vw !important;
+    bottom: -2vh !important;
+    width: 24px;
+    height: 24px;
+}
+
+
+ion-toolbar {
+    --background: #000;
+}
