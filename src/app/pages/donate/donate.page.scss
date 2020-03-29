@@ -20,7 +20,7 @@ ion-list {
 
 * { 
     color: #fff;
-    --background: #1a1a1a;
+    --background: #000;
 }
 
 fa-icon {
@@ -30,7 +30,7 @@ fa-icon {
 }
 
 ion-list {
-    background-color: #1a1a1a !important;
+    background-color: #000;
     ion-item {
         height: px2rem(104px);
     }
@@ -48,3 +48,30 @@ ion-list {
 
 }
 
+ion-range {
+    padding-left: 0vw;
+    padding-right: 0vw;
+    --bar-background: rgb(240, 50, 107);
+    --bar-background-active: #008fb3;
+    --bar-border-radius: 5px;
+    --bar-height: 15px;
+    --height: 60px;
+    --knob-background: pink;
+    // --knob-border-radius	Border radius of the range knob
+    // --knob-box-shadow
+    --knob-size: 30px;
+    --pin-background: #008fb3;
+    --pin-color: #fff;
+}
+
+
+
+ion-button.donate-button {
+    --background:  #008fb3;
+    text-transform: none;
+    font-size: 1rem;
+    font-weight: 600;
+    --border-radius: 10px;
+    width: 82%;
+  }
+  

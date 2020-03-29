@@ -4,7 +4,7 @@
 
 <ion-content padding>
   <ion-item>
-      <ion-button style="position:relative; top: 0px; left: -10px;" fill="clear"  [routerLink]="['/settings']">
+      <ion-button style="position:relative; top: 0px; left: -20px; height: 35px; width: 75px;" fill="clear"  [routerLink]="['/settings']">
         <ion-icon
           class="slider-back"
           slot="icon-only"
@@ -13,6 +13,15 @@
       </ion-button>
   </ion-item>
   <ion-item>
-    <p>Puh Puh Pineapple</p>
+    <p style="text-align: left">Currently, this app is completely free. However, donations are welcome and help motivate us to keep adding features. Thank you!</p>
   </ion-item>
+  <ion-item>
+    <ion-range min="0" max="100" step=0.1 (ionChange)="rangeValue($event)">
+      <ion-label style="font-weight: 600; font-size: 1rem; padding-right: 2vw" slot="start">0</ion-label>
+      <ion-label style="font-weight: 600; font-size: 1rem;"  slot="end">100</ion-label>
+    </ion-range>
+  </ion-item>
+  <ion-row class="ion-justify-content-center" style="padding-top: 40px;">
+      <ion-button class="donate-button ion-justify-content-center" fill="clear" (click)="donate()">Donate {{ value }} ELA</ion-button>
+  </ion-row>
 </ion-content>

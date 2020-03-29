@@ -3,14 +3,14 @@
 }
 
 ion-content {
-    --background: #1a1a1a;
+    --background: #000;
 }
 
 ion-list {
-    background-color: #1a1a1a !important;
+    background-color: #000 !important;
     ion-item {
-        height: px2rem(104px);
-        --background: #1a1a1a !important;
+        height: 42px;
+        --background: #000 !important;
     }
     ion-icon {
         margin: 10px;
@@ -19,10 +19,10 @@ ion-list {
         color: #fff;
     }
     ion-label {
-        font-size: 18px;
+        font-size: 17px;
     }
     ion-note {
-        font-size: 16px;
+        font-size: 15px;
     }
 
 }

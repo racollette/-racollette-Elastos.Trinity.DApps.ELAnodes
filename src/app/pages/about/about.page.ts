@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Native } from '../../services/native.service';
-
 
 @Component({
     selector: 'app-about',
@@ -12,7 +10,6 @@ export class AboutPage implements OnInit {
     public commitVersion = "v0.0.1";
 
     constructor(
-        public native: Native
     ) {}
 
     ngOnInit() {
@@ -23,9 +20,4 @@ export class AboutPage implements OnInit {
     //         this.spvVersion = data;
     //     });
     // }
-
-    goWebsite() {
-        this.native.openUrl("https://starfish-supernode.tech");
-    }
-
 }

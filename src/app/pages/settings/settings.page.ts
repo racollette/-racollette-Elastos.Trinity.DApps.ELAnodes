@@ -1,46 +1,76 @@
 
 import { Component, OnInit, NgZone } from '@angular/core';
+import { Native } from '../../services/native.service';
 
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.page.html',
     styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
-    public masterWalletId: string = "1";
-    public masterWalletType: string = "";
-    public readonly: string = "";
-    public currentLanguageName: string = "";
-    public isShowDeposit: boolean = false;
-    public fee: number = 0;
-    public feePerKb: number = 10000;
-    public walletInfo = {};
-    public password: string = "";
-    public available = 0;
+export class SettingsPage {
 
-    settings = [ 
+    constructor(
+        public native: Native
+    ) {}
+
+    // public masterWalletId: string = "1";
+    // public masterWalletType: string = "";
+    // public readonly: string = "";
+    // public currentLanguageName: string = "";
+    // public isShowDeposit: boolean = false;
+    // public fee: number = 0;
+    // public feePerKb: number = 10000;
+    // public walletInfo = {};
+    // public password: string = "";
+    // public available = 0;
+
+    general = [ 
       {
         route: "/language",
         label: "Language",
         icon: "md-globe",
+      }
+    ];
+
+    data = [ 
+      {
+        route: "/wallets",
+        label: "Saved Addresses",
+        icon: "wallet",
       },
+    ];
+
+    about = [ 
       {
         route: "/about",
         label: "About",
-        icon: "help-circle",
+        icon: "md-alert",
         note: "v1.0",
+      },
+       {
+        route: "/intro",
+        label: "Tutorial",
+        icon: "md-photos",
+      },
+      {
+        route: "/intro",
+        label: "F.A.Q.",
+        icon: "help-circle",
       },
       {
         route: "/donate",
         label: "Donate",
         icon: "thumbs-up",
-      }
+      },
     ];
 
-    constructor() {
+    public goWebsite() {
+        this.native.openUrl("https://starfish-supernode.tech");
     }
 
-    ngOnInit() {
+    public goSocial(link: string) {
+        console.log('clicked')
+        this.native.openUrl(link);
     }
 
 }

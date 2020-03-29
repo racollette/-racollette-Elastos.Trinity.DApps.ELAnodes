@@ -30,7 +30,6 @@
   "default_locale": "en",
   "plugins": [
     "Device",
-    "File",
     "NetworkStatus",
     "InAppBrowser",
     "Clipboard"
