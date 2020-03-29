@@ -23,13 +23,13 @@
 
 <ion-content>
   <ion-grid class="container" no-padding>
-    <app-node-slider
+    <!-- <app-node-slider
       *ngIf="showNode"
       [nodeIndex]="nodeIndex"
       [totalVotes]="nodesService.totalVotes"
       [_nodes]="_nodes"
       [node]="node"
-    ></app-node-slider>
+    ></app-node-slider> -->
     <ion-list lines="none" [class.blur]="showNode" class="node-list">
       <ion-virtual-scroll [items]="_nodes"  approxItemHeight="240px">
         <ion-item color="secondary"  *virtualItem="let node">

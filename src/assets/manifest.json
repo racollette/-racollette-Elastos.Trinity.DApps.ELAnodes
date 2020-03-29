@@ -30,6 +30,7 @@
   "default_locale": "en",
   "plugins": [
     "Device",
+    "File",
     "NetworkStatus",
     "InAppBrowser",
     "Clipboard"
@@ -37,6 +38,7 @@
   "urls": [
     "http://*",
     "https://*",
+    "https://cors-anywhere.herokuapp.com/*",
     "https://node1.elaphant.app/*",
     "https://elanodes.com/api/*"
   ],

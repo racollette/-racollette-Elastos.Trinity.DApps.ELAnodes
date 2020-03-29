@@ -14,8 +14,8 @@ import { faTelegram, faTwitter, faGithub, faMedium, faFacebook, faYoutube, faWei
 
 import { ComponentsModule } from '../../components/components.module';
 import { VotePage } from './vote.page';
-import { NodeSliderComponent } from '../../components/node-slider/node-slider.component';
-import { TruncateModule } from '@yellowspot/ng-truncate';
+//import { NodeSliderComponent } from '../../components/node-slider/node-slider.component';
+
 
 const routes: Routes = [
   {
@@ -23,55 +23,6 @@ const routes: Routes = [
     component: VotePage
   }
 ];
-
-// const routes: Routes = [
-//   {
-//     path: 'vote',
-//     component: VotePage,
-//     children: [
-//       {
-//         path: 'home',
-//         loadChildren: '../home/home.module#HomePageModule'
-//       },
-//       {
-//         path: 'intro',
-//         loadChildren: '../intro/intro.module#IntroPageModule'
-//       },
-//       {
-//         path: 'stats',
-//         loadChildren: '../stats/stats.module#StatsPageModule'
-//       },
-//       {
-//         path: 'settings',
-//         loadChildren: '../settings/settings.module#SettingsPageModule'
-//       },
-//        {
-//         path: 'settings/:about',
-//         loadChildren: '../about/about.module#AboutPageModule'
-//       },
-//       {
-//         path: 'settings/:donate',
-//         loadChildren: '../donate/donate.module#DonatePageModule'
-//       },
-//       {
-//         path: 'menu',
-//         loadChildren: '../menu/menu.module#MenuPageModule'
-//       },
-//       {
-//         path: 'history',
-//         loadChildren: '../history/history.module#HistoryPageModule'
-//       },
-//       {
-//         path: 'history/:txId',
-//         loadChildren: '../tx/tx.module#TxPageModule'
-//       },
-//     ]
-//   },
-//   {
-//     path: '',
-//     redirectTo: 'vote'
-//   }
-// ];
 
 @NgModule({
   imports: [
@@ -81,11 +32,10 @@ const routes: Routes = [
     IonicImageLoader,
     NgxDatatableModule,
     ComponentsModule,
-    TruncateModule,
     RouterModule.forChild(routes),
     FontAwesomeModule
   ],
-  declarations: [VotePage, NodeSliderComponent]
+  declarations: [VotePage]
 })
 export class VotePageModule { 
   constructor(private library: FaIconLibrary) {

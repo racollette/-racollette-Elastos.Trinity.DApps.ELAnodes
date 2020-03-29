@@ -31,7 +31,7 @@ export class HistoryPage implements OnInit {
     private modalController: ModalController,
     private zone: NgZone,
     private clipboard: Clipboard,
-    private data: DataService
+    public data: DataService
     ) { }
 
   // Toast for voteFailed/voteSuccess

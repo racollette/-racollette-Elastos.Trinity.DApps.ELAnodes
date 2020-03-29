@@ -154,7 +154,7 @@ export class MenuComponent implements OnInit {
     this.data.updateContinents(this.NA, this.SA, this.EU, this.AS, this.OC, this.AF)
   }
 
-  clearSelections(event) {
+  clearSelections() {
     let el = document.querySelectorAll('.active');
 
        for (let i = 0; i < el.length; i++){
@@ -169,8 +169,8 @@ export class MenuComponent implements OnInit {
      }
   }
 
-  maxReturn(event) {
-    this.clearSelections(event)
+  maxReturn() {
+    this.clearSelections()
 
     let nodes = this.nodeTable
     let arrayROI: string[] = []
@@ -196,8 +196,8 @@ export class MenuComponent implements OnInit {
     this.nodeTable.selected = rowsROI
   }
 
-  top36(event) {
-    this.clearSelections(event)
+  top36() {
+    this.clearSelections()
 
     let nodes = this.nodeTable
 
@@ -214,7 +214,7 @@ export class MenuComponent implements OnInit {
     this.nodeTable.selected = rows36
   }
 
-  contributors(event) {
+  contributors() {
     console.log('TBD')
   }
 

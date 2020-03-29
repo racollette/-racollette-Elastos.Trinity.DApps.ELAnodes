@@ -19,6 +19,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faCog } from '@fortawesome/free-solid-svg-icons';
 
 import { RewardsChartComponent } from './components/rewards-chart/rewards-chart.component';
+//import { NodeSliderComponent } from './components/node-slider/node-slider.component'
 import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
@@ -49,7 +50,7 @@ export class SentryErrorHandler implements ErrorHandler {
 
 @NgModule({
   declarations: [
-    MyApp, RewardsChartComponent
+    MyApp, RewardsChartComponent, //NodeSliderComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +67,8 @@ export class SentryErrorHandler implements ErrorHandler {
   ],
   bootstrap: [MyApp],
   entryComponents: [
-    RewardsChartComponent
+    RewardsChartComponent,
+    //NodeSliderComponent
   ],
   providers: [
     StatusBar,
@@ -76,7 +78,7 @@ export class SentryErrorHandler implements ErrorHandler {
     WebView,
     InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide: ErrorHandler, useClass: SentryErrorHandler}
+    { provide: ErrorHandler, useClass: SentryErrorHandler }
   ]
 })
 export class AppModule {

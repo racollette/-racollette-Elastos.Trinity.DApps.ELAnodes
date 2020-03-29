@@ -15,14 +15,14 @@
 
 <ion-content *ngIf="nodesService._nodes.length > 0">
 
-  <app-node-slider 
+  <app-node-slider
   *ngIf="showDetails" 
   [showDetails]="showDetails"
   [nodeIndex]="nodeIndex" 
   [node]="node" 
   [_nodes]="nodesService._nodes"
-  (updateSlideToggle)="getMessage($event)">
-  </app-node-slider>
+  (updateSlideToggle)="getMessage($event)"
+  ></app-node-slider>
 
   <ion-list class="node-table-container">
     <ngx-datatable #nodeTable [rows]="nodesService._nodes" [rowHeight]="auto"

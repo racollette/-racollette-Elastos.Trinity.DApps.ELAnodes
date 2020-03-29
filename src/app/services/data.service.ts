@@ -108,7 +108,7 @@ export class DataService {
     private proxyurl = "https://cors-anywhere.herokuapp.com/";
 
     private toast: any = null;
-    private rewardsObjectCreated: boolean = false;
+    public rewardsObjectCreated: boolean = false;
     public walletRequested: boolean = false;
     public requestFailed: boolean = false;
     private _wallet: Transaction[] = [];
