@@ -105,8 +105,9 @@ export class DataService {
     }
     
     private nodeApi: string = 'https://node1.elaphant.app/api/v1';
-    private proxyurl = "https://cors-anywhere.herokuapp.com/";
-
+    //private proxyurl = "https://cors-anywhere.herokuapp.com/";
+    private proxyurl = "";
+    
     private toast: any = null;
     public rewardsObjectCreated: boolean = false;
     public walletRequested: boolean = false;

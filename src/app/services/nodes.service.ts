@@ -74,7 +74,8 @@ export class NodesService {
   // Fetch
   private nodeApi: string = 'https://node1.elaphant.app/api/';
   private elaNodeUrl: string = 'https://elanodes.com/wp-content/uploads/custom/images/';
-  private proxyurl = "https://cors-anywhere.herokuapp.com/";
+  //private proxyurl = "https://cors-anywhere.herokuapp.com/";
+  private proxyurl = "";
 
   get nodes(): Node[] {
     return [...this._nodes.filter((a,b) => this._nodes.indexOf(a) === b)];
