@@ -111,9 +111,9 @@ export class VotePage implements OnInit {
 
 
 
-  // ionViewDidEnter() {
-  //   appManager.setVisible("show", ()=>{}, (err)=>{});
-  // }
+  ionViewDidEnter() {
+    appManager.setVisible("show", ()=>{}, (err)=>{});
+  }
 
    //// Toggling bootstrap and dark theme ////
   switchMode() {
