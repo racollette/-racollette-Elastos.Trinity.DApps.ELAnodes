@@ -135,7 +135,7 @@ export class VotePage implements OnInit {
     }
   }
 
-  // Shorten long supernode names
+  // Shorten long supernode names tp fit table
   truncateNames(name) {
     if (name == "Cyber Republic Press CR新闻团队") {
       return "Cyber Republic Press"

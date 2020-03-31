@@ -47,3 +47,28 @@ ion-list {
     }
 
 }
+
+ion-button.add-address-button {
+    --background:  #000;
+    text-transform: none;
+    font-size: 0.85rem;
+    color: rgb(0, 204, 153);
+    --border-color: rgb(0, 204, 153);
+    --border-style: solid;
+    --border-width: 1.25px;
+    --border-radius: 20px;
+    width: 75%;
+  }
+
+
+  ion-button.remove-button {
+    --background:  #000;
+    text-transform: none;
+    font-size: 0.58rem;
+    color: rgb(240, 50, 107);
+    --border-color: rgb(240, 50, 107);
+    --border-style: solid;
+    --border-width: 1.25px;
+    --border-radius: 20px;
+  }
+

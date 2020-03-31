@@ -440,3 +440,59 @@ ion-searchbar {
   }
   
   }
+
+
+// Alerts
+
+.removeWalletAlert {
+  --background: #202020 !important;
+  color: #fff !important;
+  h2{
+    color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+  div{
+    color: #fff !important;
+    font-size: 0.85rem !important;
+  }
+  .alert-message{
+    padding-bottom: 0 !important;
+  }
+  .acceptButton{
+    color: rgb(240, 50, 107) !important;
+  }
+  input {
+    color: #fff !important;
+  }
+} 
+
+.addWalletAlert {
+  --background: #202020 !important;
+  color: #fff !important;
+  --width: 100% !important;
+  --max-width: 90vw !important;
+  h2{
+    color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+  div{
+    color: #fff !important;
+    font-size: 0.85rem !important;
+  }
+  .alert-message{
+    padding-bottom: 0 !important;
+  }
+  .acceptButton{
+    color: rgb(0, 204, 153) !important;
+  }
+  .alert-input-group{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  input {
+    color: #fff !important;
+  }
+} 
+

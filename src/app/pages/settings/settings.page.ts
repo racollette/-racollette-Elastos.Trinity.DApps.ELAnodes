@@ -35,7 +35,7 @@ export class SettingsPage {
     data = [ 
       {
         route: "/wallets",
-        label: "Saved Addresses",
+        label: "Wallets",
         icon: "wallet",
       },
     ];

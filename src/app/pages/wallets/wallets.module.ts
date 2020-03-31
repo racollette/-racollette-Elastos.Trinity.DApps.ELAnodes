@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     //TranslateModule,
     ComponentsModule,
     //FontAwesomeModule,

@@ -103,6 +103,8 @@ export class NodesService {
 
    Storage
    getVisit() {
+
+     console.log(this.storageService)
     this.storageService.getVisit().then(data => {
       if(data || data === true) {
         this.firstVisit = false;

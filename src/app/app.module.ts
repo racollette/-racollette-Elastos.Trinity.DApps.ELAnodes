@@ -2,12 +2,19 @@ import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router';
+
 import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicImageLoader } from 'ionic-image-loader';
+import { HttpClientModule } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { HttpClientModule } from '@angular/common/http';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+
+import { zh } from './../assets/i18n/zh';
+import { en } from './../assets/i18n/en';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -47,6 +54,27 @@ export class SentryErrorHandler implements ErrorHandler {
     }
   }
 }
+export class CustomTranslateLoader implements TranslateLoader {
+    public getTranslation(lang: string): Observable<any> {
+        return Observable.create(observer => {
+            switch (lang) {
+                case 'zh':
+                    observer.next(zh);
+                    break;
+                case 'en':
+                default:
+                    observer.next(en);
+            }
+
+            observer.complete();
+        });
+    }
+}
+
+export function TranslateLoaderFactory() {
+    return new CustomTranslateLoader();
+}
+
 
 @NgModule({
   declarations: [
@@ -64,6 +92,12 @@ export class SentryErrorHandler implements ErrorHandler {
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     IonicImageLoader.forRoot(),
+    TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (TranslateLoaderFactory)
+            }
+    }),
   ],
   bootstrap: [MyApp],
   entryComponents: [
