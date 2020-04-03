@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { ChartType } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import * as moment from 'moment';
+
+// declare let appManager: any;
+// declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'rewards-chart',
@@ -27,11 +30,12 @@ export class RewardsChartComponent implements OnInit {
   @Input() perNodeEarningsObject: any;
 
 
-  @ViewChild('historyChart',{static:false}) historyCanvas;
-  @ViewChild('perNodeEarningsChart',{static:false}) perNodeEarningsCanvas;
+  @ViewChild('historyChart', { static: false }) historyCanvas;
+  @ViewChild('perNodeEarningsChart', { static: false }) perNodeEarningsCanvas;
 
-  constructor( 
-    private modalCtrl: ModalController,   
+  constructor(
+    private modalCtrl: ModalController,
+    private navController: NavController
   ) { }
 
   lineChart: any;
@@ -41,13 +45,27 @@ export class RewardsChartComponent implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
-      const gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
-        gradient.addColorStop(1,"rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-        gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
+  // ionViewWillEnter() {
+  //   titleBarManager.setTitle(this.translate.instant('rewards-tab'))
+  //   titleBarManager.setBackgroundColor("#000000");
+  //   titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+  //   titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+  //   appManager.setListener((ret) => { this.onMessageReceived(ret) });
+  // }
 
-      this.lineChartMethod(gradient);
-      this.horizontalBarMethod();
+  // onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
+  //   if (ret.message == "navback") {
+  //     this.navController.back();
+  //   }
+  // }
+
+  ionViewDidEnter() {
+    const gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
+    gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
+
+    this.lineChartMethod(gradient);
+    this.horizontalBarMethod();
   }
 
   lineChartMethod(gradient) {
@@ -74,58 +92,58 @@ export class RewardsChartComponent implements OnInit {
           }
         ]
       },
-     options:  {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-            display: false,
-      },
-      scales: {
-      yAxes: [{
-        scaleLabel: {
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
           display: false,
         },
-        ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 6
-        }
-      }],
-      xAxes: [{
-       type: 'time',
-       distribution: 'linear',
-       ticks: {
-          maxTicksLimit: 5,
-          maxRotation: 0,
-          minRotation: 0,
-       }
-      }],
-      },
-    } 
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: false,
+            },
+            ticks: {
+              beginAtZero: true,
+              maxTicksLimit: 6
+            }
+          }],
+          xAxes: [{
+            type: 'time',
+            distribution: 'linear',
+            ticks: {
+              maxTicksLimit: 5,
+              maxRotation: 0,
+              minRotation: 0,
+            }
+          }],
+        },
+      }
     });
   }
 
   horizontalBarMethod() {
 
-    let nodeLabels = this.perNodeEarningsObject.map(function(d) {return d.Name});
-    let earningData = this.perNodeEarningsObject.map(function(d) {return d.Earnings});
+    let nodeLabels = this.perNodeEarningsObject.map(function(d) { return d.Name });
+    let earningData = this.perNodeEarningsObject.map(function(d) { return d.Earnings });
 
-    let colorOptions = ['#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c','#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c']
+    let colorOptions = ['#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c']
 
     let colorLabels = []
-    for (let i=0; i < nodeLabels.length; i++) {
+    for (let i = 0; i < nodeLabels.length; i++) {
       colorLabels.push(colorOptions[i])
     }
 
     console.log(nodeLabels)
     console.log(earningData)
 
-    this.perNodeEarningsCanvas.nativeElement.height = nodeLabels.length*16 + 40
+    this.perNodeEarningsCanvas.nativeElement.height = nodeLabels.length * 16 + 40
 
     this.horizontalBar = new Chart(this.perNodeEarningsCanvas.nativeElement, {
-    type: 'horizontalBar',
-    data: {
-      labels: nodeLabels,
-      datasets: [{
+      type: 'horizontalBar',
+      data: {
+        labels: nodeLabels,
+        datasets: [{
           data: earningData,
           backgroundColor: colorLabels,
           //barThickness: ,
@@ -133,16 +151,16 @@ export class RewardsChartComponent implements OnInit {
           minBarLength: 12,
           maxBarThickness: 8,
           datalabels: {
-            display:false
+            display: false
           }
         }]
-    },
-    options: {
+      },
+      options: {
         responsive: true,
         maintainAspectRatio: false,
         legend: {
-        display: false
-      },
+          display: false
+        },
         scales: {
           xAxes: [{
             position: 'top',
@@ -150,14 +168,14 @@ export class RewardsChartComponent implements OnInit {
             scaleLabel: {
               display: false,
             },
-             ticks: {
+            ticks: {
               beginAtZero: true,
               maxTicksLimit: 5
             }
           }
-        ]
+          ]
         }
-     },
+      },
     });
   }
 

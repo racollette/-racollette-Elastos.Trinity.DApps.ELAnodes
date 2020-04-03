@@ -2,7 +2,7 @@
     <ion-header color=primary no-border>
       <ion-toolbar>
         <ion-title>
-          Staking Tools
+          {{ 'menu-title' | translate }}
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -18,7 +18,7 @@
 
         <ion-row class="row0 ion-align-items-end ion-justify-content-start">
           <ion-col class="col0">
-            <p class="section-label ion-no-margin">STATISTICS</p>
+            <p class="section-label ion-no-margin">{{ 'statistics-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
@@ -27,13 +27,13 @@
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ input }}/36</div>
-                <div class="stat-label">NODES</div>
+                <div class="stat-label">{{ 'nodes-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat"> {{ input3 }}%</div>
-                <div class="stat-label">OF VOTES</div>
+                <div class="stat-label">{{ 'of-votes-text' | translate }}</div>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -41,13 +41,13 @@
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat"> {{ input1 }}%</div>
-                <div class="stat-label">ANNUAL RETURN</div>
+                <div class="stat-label">{{ 'annual-return-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ input2 }}%</div>
-                <div class="stat-label">AVG. EARNINGS SHARE</div>
+                <div class="stat-label">{{ 'earnings-share-text' | translate }}</div>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -55,7 +55,7 @@
 
         <ion-row class="row0 ion-align-items-end ion-justify-content-start">
           <ion-col class="col0">
-            <p class="section-label ion-no-margin">GEOGRAPHY</p>
+            <p class="section-label ion-no-margin">{{ 'geography-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
@@ -64,19 +64,19 @@
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ NA }}</div>
-                <div class="stat-label">NORTH AMERICA</div>
+                <div class="stat-label">{{ 'north-america-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ SA }}</div>
-                <div class="stat-label">SOUTH AMERICA</div>
+                <div class="stat-label">{{ 'south-america-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ EU }}</div>
-                <div class="stat-label">EUROPE</div>
+                <div class="stat-label">{{ 'europe-text' | translate }}</div>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -84,19 +84,19 @@
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ AS }}</div>
-                <div class="stat-label">ASIA</div>
+                <div class="stat-label">{{ 'asia-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin ">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ OC }}</div>
-                <div class="stat-label">OCEANIA</div>
+                <div class="stat-label">{{ 'oceania-text' | translate }}</div>
               </ion-col>
             </ion-row>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
                 <div class="stat">{{ AF }}</div>
-                <div class="stat-label">AFRICA</div>
+                <div class="stat-label">{{ 'africa-text' | translate }}</div>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -104,7 +104,7 @@
 
         <ion-row class="row0 ion-align-items-end ion-justify-content-start">
           <ion-col class="col0">
-            <p class="section-label ion-no-margin">PRESET BUNDLES</p>
+            <p class="section-label ion-no-margin">{{ 'bundles-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
@@ -112,19 +112,24 @@
           <ion-col class="ion-no-margin">
             <ion-button class="green-button" (click)="maxReturn()">
               <strong>
-                Max Return
+                {{ 'max-return-button' | translate }}
+              </strong>
+            </ion-button>
+            <ion-button class="green-button" (click)="getStoredNodes()">
+              <strong>
+                {{ 'last-vote-button' | translate }}
               </strong>
             </ion-button>
           </ion-col>
           <ion-col class="ion-no-margin">
             <ion-button class="green-button" (click)="top36()">
               <strong>
-                Top 36
+                {{ 'top-36-button' | translate }}
               </strong>
             </ion-button>
             <ion-button class="pink-button" (click)="clearSelections()">
               <strong>
-                Clear
+                {{ 'clear-button' | translate }}
               </strong>
             </ion-button>
           </ion-col>
@@ -132,15 +137,16 @@
 
         <ion-row class="row0 ion-align-items-end ion-justify-content-start">
           <ion-col class="col0">
-            <p class="section-label ion-no-margin">Vote</p>
+            <p class="section-label ion-no-margin">{{ 'vote-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
         <ion-row class="row2 ion-align-items-end ion-justify-content-center">
           <ion-col class="ion-no-margin">
             <ion-button class="blue-button" (click)="elastOSVote()">
+              <ion-img class="wallet-logo" src="../assets/images/elastOS.png"></ion-img>
               <strong>
-                elastOS
+                {{ 'elastOS-button' | translate }}
               </strong>
             </ion-button>
           </ion-col>
@@ -148,7 +154,7 @@
             <ion-button class="purple-button" (click)="elephantVote()">
               <ion-img class="wallet-logo" src="../assets/logos/Elephant Wallet.png"></ion-img>
               <strong>
-                Elephant
+                {{ 'elephant-button' | translate }}
               </strong>
             </ion-button>
           </ion-col>

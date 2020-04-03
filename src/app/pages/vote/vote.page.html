@@ -1,19 +1,15 @@
-<ion-content *ngIf="nodesService._nodes.length === 0">
+<!-- <ion-content *ngIf="nodesService._nodes.length === 0">
   <ion-row class="img-container">
     <img-loader useImg><img style="height: 100%; width: 100%" src="../assets/images/SplashBackgroundI.png"></img-loader>
   </ion-row>
-</ion-content>
-
-<section *ngIf="nodesService._nodes.length > 0" id="header" (click)="return()">
-<!-- <section *ngIf="loaded" id="header" (click)="return()">
-&& nodesService._nodes.length > 0 -->
-  
-  <ion-header>
-    <header-bar title="Supernodes"></header-bar>
-  </ion-header>
-</section>
+</ion-content> -->
 
 <ion-content *ngIf="nodesService._nodes.length > 0">
+
+  <ion-refresher slot="fixed" (ionRefresh)="updateNodes($event)" pullMin="100" pullMax="125">
+    <ion-refresher-content pullingIcon="arrow-round-up" pullingText="Refresh Data">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <app-node-slider
   *ngIf="showDetails" 
@@ -28,7 +24,7 @@
     <ngx-datatable #nodeTable [rows]="nodesService._nodes" [rowHeight]="auto"
        [headerHeight]="30" [columnMode]="'flex'" [selectionType]="'multiClick'"
       (select)="onSelect($event)" (onclick)="onSelect($event)">
-      <ngx-datatable-column name="Rank" prop="Rank" [flexGrow]="0.7">
+      <ngx-datatable-column [name]=" 'table-header-rank' | translate" prop="Rank" [flexGrow]="0.7">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <p class="ion-no-margin rank">{{ row.Rank }}</p>
           <ion-icon class="arrow" src="../../../assets/icon/arrow-up-outline.svg" *ngIf="row.rankChange == true">
@@ -46,7 +42,7 @@
           </img-loader>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Delegate" prop="Nickname" [flexGrow]="2.6">
+      <ngx-datatable-column [name]=" 'table-header-delegate' | translate" prop="Nickname" [flexGrow]="2.6">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <p class="ion-no-margin">{{ truncateNames(row.Nickname) }}</p>
           <div class="nodes-small">{{ row.Country }}&nbsp;|&nbsp;{{ formatVotes(row.Votes) }}&nbsp;
@@ -57,7 +53,7 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Rewards" prop="AnnualROI" [flexGrow]="1">
+      <ngx-datatable-column [name]=" 'table-header-rewards' | translate" prop="AnnualROI" [flexGrow]="1">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <p class="ion-no-margin">{{ arrPercent(row.AnnualROI) }}</p>
           <p class="ion-no-margin nodes-small">{{ payPercent(row.PercentPayout) }}&nbsp;</p>

@@ -126,7 +126,7 @@
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
                   <div class="stat">#{{node.Rank}}</div>
-                  <div class="stat-label">Rank</div>
+                  <div class="stat-label">{{ 'node-rank-text' | translate }}</div>
                 </ion-col>
               </ion-row>
               <ion-row class="ion-no-margin">
@@ -137,7 +137,7 @@
                    <span  *ngIf="node.votesChange == false"
                     [ngStyle]="{'color':'#e8007f', 'font-weight':'500', 'font-size':'0.75rem'}">(-{{ deltaStatus(node.deltaVotes) }})</span>
                   </div>
-                  <div class="stat-label">Votes</div>
+                  <div class="stat-label">{{ 'node-votes-text' | translate }}</div>
                 </ion-col>
               </ion-row>
               <ion-row class="ion-no-margin">
@@ -148,29 +148,29 @@
                    <span  *ngIf="node.votersChange == false"
                     [ngStyle]="{'color':'#e8007f', 'font-weight':'500', 'font-size':'0.75rem'}">(-{{ deltaStatus(node.deltaVoters) }})</span>
                   </div>
-                  <div class="stat-label">Voters</div>
+                  <div class="stat-label">{{ 'node-voters-text' | translate }}</div>
                 </ion-col>
               </ion-row>
             </ion-col>
             <ion-col size="4">
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
-                  <div *ngIf="node.Rank <= 24 && node.State == 'Active'" [ngStyle]="{'color': '#ffc34d'}" class="stat">Active</div>
-                  <div *ngIf="node.Rank > 24 && node.State == 'Active'" [ngStyle]="{'color': '#cc66ff'}" class="stat">Standby</div>
-                  <div *ngIf="node.State == 'Inactive'" [ngStyle]="{'color': '#e8007f'}" class="stat">Inactive</div>
-                  <div class="stat-label">State</div>
+                  <div *ngIf="node.Rank <= 24 && node.State == 'Active'" [ngStyle]="{'color': '#ffc34d'}" class="stat">{{ 'node-active' | translate }}</div>
+                  <div *ngIf="node.Rank > 24 && node.State == 'Active'" [ngStyle]="{'color': '#cc66ff'}" class="stat">{{ 'node-standby' | translate }}</div>
+                  <div *ngIf="node.State == 'Inactive'" [ngStyle]="{'color': '#e8007f'}" class="stat">{{ 'node-inactive' | translate }}</div>
+                  <div class="stat-label">{{ 'node-state-text' | translate }}</div>
                 </ion-col>
               </ion-row>
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
                   <div class="stat">{{ votePercent( node )}}</div>
-                  <div class="stat-label">of Votes</div>
+                  <div class="stat-label">{{ 'node-of-votes-text' | translate }}</div>
                 </ion-col>
               </ion-row>
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
                   <div class="stat">{{ payPercent(node.PercentPayout) }}</div>
-                  <div class="stat-label">Payout</div>
+                  <div class="stat-label">{{ 'node-payout-text' | translate }}</div>
                 </ion-col>
               </ion-row>
             </ion-col>
@@ -178,7 +178,7 @@
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
                   <div class="stat">{{node.Country}}</div>
-                  <div class="stat-label">Location</div>
+                  <div class="stat-label">{{ 'node-location-text' | translate }}</div>
                 </ion-col>
               </ion-row>
               <ion-row class="ion-no-margin">
@@ -186,13 +186,13 @@
                   <div class="stat">
                     {{ getRewards(node.EstRewardPerYear) }} ELA
                   </div>
-                  <div class="stat-label">Daily Reward</div>
+                  <div class="stat-label">{{ 'node-reward-text' | translate }}</div>
                 </ion-col>
               </ion-row>             
               <ion-row class="ion-no-margin">
                 <ion-col class="ion-no-margin inner-col">
                   <div class="stat">{{ arrPercent(node.AnnualROI) }}</div>
-                  <div class="stat-label">Annual Return</div>
+                  <div class="stat-label">{{ 'node-return-text' | translate }}</div>
                 </ion-col>
               </ion-row>
             </ion-col>
@@ -200,7 +200,7 @@
 
           <ion-row *ngIf="node.details" class="row0">
             <ion-col class="ion-no-margin inner-col">
-            <h3 class="stat-label" style="text-align: left; padding-left: 20px;">About</h3>
+            <h3 class="stat-label" style="text-align: left; padding-left: 20px;">{{ 'node-about-text' | translate }}</h3>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="node.details" class="row1 description" style="border-bottom: solid 0.5px #e9e9e9; padding-bottom: 10px;">
@@ -211,13 +211,13 @@
             <h3 *ngIf="truncating && node.details.Description.length > limit">
               {{ node.details.Description | truncate : limit : ''}}
               <a style="color: #e8007f" (click)="truncating = false"
-                >...show more</a
+                >{{ 'show-more-text' | translate }}</a
               >
             </h3>
             <h3 *ngIf="!truncating && node.details.Description.length > limit">
               {{ node.details.Description }}
               <a style="color: #e8007f" (click)="truncating = true"
-                >...show less</a
+                >{{ 'show-less-text' | translate }}</a
               >
             </h3>
             </ion-col>

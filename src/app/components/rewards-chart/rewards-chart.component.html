@@ -22,7 +22,7 @@
   <ion-row>
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">HISTORY</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'rewards-chart-title' | translate }}</p>
       </ion-row>
       <!-- <ion-row style="margin-left: 10px; margin-right: 10px; padding-top: 7.5px; padding-bottom: 15px; font-size: 0.7rem;">
         <ion-col size="6" class="ion-justify-content-left ion-no-padding">
@@ -47,7 +47,7 @@
   <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">FIRST PAYOUT</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'first-payout-text' | translate }}</p>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ firstPayout }}</p>
@@ -60,7 +60,7 @@
     </ion-col>
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">TOTAL EARNINGS</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'total-earnings-text' | translate }}</p>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ totalEarned }} ELA</p>
@@ -76,14 +76,14 @@
   <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">PAST MONTH</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'month-text' | translate }}</p>
       </ion-row>
       <ion-row style="margin-left: 10px; margin-right: 10px">
         <ion-col class="ion-justify-content-left ion-no-padding">
           <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ monthEarn }} ELA</p>
         </ion-col>
         <ion-col class="ion-justify-content-left ion-no-padding">
-          <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ monthARR }}% ARR</p>
+          <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ monthARR + '% ' + ( 'arr-text' | translate) }}</p>
         </ion-col>
       </ion-row>
     </ion-col>
@@ -92,14 +92,14 @@
   <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">PAST WEEK</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'week-text' | translate }}</p>
       </ion-row>
       <ion-row style="margin-left: 10px; margin-right: 10px">
         <ion-col class="ion-justify-content-left ion-no-padding">
           <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ weekEarn }} ELA</p>
         </ion-col>
         <ion-col class="ion-justify-content-left ion-no-padding">
-          <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ weekARR }}% ARR</p>
+          <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ weekARR + '% ' + ( 'arr-text' | translate) }}</p>
         </ion-col>
       </ion-row>
     </ion-col>
@@ -108,7 +108,7 @@
   <ion-row>
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">EARNINGS PER SUPERNODE</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'earnings-per-node-text' | translate }}</p>
       </ion-row>
       <ion-row style="margin-top: 15px;">
         <div style="width: 100%;">

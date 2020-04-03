@@ -1,24 +1,11 @@
-<ion-header>
-  <header-bar title="About"></header-bar>
-</ion-header>
-
 <ion-content padding>
-  <ion-item>
-    <ion-button style="position:relative; top: 0px; left: -20px; height: 35px; width: 75px;" fill="clear"  [routerLink]="['/settings']">
-      <ion-icon
-        class="slider-back"
-        slot="icon-only"
-        name="arrow-round-back"
-      ></ion-icon>
-    </ion-button>
-</ion-item>
-  <div id="logo">
+  <div id="logo" style="margin-top: 10vh;">
     <img src="../assets/images/logo.png" />
-    <div>{{('Version') + ' ' + version}}</div>
+    <div>{{ ( 'version-text' | translate) + ' ' + version }}</div>
   </div>
   <ion-list>
     <ion-item style="--border-color: #a6a6a6">
-      <ion-label>Commit</ion-label>
+      <ion-label>{{ 'commit-text' | translate }}</ion-label>
       <ion-note slot="end">{{commitVersion}}</ion-note>
     </ion-item>
     <!-- <ion-item>
@@ -27,13 +14,13 @@
     </ion-item> -->
     <ion-item style="--border-color: #a6a6a6" detail (click)="goWebsite()">
       <ion-label>
-        <h2>{{'Website'}}</h2>
+        <h2>{{ 'website-text' | translate }}</h2>
         <p>starfish-supernode.tech</p>
       </ion-label>
     </ion-item>
     <ion-item style="--border-color: #1a1a1a;">
       <ion-label style="margin-bottom: 0;">
-        <h2>{{'Community'}}</h2>
+        <h2>{{ 'community-text-normal' | translate }}</h2>
       </ion-label>
     </ion-item>
     <ion-item style="--border-color: #1a1a1a;" class="ion-justify-content-evenly">

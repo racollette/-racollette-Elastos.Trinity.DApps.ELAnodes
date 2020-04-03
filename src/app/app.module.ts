@@ -23,7 +23,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ComponentsModule } from './components/components.module';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog } from '@fortawesome/free-solid-svg-icons';
 
 import { RewardsChartComponent } from './components/rewards-chart/rewards-chart.component';
 //import { NodeSliderComponent } from './components/node-slider/node-slider.component'
@@ -117,6 +117,6 @@ export function TranslateLoaderFactory() {
 })
 export class AppModule {
     constructor(private library: FaIconLibrary) {
-    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faCog);
+    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog);
   }  
 }

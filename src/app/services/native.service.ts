@@ -1,31 +1,30 @@
 
 import { Injectable, NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
-//import { ToastController, LoadingController, NavController } from '@ionic/angular';
-//import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { ToastController, LoadingController, NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-//import { TranslateService } from '@ngx-translate/core';
-//import { Logger } from '../services/Logger';
+import { Router } from '@angular/router';
 
-/***
- * APP底层交互
- */
 @Injectable({
   providedIn: 'root'
 })
 
 export class Native {
-    //private mnemonicLang: string = "english";
-    //private loadingIsOpen: boolean = false;
-    constructor(//public toastCtrl: ToastController,
-                //private clipboard: Clipboard,
-                //public translate: TranslateService,
-                //private loadingCtrl: LoadingController,
-                private inappBrowser: InAppBrowser
-                //private navCtrl: NavController,
-                //private zone: NgZone,
-                //private router: Router
-                ) {}
+      
+      private loadingIsOpen: boolean = false;
+
+    constructor(
+      private inappBrowser: InAppBrowser,
+      private navController: NavController,
+      private loadingCtrl: LoadingController,
+      private router: Router,
+      private zone: NgZone
+    ) {}
+
+    public openUrl(url: string) {
+        const target = "_system";
+        const options = "location=no";
+        this.inappBrowser.create(url, target, options);
+    }
 
     // public info(message) {
     //     Logger.log(message, "Info");
@@ -73,20 +72,17 @@ export class Native {
     //     this.navCtrl.pop();
     // }
 
-    public openUrl(url: string) {
-        const target = "_system";
-        const options = "location=no";
-        this.inappBrowser.create(url, target, options);
-    }
 
-    // public setRootRouter(page: any,  options: any = {}) {
-    //     console.log("Setting root router path to:", page);
-    //     this.zone.run(()=>{
-    //         this.hideLoading();
-    //         this.navCtrl.setDirection('root');
-    //         this.router.navigate([page], { queryParams: options });
-    //     });
-    // }
+
+    public setRootRouter(page: any,  options: any = {}) {
+        console.log("Setting root router path to:", page);
+        this.zone.run(()=>{
+          
+            //this.hideLoading();
+            //this.navController.setDirection('root');
+            this.router.navigate([page], { queryParams: options });
+        });
+    }
 
     // public getMnemonicLang(): string {
     //     return this.mnemonicLang;
@@ -131,10 +127,11 @@ export class Native {
     // /**
     //  * 关闭loading
     //  */
-    // public hideLoading(): void {
-    //     this.loadingIsOpen && this.loadingCtrl.dismiss();
-    //     this.loadingIsOpen = false;
-    // }
+
+    public hideLoading(): void {
+        this.loadingIsOpen && this.loadingCtrl.dismiss();
+        this.loadingIsOpen = false;
+    }
 
     // public getTimestamp() {
     //     return new Date().getTime().toString();

@@ -1,10 +1,6 @@
-<ion-header>
-  <header-bar title="Analytics"></header-bar>
-</ion-header>
-
 <ion-content>
-  
-  <ion-refresher slot="fixed" (ionRefresh)="updateStats($event)" pullMin="100" pullMax="150">
+
+  <ion-refresher slot="fixed" (ionRefresh)="updateStats($event)" pullMin="100" pullMax="125">
     <ion-refresher-content pullingIcon="arrow-round-up" pullingText="Refresh Data">
     </ion-refresher-content>
   </ion-refresher>
@@ -12,27 +8,27 @@
   <ion-row style="margin-top: 10px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">STAKING PARTICIPATION</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'staking-chart-title' | translate }}</p>
       </ion-row>
       <ion-row class="ion-align-items-end ion-justify-content-evenly">
         <ion-col class="ion-no-margin">
           <ion-button class="dataset-button" (click)="selectCoins()" [ngStyle]="{'background-color': colorCoins }">
             <strong>
-              COINS
+              {{ 'staking-chart-coins' | translate }}
             </strong>
           </ion-button>
         </ion-col>
         <ion-col class="ion-no-margin">
           <ion-button class="dataset-button" (click)="selectSupply()" [ngStyle]="{'background-color': colorSupply }">
             <strong>
-              SUPPLY
+              {{ 'staking-chart-supply' | translate }}
             </strong>
           </ion-button>
         </ion-col>  
         <ion-col class="ion-no-margin">
           <ion-button class="dataset-button" (click)="selectVoters()" [ngStyle]="{'background-color': colorVoters }">
             <strong>
-              VOTERS
+              {{ 'staking-chart-voters' | translate }}
             </strong>
           </ion-button>
         </ion-col>  
@@ -69,7 +65,7 @@
         <ion-col class="ion-no-margin">    
           <ion-button class="chart-button" (click)="switchAll()" [ngStyle]="{'background-color': colorAll }">
             <strong>
-              ALL
+              {{ 'all-text' | translate }}
             </strong>
           </ion-button>
         </ion-col>
@@ -82,7 +78,7 @@
   <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0px; margin-bottom: 15px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">STAKED SUPPLY</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'supply-pie-chart' | translate }}</p>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <div style="width: 100px; height: 100px; float: left; position: relative;  margin-top: 10px; margin-bottom: 10px;">
@@ -95,7 +91,7 @@
     </ion-col>
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">HASHRATE</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'hashrate-bar-chart' | translate }}</p>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <div style="margin-top: 10px; margin-bottom: 10px;">
@@ -108,27 +104,27 @@
   <ion-row style="margin-bottom: 20px">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0px; margin-bottom: 15px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">MAINCHAIN ACTIVITY</p>
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'mainchain-chart-title' | translate }}</p>
       </ion-row>
       <ion-row class="ion-align-items-end ion-justify-content-evenly">
         <ion-col class="ion-no-margin">
           <ion-button class="mainchain-button" (click)="selectHashrate()" [ngStyle]="{'background-color': colorHashrate }">
             <strong>
-              HASHRATE
+              {{ 'mainchain-chart-hashrate' | translate }}
             </strong>
           </ion-button>
         </ion-col>
         <ion-col class="ion-no-margin">
           <ion-button class="mainchain-button" (click)="selectAA()" [ngStyle]="{'background-color': colorAA }">
             <strong>
-              ADDRESSES
+              {{ 'mainchain-chart-addresses' | translate }}
             </strong>
           </ion-button>
         </ion-col>  
         <ion-col class="ion-no-margin">
           <ion-button class="mainchain-button" (click)="selectTPH()" [ngStyle]="{'background-color': colorTPH }">
             <strong>
-              TX PER HR
+              {{ 'mainchain-chart-tph' | translate }}
             </strong>
           </ion-button>
         </ion-col>  
@@ -165,7 +161,7 @@
         <ion-col class="ion-no-margin">    
           <ion-button class="chart-button" (click)="mainchainSwitchAll()" [ngStyle]="{'background-color': mainchainColorAll }">
             <strong>
-              ALL
+              {{ 'all-text' | translate }}
             </strong>
           </ion-button>
         </ion-col>

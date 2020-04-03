@@ -1,17 +1,20 @@
-<section>
-  <ion-header>
-    <header-bar title="Rewards"></header-bar>
-  </ion-header>
-</section>
-
 <ion-content>
-  <ion-row style="padding-top: 12px; padding-left: 10px; padding-right: 8px">
+
+  <ion-item lines="none" style="--border-color: #a6a6a6" detail (click)="switchWallets()">
+    <ion-icon slot="start" style="font-size: 20px; margin-left: 0; margin-right: 4vw;" name="repeat"></ion-icon>
+    <ion-label>
+      <p style="color: #fff">{{ 'switch-wallet-text' | translate }}</p>
+    </ion-label>
+    <ion-note style="color: #a6a6a6; margin-right: 4vw; white-space: no-wrap" slot="end">{{ alias }}</ion-note>
+  </ion-item>
+
+  <ion-row style="padding-top: 0; padding-left: 10px; padding-right: 8px">
     <ion-col class="ion-no-margin address">
-      <h4 class="ion-no-margin" style="font-size: 0.8rem;">ADDRESS</h4>
+      <h4 class="ion-no-margin" style="font-size: 0.8rem;">{{ 'address-text' | translate }}</h4>
       &nbsp;&nbsp;
       <span class="ion-no-margin" (click)="requestWalletAccess()">
         <ion-icon name="wallet" color="danger"></ion-icon> &nbsp;
-        <p class="ion-no-margin">[access from wallet]</p>
+        <p class="ion-no-margin">{{ '[' + ('access-wallet-text' | translate) + ']' }}</p>
       </span>
     </ion-col>
   </ion-row>
@@ -29,14 +32,14 @@
       ></ion-icon>
         <ion-textarea
           [(ngModel)]="address"
-          placeholder="Enter your voting address"
+          placeholder="{{ 'input-placeholder-text' | translate }}"
           minlength="10"
           type="text"
         >
         </ion-textarea>
         <ion-icon
         class="search"
-        (click)="retrieveTxHistory()"
+        (click)="addWalletStorage()"
         name="ios-search"
       ></ion-icon>
       </div>
@@ -59,9 +62,9 @@
 
   <ion-list *ngIf="data.walletRequested == true" class="loader">
     <img-loader useImg
-      ><img class="loading-gif" src="../../../assets/images/loading1.gif"
+      ><img class="loading-gif" src="../../../assets/images/loading3.gif"
     /></img-loader>
-    <p class="ion-no-margin ion-no-padding" style="font-weight: 600; font-size: 0.8rem;">Fetching transaction history...</p>
+    <p class="ion-no-margin ion-no-padding" style="font-weight: 500; font-size: 0.8rem;">{{ ('fetching-text' | translate) + '...' }}</p>
   </ion-list>
 
   <ion-list *ngIf="data.rewardsObjectCreated" class="rewards-table-container">
@@ -73,7 +76,7 @@
         name="stats"
       ></ion-icon>
         <strong style="font-size: 0.8rem; padding-left: 10px;">
-          ADVANCED DATA
+          {{ 'advanced-data-text' | translate }}
         </strong>
       </ion-button>
     </ion-row>
@@ -98,10 +101,10 @@
           <div class="detail-container">
               <ion-row class="ion-no-padding ion-no-margin">
                 <ion-col size="3.5" class="ion-no-padding ion-no-margin">
-                  <div style="padding-bottom: 1px;">Memo</div>
-                  <div style="padding-bottom: 1px;">Payout Address</div>
-                  <div style="padding-bottom: 1px;">Height</div>
-                  <div>Transaction ID</div>
+                  <div style="padding-bottom: 1px;">{{ 'memo-text' | translate }}</div>
+                  <div style="padding-bottom: 1px;">{{ 'payout-address-text' | translate }}</div>
+                  <div style="padding-bottom: 1px;">{{ 'height-text' | translate }}</div>
+                  <div>{{ 'txid-text' | translate }}</div>
                 </ion-col>
                 <ion-col size="8.5" class="ion-no-padding ion-no-margin">
                   <div style="padding-bottom: 1px;">{{ row.Memo }}</div>
@@ -114,7 +117,7 @@
         </ng-template>
       </ngx-datatable-row-detail>
 
-      <ngx-datatable-column name="DATE" prop="CreateTime" [flexGrow]="0.8">
+      <ngx-datatable-column [name]=" 'table-date' | translate " prop="CreateTime" [flexGrow]="0.8">
         <ng-template
           let-row="row"
           let-value="value"
@@ -134,7 +137,7 @@
           /></img-loader>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="DELEGATE" prop="Delegate" [flexGrow]="1.2">
+      <ngx-datatable-column [name]=" 'table-delegate' | translate"  prop="Delegate" [flexGrow]="1.2">
         <ng-template
           let-row="row"
           let-value="value"

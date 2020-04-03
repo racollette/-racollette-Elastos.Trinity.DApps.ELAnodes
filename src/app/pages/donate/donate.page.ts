@@ -1,106 +1,121 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: any;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-    selector: 'app-donate',
-    templateUrl: './donate.page.html',
-    styleUrls: ['./donate.page.scss'],
+  selector: 'app-donate',
+  templateUrl: './donate.page.html',
+  styleUrls: ['./donate.page.scss'],
 })
 export class DonatePage implements OnInit {
 
-    public value: number = 0;
+  public value: number = 0;
 
-    // Toast for donate Failed/Success
-    private toast: any = null;
+  // Toast for donate Failed/Success
+  private toast: any = null;
 
-    constructor(
-        private toastController: ToastController,
-        private zone: NgZone
-    ) {}
+  constructor(
+    private toastController: ToastController,
+    private navController: NavController,
+    private zone: NgZone,
+    private translate: TranslateService,
+  ) { }
 
-    ngOnInit() {
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    titleBarManager.setTitle(this.translate.instant('donate-title'))
+    titleBarManager.setBackgroundColor("#000000");
+    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+    appManager.setListener((ret) => {this.onMessageReceived(ret)});
+  }
+
+  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
+    if (ret.message == "navback") {
+      this.navController.back();
     }
+  }
 
-    close() {
-    }
+  ionViewDidEnter() {
+  }
 
-    rangeValue(event) {
-        this.value = (event.detail.value).toFixed(1)
-        console.log('Donation Value: ' + this.value)
-    }
+  rangeValue(event) {
+    this.value = (event.detail.value).toFixed(1)
+    console.log('Donation Value: ' + this.value)
+  }
 
-    donate() {
-      appManager.sendIntent("pay", {
-          receiver:'EXnTnfzbz3xdnarzruf9rLzawGrw7ENnMd', 
-          amount: this.value, 
-          type: 'payment-confirm'
-        }, {}, (res) => {
+  donate() {
+    appManager.sendIntent("pay", {
+      receiver: 'EXnTnfzbz3xdnarzruf9rLzawGrw7ENnMd',
+      amount: this.value,
+      type: 'payment-confirm'
+    }, {}, (res) => {
       this.zone.run(() => {
-        if(res.result) {
-            console.log(res.result)
-        //   this.address = res.result.elaaddress;
-        //   this.addressReturned = !this.addressReturned
-        //this.paySuccess('Success! We appreciate your support!');
-        this.paySuccess(res);
+        if (res.result.txid) {
+          let translation: string = this.translate.instant('donate-success-toast');
+          this.paySuccess(translation, res);
         } else {
-          this.toastError('Error. Payment canceled');
+          let translation: string = this.translate.instant('donate-canceled-toast');
+          this.toastError(translation);
         }
       });
     }, (err) => {
       console.log(err);
-      this.toastError('Oops');
+      let translation: string = this.translate.instant('Error. Unable to access wallet application.');
+      this.toastError(translation);
     });
+  }
+
+  async paySuccess(header: string, res: string) {
+    this.closeToast();
+    this.toast = await this.toastController.create({
+      mode: 'ios',
+      header: this.translate.instant('Success! We appreciate your support!'),
+      message: res,
+      cssClass: "toaster",
+      position: "middle",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.toast.dismiss();
+          }
+        }
+      ],
+    });
+    this.toast.present();
+  }
+
+  async toastError(res: string) {
+    this.closeToast();
+    this.toast = await this.toastController.create({
+      mode: 'ios',
+      message: res,
+      position: "middle",
+      cssClass: 'toaster',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.toast.dismiss();
+          }
+        }
+      ]
+    });
+    this.toast.present();
+  }
+
+
+  closeToast() {
+    if (this.toast) {
+      this.toast.dismiss();
+      this.toast = null;
     }
-
-    async paySuccess(res: string) {
-        this.closeToast();
-        this.toast = await this.toastController.create({
-          mode: 'ios',
-          header: 'Votes successfully submitted.',
-          message: res,//.slice(0,30) + '...',
-          cssClass: "toaster",
-          position: "middle",
-          buttons: [
-            {
-              text: 'Ok',
-              handler: () => {
-                this.toast.dismiss();
-              }
-            }
-          ],
-        });
-        this.toast.present();
-    }
-
-    async toastError(res: string) {
-        this.closeToast();
-        this.toast = await this.toastController.create({
-          mode: 'ios',
-          //header: 'Failed to get an address from your wallet',
-          message: res,
-          //color: "primary",
-          position: "middle",
-          cssClass: 'toaster',
-          buttons: [
-            {
-              text: 'Ok',
-              handler: () => {
-                this.toast.dismiss();
-              }
-            }
-          ]
-        });
-        this.toast.present();
-    }
-
-
-    closeToast() {
-       if (this.toast) {
-         this.toast.dismiss();
-         this.toast = null;
-       }
-     }
+  }
 
 }

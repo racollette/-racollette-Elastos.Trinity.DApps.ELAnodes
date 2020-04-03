@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { TruncateModule } from '@yellowspot/ng-truncate';
+import { TranslateModule } from '@ngx-translate/core';
 
 //import { TranslateModule } from '@ngx-translate/core';
 
@@ -22,6 +23,7 @@ import { NodeSliderComponent } from './node-slider/node-slider.component';
     FormsModule,
     IonicModule,
     IonicImageLoader,
+    TranslateModule,
     FontAwesomeModule,
     TruncateModule
 //  TranslateModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     ComponentsModule,
     NgxDatatableModule,
     IonicImageLoader,

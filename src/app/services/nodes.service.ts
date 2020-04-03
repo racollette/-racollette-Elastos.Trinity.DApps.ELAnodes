@@ -89,6 +89,7 @@ export class NodesService {
   }
 
   async init() {
+    console.log('NODE SERVICE INITIATED')
     this.getVisit();
     this.getStoredVotes();
     this.fetchStats();
@@ -98,13 +99,11 @@ export class NodesService {
     }, 5000); */
 
     const height: number = await this.fetchCurrentHeight();
-    this.fetchNodes(height);
+    this.fetchNodes();
   }
 
-   Storage
+   //Storage
    getVisit() {
-
-     console.log(this.storageService)
     this.storageService.getVisit().then(data => {
       if(data || data === true) {
         this.firstVisit = false;
@@ -124,16 +123,16 @@ export class NodesService {
     });
   }
 
-  getStoredNodes() {
-    this.storageService.getNodes().then(data => {
-      console.log(data);
-      this._nodes.map(node => {
-        if (data && data.includes(node.Ownerpublickey) && node.State === 'Active') {
-          node.isChecked = true;
-        }
-      });
-    });
-  }
+  // getStoredNodes() {
+  //   this.storageService.getNodes().then(data => {
+  //     console.log(data);
+  //     this._nodes.map(node => {
+  //       if (data && data.includes(node.Ownerpublickey) && node.State === 'Active') {
+  //         node.isChecked = true;
+  //       }
+  //     });
+  //   });
+  // }
 
   fetchStats() {
     return new Promise((resolve, reject) => {
@@ -171,22 +170,20 @@ export class NodesService {
     this.nodesLoadedSource.next(nodeLoad)
   }
 
-  fetchNodes(height: number) {
+  fetchNodes() {
     console.log('Fetching Nodes..');
+    this._nodes = []
     //this.http.get<any>(this.nodeApi + 'v1/dpos/rank/height/' + height).subscribe((res) => {
-    this.http.get<any>(this.proxyurl + 'https://elanodes.com/api/node-metrics').subscribe((res) => { 
-      console.log('Nodes Fetch Response', res)
-      this._nodes = this._nodes.concat(res.result);
-      //this.activeNodes = this._nodes.filter(node => node.State === 'Active');
-      this.getNodeIcon();
-      this.getNodeDayChange();
-      this.getStoredNodes();
-
-      this.nodeLoader(this._nodes)
-      //this.getTotalVotes(res.result);
-      console.log('Nodes Added..', this._nodes);
-
-      //console.log('Active Nodes..', this.activeNodes);
+    return new Promise((resolve, reject) => {
+      this.http.get<any>(this.proxyurl + 'https://elanodes.com/api/node-metrics').subscribe((res) => { 
+        this._nodes = this._nodes.concat(res.result);
+        this.getNodeIcon();
+        this.getNodeDayChange();
+        //this.getStoredNodes();
+        this.nodeLoader(this._nodes)
+        console.log('Nodes Added..', this._nodes);
+        resolve();
+      });
     });
   }
 
@@ -280,8 +277,9 @@ export class NodesService {
       || node.Nickname === 'Elastos HIVE'                          
       || node.Nickname === '曲率区动'
       || node.Nickname === 'Elastos Scandinavia'                   
-      || node.Nickname === '比特头条BITETT '
-      || node.Nickname === 'Elate.ch'                               
+      || node.Nickname === '比特头条BITETT '  
+      || node.Nickname === 'ELACOINS'      
+      || node.Nickname === 'Elate.ch'                                 
       || node.Nickname === '链世界') {
         node.imageUrl = '../../assets/logos/' + node.Nickname + '.png'
       }
@@ -290,7 +288,11 @@ export class NodesService {
       }
       if (node.Nickname === "CR Herald | CR 先锋资讯") {
          node.imageUrl = '../../assets/logos/CR Herald.png'
-      } else {
+      } 
+      if (node.Nickname === "Pmhee555 75% weekly payouts") {
+         node.imageUrl = '../../assets/logos/Pmhee555 75 weekly payouts.png'
+      } 
+      else {
          return '../../assets/logos/Default.png'
       }
       
@@ -362,7 +364,8 @@ export class NodesService {
       || name === '曲率区动'
       || name === 'Elastos Scandinavia'                   
       || name === '比特头条BITETT '
-      || name === 'Elate.ch'                               
+      || name === 'Elate.ch'         
+      || name === 'ELACOINS'                         
       || name === '链世界') {
         return '../../assets/logos/' + name + '.png'
       }
@@ -371,6 +374,9 @@ export class NodesService {
       }
       if (name === "CR Herald | CR 先锋资讯") {
          return '../../assets/logos/CR Herald.png'
+      } 
+      if (name === "Pmhee555 75% weekly payouts") {
+         return '../../assets/logos/Pmhee555 75 weekly payouts.png'
       } else {
          return '../../assets/logos/Default.png'
       }

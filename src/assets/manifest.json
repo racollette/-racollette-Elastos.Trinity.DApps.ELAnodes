@@ -12,12 +12,12 @@
   "category": "finance",
   "icons": [
     {
-      "src": "assets/images/logo.png",
+      "src": "assets/images/logo3.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "assets/images/logo.png",
+      "src": "assets/images/logo3.png",
       "sizes": "128x128",
       "type": "image/png"
     }
@@ -35,9 +35,6 @@
     "Clipboard"
   ],
   "urls": [
-    "http://*",
-    "https://*",
-    "https://cors-anywhere.herokuapp.com/*",
     "https://node1.elaphant.app/*",
     "https://elanodes.com/api/*"
   ],

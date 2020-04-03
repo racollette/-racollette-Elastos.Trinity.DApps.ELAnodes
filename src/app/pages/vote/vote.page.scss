@@ -39,3 +39,25 @@ ion-list {
   }
 }
 
+ion-refresher {
+  --color: #fff;
+  background-color: #202020;
+}
+
+ion-refresher-content {
+  padding-top: 50px;
+  padding-bottom: 100px;
+  background-color: #202020;
+}
+
+.refresher-md {
+  --ion-text-color: #fff !important;
+}
+
+.refresher-pulling-icon {
+  color: #fff !important;
+}
+
+.fixed-content{
+  background:#202020;
+}

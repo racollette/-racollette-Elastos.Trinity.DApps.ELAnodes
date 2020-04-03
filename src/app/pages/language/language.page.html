@@ -1,19 +1,6 @@
-<ion-header>
-  <header-bar title="Language"></header-bar>
-</ion-header>
-
 <ion-content padding>
 <ion-list style="padding-top: 0">
-  <ion-item style="--border-color: #a6a6a6;">
-    <ion-button style="position:relative; top: 0px; left: -20px; height: 35px; width: 75px;" fill="clear"  [routerLink]="['/settings']">
-      <ion-icon
-        class="slider-back"
-        slot="icon-only"
-        name="arrow-round-back"
-      ></ion-icon>
-    </ion-button>
-</ion-item>
-<ion-radio-group value="en"  (ionChange)="languageChoice($event)">
+<ion-radio-group [value]="lang"  (ionChange)="languageChoice($event)">
   <ion-item style="--border-color: #a6a6a6">
     <ion-label>English</ion-label>
     <ion-radio slot="end" value="en"></ion-radio>

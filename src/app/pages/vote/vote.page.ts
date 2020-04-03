@@ -1,12 +1,16 @@
 import { Component, OnInit, Directive, Input, ViewChild } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Injectable, NgZone } from '@angular/core';
 import { NodesService } from 'src/app/services/nodes.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable/esm2015/lib/components/datatable.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: any;
-
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
+    
 @Injectable({
   providedIn: 'root'
 })
@@ -64,16 +68,44 @@ export class VotePage implements OnInit {
     public nodesService: NodesService,
     private router: Router,
     private data: DataService,
-  ) { }
+    private storageService: StorageService,
+    private translate: TranslateService,
+    private navController: NavController
+    ) {}
 
   ngOnInit() {
-    this.data.loaded.subscribe(load => this.loaded = load)
-    this.wait();
+  }
+
+  ionViewWillEnter() {
+    titleBarManager.setTitle(this.translate.instant('Supernodes'))
+    titleBarManager.setBackgroundColor("#000000");
+    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
+    appManager.setVisible("show", ()=>{}, (err)=>{});
+    let menuItems = [
+        {
+            key: "close", 
+            iconPath: "assets/icon/close2.png", 
+            title: "Close"
+        }
+    ];
+    titleBarManager.setupMenuItems(menuItems, (selectedMenuItem)=>{
+        switch (selectedMenuItem.key) {
+            case "close":
+                appManager.close();
+                break;
+        }
+    });
+    //this.data.loaded.subscribe(load => this.loaded = load)
+    //this.wait();
+  }
+
+  ionViewDidEnter() {
   }
 
   public pushMenu() {
     this.nodesService.nodesLoaded.subscribe(nodeLoad => this.nodeLoad = nodeLoad)
-    this.data.loaded.subscribe(load => this.loaded = load)
+    //this.data.loaded.subscribe(load => this.loaded = load)
     this.tableStyle = this.nodesService.tableStyle;
     this.data.currentselectedCount.subscribe(input => this.input = input)
     this.data.currentselectedARR.subscribe(input1 => this.input1 = input1)
@@ -90,7 +122,8 @@ export class VotePage implements OnInit {
     this.data.NA_Count.subscribe(AF => this.AF = AF)
 
     this.voteDocument = document.querySelectorAll('.datatable-body-row');
-    this.data.updateStats(this.selectedCount, this.selectedARR, this.selectedAvgPay, this.selected, this.nodeTable, this.selectedVotePercent,     this.voteDocument)
+
+    this.data.updateStats(this.selectedCount, this.selectedARR, this.selectedAvgPay, this.selected, this.ngxDataTable, this.selectedVotePercent, this.voteDocument)
     this.nodesService.nodeLoader(this.nodeLoad)
 
     this.simulateClick();
@@ -102,28 +135,19 @@ export class VotePage implements OnInit {
      row.click();
   }
 
-  wait() {
-    setTimeout(() => {           
-      this.loaded = true 
-      this.data.loadTimer(this.loaded)
+  // wait() {
+  //   setTimeout(() => {           
+  //     this.loaded = true 
+  //     this.data.loadTimer(this.loaded)
+  //   }, 2000);
+  // }
+
+  updateNodes(event) {
+    setTimeout(() => {
+      this.nodesService.fetchNodes().then(() => {
+        event.target.complete();
+      });
     }, 2000);
-  }
-
-
-
-  ionViewDidEnter() {
-    appManager.setVisible("show", ()=>{}, (err)=>{});
-  }
-
-   //// Toggling bootstrap and dark theme ////
-  switchMode() {
-    if(this.nodesService.tableStyle === 'bootstrap') {
-      this.nodesService.tableStyle = 'dark';
-      this.tableStyle = 'dark';
-    } else {
-      this.nodesService.tableStyle = 'bootstrap';
-      this.tableStyle = 'bootstrap';
-    }
   }
 
   deltaStatus(input) {
@@ -167,7 +191,8 @@ export class VotePage implements OnInit {
   arrPercent(arr) {
     const arrPercent: number = arr
     if (isNaN(arrPercent)) {
-      return 'No Data'
+      let translation:string = this.translate.instant('table-no-data');
+      return translation
     } else {
     return arrPercent + '%'
     }

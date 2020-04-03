@@ -4,7 +4,8 @@ import { ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { NodesService } from 'src/app/services/nodes.service';
 import { DataService } from 'src/app/services/data.service';
-import { VotePage} from 'src/app/pages/vote/vote.page';
+import { VotePage } from 'src/app/pages/vote/vote.page';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: any;
 
@@ -21,7 +22,8 @@ export class MenuComponent implements OnInit {
     public nodesService: NodesService,
     private storageService: StorageService,
     private toastController: ToastController,
-    private votePage: VotePage
+    private votePage: VotePage,
+    private translate: TranslateService
   ) { }
 
   public input:number;
@@ -57,7 +59,7 @@ export class MenuComponent implements OnInit {
   
 
   ngOnInit() {
-    this.data.loaded.subscribe(load => this.loaded = load)
+    //this.data.loaded.subscribe(load => this.loaded = load)
     this.data.currentselectedCount.subscribe(input => this.input = input)
     this.data.currentselectedARR.subscribe(input1 => this.input1 = input1)
     this.data.currentselectedAvgPay.subscribe(input2 => this.input2 = input2)
@@ -155,7 +157,8 @@ export class MenuComponent implements OnInit {
   }
 
   clearSelections() {
-    let el = document.querySelectorAll('.active');
+    let el = this.voteDocument //document.querySelectorAll('.active');
+    console.log(el)
 
        for (let i = 0; i < el.length; i++){
          el[i].className = '';
@@ -169,14 +172,60 @@ export class MenuComponent implements OnInit {
      }
   }
 
+  getStoredNodes() {
+    this.storageService.getNodes().then(data => {
+      console.log('Last Node Vote', data);
+      if(data) {
+        this.myLastVote(data)
+      } else {
+        let translation = this.translate.instant('No voting history found')
+        this.data.toastError(translation)
+      }
+    });
+  }
+
+  myLastVote(data) {
+    let voteArr = data
+    let nodes = this.nodeLoad
+    console.log(nodes)
+  
+    // data.forEach(node => {
+    //   voteArr.push(node.Producer_public_key)
+    // })
+
+    let nodeRows: any = []
+    let el = this.voteDocument
+
+    nodes.forEach(node => {
+      if (voteArr.includes(node.Producer_public_key)) {
+        nodeRows.push(node)
+      }
+    })
+
+    console.log(nodeRows)
+
+    let length = nodeRows.length
+    for (let j=0; j < length; j++) {
+      console.log(j)
+      console.log(nodeRows[j])
+       let index = nodeRows[j].Rank - 1
+       el[index].classList.add("active");
+     }
+    console.log(nodeRows)
+    this.onSelect({selected: nodeRows});
+    this.nodeTable.selected = nodeRows
+  }
+
+
   maxReturn() {
     this.clearSelections()
 
-    let nodes = this.nodeTable
+    let nodes = this.nodeLoad
+    console.log(nodes)
     let arrayROI: string[] = []
 
-    for (let i=0; i < nodes.rows.length; i++) {
-      arrayROI.push(nodes.rows[i].AnnualROI)
+    for (let i=0; i < nodes.length; i++) {
+      arrayROI.push(nodes[i].AnnualROI)
     }
 
     let sortROI = arrayROI.map((val, ind) => {return {ind, val}})
@@ -188,10 +237,12 @@ export class MenuComponent implements OnInit {
 
      for (let j=0; j < 36; j++) {
        let index = sortROI[j]
-       rowsROI.push(nodes.rows[index])
+       rowsROI.push(nodes[index])
        el[index].classList.add("active");
      }
-
+    console.log('NODE TABLE DO YOU FUCKING EXIST')
+    console.log(this.nodeTable)
+    console.log(rowsROI)
     this.onSelect({selected: rowsROI});
     this.nodeTable.selected = rowsROI
   }
@@ -199,13 +250,13 @@ export class MenuComponent implements OnInit {
   top36() {
     this.clearSelections()
 
-    let nodes = this.nodeTable
+    let nodes = this.nodeLoad
 
     let el = document.querySelectorAll('.datatable-body-row');
     let rows36: string[] = []
 
     for (let j=0; j < 36; j++) {
-      rows36.push(nodes.rows[j])
+      rows36.push(nodes[j])
       el[j].classList.add("active");
     }
 
@@ -235,7 +286,6 @@ export class MenuComponent implements OnInit {
     }
 
     console.log(submitNodeKeys);
-    this.storageService.setNodes(submitNodeKeys);
     let votesSent: boolean = false;
 
       appManager.sendIntent(
@@ -247,17 +297,20 @@ export class MenuComponent implements OnInit {
 
           if(res.result.txid === null ) {
             votesSent = true;
-            this.voteFailed('Votes were cancelled');
+            let translation = this.translate.instant('votes-canceled-toast');
+            this.voteFailed(translation);
           } else {
             votesSent = true;
             this.voted = true;
             let date = new Date;
             let txid: string = res.result.txid;
+            txid = txid.substr(0,16) + '... ' + txid.substr(48,16)
 
             this.nodesService._votes = this.nodesService._votes.concat({ date: date, tx: txid, keys: submitNodeKeys });
             console.log('Vote history updated', this.nodesService._votes);
             this.storageService.setVotes(this.nodesService._votes);
-            this.voteSuccess(res.result.txid);
+            this.storageService.setNodes(submitNodeKeys);
+            this.voteSuccess(txid);
           }
         }, (err) => {
           votesSent = true;
@@ -269,7 +322,8 @@ export class MenuComponent implements OnInit {
       // If no response is sent from wallet, show vote transaction has failed
       setTimeout(() => {
         if(votesSent === false) {
-          this.voteFailed('No response from wallet');
+          let translation = this.translate.instant('wallet-failed-toast');
+          this.voteFailed(translation);
         }
       }, 10000)
 
@@ -304,6 +358,7 @@ export class MenuComponent implements OnInit {
       let url = encodeURIComponent(elephantKeys)
 
       this.data.openUrl(requestHeader + url)
+      this.storageService.setNodes(submitNodeKeys);
     }
 
    } else {
@@ -312,19 +367,18 @@ export class MenuComponent implements OnInit {
 
   }
 
-
   //// Alerts ////
   async voteSuccess(res: string) {
     this.closeToast();
     this.toast = await this.toastController.create({
       mode: 'ios',
-      header: 'Votes successfully submitted.',
+      header: this.translate.instant('vote-success-header'),
       message: 'Txid:' + res,//.slice(0,30) + '...',
       cssClass: "toaster",
       position: "middle",
       buttons: [
         {
-          text: 'Ok',
+          text: this.translate.instant('toast-ok'),
           handler: () => {
             this.toast.dismiss();
           }
@@ -338,14 +392,14 @@ export class MenuComponent implements OnInit {
     this.closeToast();
     this.toast = await this.toastController.create({
       mode: 'ios',
-      header: 'There was an error with sending votes...',
+      header: this.translate.instant('vote-failed-toast'),
       message: res,
       //color: "primary",
       position: "middle",
       cssClass: 'toaster',
       buttons: [
         {
-          text: 'Ok',
+          text: this.translate.instant('toast-ok'),
           handler: () => {
             this.toast.dismiss();
           }
@@ -366,7 +420,7 @@ export class MenuComponent implements OnInit {
   async noNodesChecked() {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Please select up to 36 nodes in order to vote.',
+      message: this.translate.instant('select-36-toast'),
       cssClass: "toaster",
       position: "middle",
       duration: 2000

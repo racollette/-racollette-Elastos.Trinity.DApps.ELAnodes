@@ -1,27 +1,14 @@
-<ion-header>
-  <header-bar title="Donate"></header-bar>
-</ion-header>
-
 <ion-content padding>
-  <ion-item>
-      <ion-button style="position:relative; top: 0px; left: -20px; height: 35px; width: 75px;" fill="clear"  [routerLink]="['/settings']">
-        <ion-icon
-          class="slider-back"
-          slot="icon-only"
-          name="arrow-round-back"
-        ></ion-icon>
-      </ion-button>
+  <ion-item style="margin-top: 10vh">
+    <p style="text-align: left; font-weight: 400; font-size: 0.9rem">{{ 'donate-text' | translate }}</p>
   </ion-item>
-  <ion-item>
-    <p style="text-align: left; font-weight: 350; font-size: 0.9rem">Currently, this app is completely free. However, donations are welcome and help motivate us to keep adding features. Thank you!</p>
-  </ion-item>
-  <ion-item>
+  <ion-item style="margin-top: 10vh">
     <ion-range min="0" max="100" step=0.1 (ionChange)="rangeValue($event)">
       <ion-label style="font-weight: 600; font-size: 1rem; padding-right: 2vw" slot="start">0</ion-label>
       <ion-label style="font-weight: 600; font-size: 1rem;"  slot="end">100</ion-label>
     </ion-range>
   </ion-item>
   <ion-row class="ion-justify-content-center" style="padding-top: 40px;">
-      <ion-button class="donate-button ion-justify-content-center" fill="clear" (click)="donate()">Donate {{ value }} ELA</ion-button>
+      <ion-button class="donate-button ion-justify-content-center" fill="clear" (click)="donate()">{{ ('donate-title' | translate ) + ' ' + value + ' ELA' }}</ion-button>
   </ion-row>
 </ion-content>

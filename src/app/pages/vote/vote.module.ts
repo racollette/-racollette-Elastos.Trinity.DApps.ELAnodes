@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { IonicModule } from '@ionic/angular';
 import { IonicImageLoader } from 'ionic-image-loader';
@@ -32,6 +33,7 @@ const routes: Routes = [
     IonicImageLoader,
     NgxDatatableModule,
     ComponentsModule,
+    TranslateModule,
     RouterModule.forChild(routes),
     FontAwesomeModule
   ],

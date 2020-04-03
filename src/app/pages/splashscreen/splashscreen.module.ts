@@ -1,18 +1,17 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { IonicImageLoader } from 'ionic-image-loader';
-//import { NodeSliderComponent } from './node-slider/node-slider.component';
-
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { TxPage } from './tx.page';
+import { SplashscreenPage } from './splashscreen.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TxPage
+    component: SplashscreenPage
   }
 ];
 
@@ -21,9 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    IonicImageLoader,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TxPage] // NodeSliderComponent
+  declarations: [SplashscreenPage]
 })
-export class TxPageModule {}
+export class SplashscreenPageModule {}

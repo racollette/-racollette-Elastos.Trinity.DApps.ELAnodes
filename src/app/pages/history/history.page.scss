@@ -23,11 +23,11 @@ ion-button.green-button {
 }
 
 ion-content {
-  background-color: #202020;
+  background-color: #181818;
 }
 
 ion-list {
-  background-color: #202020;
+  background-color: #181818;
   padding-top: 0 !important;
 }
 
@@ -40,8 +40,8 @@ ion-list {
 
 .loading-gif {
   margin-top: 20vh;
-  width: 115px;
-  height: 115px;
+  width: 110px;
+  height: 110px;
 }
 
 .loader {
@@ -120,4 +120,12 @@ ion-textarea {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 0.75px solid #a6a6a6;
+}
+
+ion-item {
+  --background: #181818;
+}
+
+ion-icon {
+  color: #fff;
 }

@@ -47,4 +47,19 @@ export class StorageService {
       return JSON.parse(data);
     });
   }
+
+  public setWallets(value: any) {
+    console.log(value)
+    return this.storage.set("wallets", JSON.stringify(value)).then((data) => {
+      console.log('Stored wallets', data)
+    });
+  }
+
+  public getWallets(): Promise<any> {
+    return this.storage.get("wallets").then((data) => {
+      //console.log(data)
+      return JSON.parse(data);
+    });
+  }
+
 }

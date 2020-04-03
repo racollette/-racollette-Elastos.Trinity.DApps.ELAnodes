@@ -4,7 +4,7 @@
 
 ion-header {
   ion-title {
-    font-weight: 700;
+    font-weight: 500;
     text-align: center;
   }
 }
@@ -89,6 +89,10 @@ ion-button.pink-button {
 
 ion-button.green-button {
   --background:  #29a329;
+}
+
+ion-button.last-vote-button {
+  --background:  #0096ab;
 }
 
 ion-button.blue-button {

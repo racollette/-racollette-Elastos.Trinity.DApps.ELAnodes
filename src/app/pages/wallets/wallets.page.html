@@ -1,34 +1,31 @@
-<ion-header>
-  <header-bar title="Wallets"></header-bar>
-</ion-header>
-
 <ion-content padding>
-<ion-list style="padding-top: 0;">
-  <ion-item style="padding-bottom: 10px;">
-    <ion-button style="position:relative; top: 0px; left: -20px; height: 35px; width: 75px;" fill="clear"  [routerLink]="['/settings']">
-      <ion-icon
-        class="slider-back"
-        slot="icon-only"
-        name="arrow-round-back"
-      ></ion-icon>
-    </ion-button>
-</ion-item>
-<ion-item *ngIf="wallets.length === 0">
+<ion-list style="padding-top: 5vh;">
+<ion-item *ngIf="data.wallets.length === 0">
   <ion-icon style="font-size: 30px; margin-left: 0;" item-start name="wallet"></ion-icon>
   <ion-label>
-    <h2 style="font-size: 0.85rem">No wallets stored</h2>
+    <h2 style="font-size: 0.85rem">{{ 'no-wallets-text' | translate }}</h2>
   </ion-label>
 </ion-item>
-<ion-item *ngFor="let item of wallets">
-  <ion-icon style="font-size: 30px; margin-left: 0; margin-top: 5px" item-start name="wallet"></ion-icon>
-  <ion-label>
-    <h2 style="font-size: 0.85rem">{{ item.alias }}</h2>
-    <p style="font-size: 0.62rem; color: #b3b3b3">{{ item.address }}</p>
-  </ion-label>
-  <ion-button class="remove-button" style="margin-right: 0;" expand="block" (click)="removeWallet(item)">Remove</ion-button>
-</ion-item>
+<ion-item-group *ngFor="let item of data.wallets;">
+  <ion-item *ngIf="item.active == true" style="--background: #202020; border-radius: 7.5px;" (click)="toggleActiveWallet(item)">
+    <ion-icon style="font-size: 24px; margin-left: 0; margin-top: 5px" item-start name="md-checkmark"></ion-icon>
+      <ion-label>
+        <h2 style="font-size: 0.85rem">{{ item.alias }}</h2>
+        <p style="font-size: 0.62rem; color: #b3b3b3">{{ item.address }}</p>
+      </ion-label>
+    <ion-button class="remove-button" style="margin-right: 0;" expand="block" (click)="removeWallet(item)">{{ 'remove-wallet-button' | translate }}</ion-button>
+  </ion-item>
+  <ion-item *ngIf="item.active == false" (click)="toggleActiveWallet(item)">
+      <ion-icon style="font-size: 24px; margin-left: 0; margin-top: 5px; color: #000;" item-start name="md-checkmark"></ion-icon>
+      <ion-label>
+        <h2 style="font-size: 0.85rem">{{ item.alias }}</h2>
+        <p style="font-size: 0.62rem; color: #b3b3b3">{{ item.address }}</p>
+      </ion-label>
+    <ion-button class="remove-button" style="margin-right: 0;" expand="block" (click)="removeWallet(item)">{{ 'remove-wallet-button' | translate }}</ion-button>
+  </ion-item>
+</ion-item-group>
 <ion-row class="ion-justify-content-center" style="padding-top: 30px; ">
-  <ion-button class="add-address-button" expand="block" (click)="addWallet()">Add Wallet</ion-button>
+  <ion-button class="add-address-button" expand="block" (click)="addWallet()">{{ 'add-wallet-button' | translate }}</ion-button>
 </ion-row>
 </ion-list>
 </ion-content>

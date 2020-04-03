@@ -1,16 +1,19 @@
-import { Injectable, NgZone} from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { AlertController } from '@ionic/angular';
 import { NodesService } from 'src/app/services/nodes.service';
 import { Reward } from 'src/app/models/reward.model';
 import { Transaction } from 'src/app/models/transaction.model';
-
-
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+
+declare let appManager: any;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +28,50 @@ export class DataService {
     private storageService: StorageService,
     private nodesService: NodesService,
     private toastController: ToastController,
-  ) {}
+    private alertController: AlertController,
+    private translate: TranslateService,
+    private zone: NgZone
+  ) {
+    // this language will be used as a fallback when a translation isn't found in the current language
+    // translate.setDefaultLang('en');
+  }
 
+  public language: string;
+  public wallets = []
+  
+  async init() {
+      console.log('DATA SERVICE INITIATED')
+      this.getLanguage();
+      this.fetchPayoutAddresses();     
+      this.getStoredWallets();
+      this.setActiveAlias();
+  }
+
+  getLanguage() {
+        appManager.getLocale(
+            (defaultLang, currentLang, systemLang) => {
+                console.log('defaultLang', defaultLang, ' currentLang:', currentLang, ' systemLang:', systemLang);
+                this.setCurLang(currentLang);
+            }
+        );
+    }
+
+  setCurLang(lang: string) {
+      console.log(lang)
+      this.zone.run(()=> {
+          this.translate.use(lang);
+          this.language = lang
+      });
+  }
   /////////////// Observables /////////////////////
 
-    private loadedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    loaded = this.loadedSource.asObservable();
+    // private loadedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    // loaded = this.loadedSource.asObservable();
 
-    loadTimer(load) {
-      console.log(load)
-      this.loadedSource.next(load)
-    }
+    // loadTimer(load) {
+    //   console.log(load)
+    //   this.loadedSource.next(load)
+    // }
 
     ///////////////////////////////////////////////
 
@@ -98,11 +134,156 @@ export class DataService {
         this.inappBrowser.create(url, target, options);
     }
 
-    //////////////////  Wallet History Retrieval //////////////////////////
 
-    async init() {
-        this.fetchPayoutAddresses();
+    //////////////////// Saved Wallets Storage //////////////////////////
+
+    public inputAddressSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
+    inputAddress = this.inputAddressSource.asObservable();
+
+    updateInputAddress(address) {
+      this.inputAddressSource.next(address);
     }
+
+
+          // {
+      // address: "EXnTnfzbz3xdnarzruf9rLzawGrw7ENnMd",
+      // alias: "elephant",
+      // active: true
+      // },
+      // {
+      // address: "EK5TPYQVP4AuS9i1ytY5j8xuG5x4qWL9a6",
+      // alias: "vlyx",
+      // active: false
+      // },
+
+    private activeAliasSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
+    activeAlias = this.activeAliasSource.asObservable();
+
+    updateAlias(alias) {
+      this.activeAliasSource.next(alias);
+    }
+
+    getStoredWallets() {
+      console.log('stored wallets function called')
+      this.storageService.getWallets().then(data => {
+       if(data) {
+        this.wallets = data
+        console.log('Stored Wallets', data)
+        this.setActiveAlias();
+
+        let activeAddress: string;
+        this.wallets.forEach(wallet => {
+          if (wallet.active == true ) {
+          activeAddress = wallet.address
+          }
+        });
+
+        this.fetchWallet(activeAddress)
+        this.updateInputAddress(activeAddress)
+
+      } else {
+        this.wallets = []
+      }
+
+      });
+    }
+
+    setActiveAlias() {
+
+    if (this.wallets) {
+       this.wallets.forEach(wallet => {
+        if (wallet.active == true ) {
+          this.updateAlias(wallet.alias)
+        }
+      })
+    }
+    
+    }
+
+    expandStorage(data) {
+      console.log(data)
+      let address = data.address
+      let alias = data.alias
+      let noDupes: boolean = true;
+
+      //let wallets = this.data.wallets
+      let wallet = Object.create(null)
+
+      this.wallets.forEach(wallet => {
+        if (wallet.address == address) {
+          let translation = this.translate.instant('duplicate-toast-error');
+          this.toastErrorConfirm(translation)
+          noDupes = false;
+          return
+        }
+      })
+
+      if (address.length == 34 && noDupes) {
+        wallet.address = address
+
+        if (alias.length === 0) {
+          alias = address
+          wallet.alias = alias
+        } else {
+          wallet.alias = alias
+        }
+  
+        if (this.wallets.length == 0) {
+          wallet.active = true
+          this.updateAlias(wallet.alias);
+        } else {
+          wallet.active = false
+        }
+
+        this.wallets.push(wallet)
+      } else if (address.length !== 34) {
+        let translation = this.translate.instant('invalid-address-toast-error');
+        this.toastErrorConfirm(translation)
+      }
+      this.storageService.setWallets(this.wallets);
+    }
+
+    clearStorage(item) {
+      let wallets = this.wallets
+      this.wallets = []
+     
+      wallets.forEach(wallet => {
+        if (wallet.address == item.address) {
+          // Don't rebuild
+        } else {
+          this.wallets.push(wallet)
+        }
+      })
+
+      if (this.wallets.length > 0) {
+        if (item.active = true) {
+          this.wallets[0].active = true
+        }
+      }
+      this.setActiveAlias();
+      this.storageService.setWallets(this.wallets);
+    }
+
+    firstTimeStorage(data, address) {
+      let alias = data.alias
+
+      let wallets = this.wallets
+      let wallet = Object.create(null)
+
+      wallets.forEach(wallet => {
+        wallet.active = false;
+      })
+
+        wallet.address = address
+        wallet.active = true;
+        wallet.alias = alias
+     
+        this.wallets.push(wallet)
+        this.fetchWallet(address)
+        this.storageService.setWallets(this.wallets);
+    }
+
+    //////////////////  Wallet History Retrieval //////////////////////////
     
     private nodeApi: string = 'https://node1.elaphant.app/api/v1';
     private proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -158,29 +339,34 @@ export class DataService {
         console.log(this._walletAddress)
         this.fetchBalance(this._walletAddress)
         } else {
-          this.toastError('Not a valid address. Please try again.')
+          let translation = this.translate.instant('invalid-address-toast-error');
+          this.toastError(translation)
           this.walletRequested = false;
         }
         }, (err) => {
           console.log(err);
-          this.toastError('Not a valid address. Please try again.')
+          let translation = this.translate.instant('unknown-toast-error');
+          this.toastError(translation)
           this.walletRequested = false;
       });
     } 
 
 
   public fetchBalance(address: string) {
+    console.log(address)
       this.http.get<any>(this.proxyurl + this.nodeApi + '/asset/balances/' + address).subscribe((res) => {
         if (res.Error == 0) { 
         console.log('Address Fetch Balance', res)
         this._walletBalance = res.Result
         this.matchDelegate(this._wallet)
         } else {
-          this.toastError('Balance fetch error')
+          let translation = this.translate.instant('balance-fetch-toast-error');
+          this.toastErrorConfirm(translation)
         }
         }, (err) => {
           console.log(err);
-          this.toastError('Balance fetch error')
+          let translation = this.translate.instant('unknown-toast-error');
+          this.toastErrorConfirm(translation)
       });
   }
 
@@ -199,9 +385,9 @@ export class DataService {
          entry.Delegate = this.truncateNames(result[0].Nickname)
          entry.Value = (wallet[i].Value/100000000).toFixed(6)
          entry.Memo =  wallet[i].Memo.slice(14)
-         entry.Address = wallet[i].Inputs[0].substr(0,10) + '... ' + wallet[i].Inputs[0].substr(24,10)
+         entry.Address = wallet[i].Inputs[0] //.substr(0,10) + '... ' + wallet[i].Inputs[0].substr(24,10)
          entry.Height = wallet[i].Height
-         entry.Hash = wallet[i].Txid.substr(0,16) + '... ' + wallet[i].Txid.substr(48,16)
+         entry.Hash = wallet[i].Txid //.substr(0,16) + '... ' + wallet[i].Txid.substr(48,16)
          this._rewards.push(entry)
        }
       }
@@ -354,5 +540,23 @@ export class DataService {
     this.toast.present();
   }
 
+    async toastErrorConfirm(res: string) {
+        this.closeToast();
+        this.toast = await this.toastController.create({
+          mode: 'ios',
+          message: res,
+          position: "middle",
+          cssClass: 'toaster',
+          buttons: [
+            {
+              text: this.translate.instant('toast-ok'),
+              handler: () => {
+                this.toast.dismiss();
+              }
+            }
+          ]
+        });
+        this.toast.present();
+    }
 
 }
