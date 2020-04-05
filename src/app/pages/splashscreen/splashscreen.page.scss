@@ -1,15 +1,6 @@
 #splash {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: fixed;
-    padding: 50;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    background-image: url("../../../assets/images/SplashBackgroundI.png");
+    background-color: #272727;
+    background-image: url("../../../assets/images/splash1.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
@@ -19,20 +10,10 @@
      -ms-animation: fadein 2s; /* Internet Explorer */
       -o-animation: fadein 2s; /* Opera < 12.1 */
          animation: fadein 2s;
+}
 
-    ion-spinner {
-        margin-top: 20vh;
-        color: black;
-        position: absolute;
-    }
-
-    p {
-        margin-top: 60vh;
-        margin-left: 20px;
-        margin-right: 20px;
-        color: grey;
-        font-size: 24px;
-    }
+.logo {
+    max-width: 50% !important;
 }
 
 @keyframes fadein {

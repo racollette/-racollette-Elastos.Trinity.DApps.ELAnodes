@@ -57,9 +57,8 @@ export class StatsPage {
 
   public time = Date.now() / 1000
   public month = 2628000
-
-  public staked = this.nodesService.voters.percent
-
+  public staked;
+  
   public stakingLabels = this.nodesService.voters.chart.time
   public stakingData = this.nodesService.voters.chart.ELA
   public stakingSupplyData = this.nodesService.voters.chart.percent
@@ -109,10 +108,6 @@ export class StatsPage {
   colorSupply = this.baseColor
   colorVoters = this.baseColor
 
-
-  //ngOnInit() {
-  //}
-
   ///////////////////////////////////////////////////////////////////
   //////////////////////// STAKING CHART ///////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -145,7 +140,6 @@ export class StatsPage {
     if (button == 'All') {
       this.colorAll = this.activateColor
     }
-
   }
 
   public toggleDatasetColor(button) {
@@ -166,6 +160,8 @@ export class StatsPage {
 
   ionViewDidEnter() {
 
+    this.staked = this.nodesService.voters.percent
+
     this.coinsGradient = this.coinCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.coinsGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
     this.coinsGradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
@@ -184,14 +180,14 @@ export class StatsPage {
 
     this.aaGradient = this.mainchainCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.aaGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    this.aaGradient.addColorStop(0, 'rgb(255, 219, 77, 0.4)') // F50057 rgb(245, 0, 87)
+    this.aaGradient.addColorStop(0, 'rgb(0, 150, 171, 0.4)') // F50057 rgb(245, 0, 87)
 
     this.tphGradient = this.mainchainCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.tphGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
     this.tphGradient.addColorStop(0, "rgb(0, 204, 153, 0.6)") // F50057 rgb(245, 0, 87)
 
     this.stakingChartMethod(this.stakingLabelsAll, this.stakingDataAll, this.coinsAxis, this.coinsGradient, this.coinsBorder);
-    this.pieChartMethod(this.nodesService.voters.percent);
+    this.pieChartMethod(this.staked);
     this.stackedBarChartMethod(this.nodesService.block.percentBTChashrate);
     this.mainchainChartMethod(this.hashrateLabelsAll, this.hashrateDataAll, this.hashrateAxis, this.hashrateGradient, this.hashrateBorder);
   }
@@ -387,11 +383,11 @@ export class StatsPage {
   public hashrateBorder: string = 'rgb(240, 50, 107)' // //rgb(240, 50, 107)"
   public hashrateButton: string = 'rgb(240, 50, 107, 0.75)' //"rgb(204, 51, 153, 0.85)" //"rgb(240, 50, 107, 0.75)" 
   public aaGradient: any;
-  public aaBorder: string = "rgb(255, 219, 77)"
-  public aaButton: string = "rgb(255, 219, 77, 0.4)"
+  public aaBorder: string = 'rgb(51, 204, 255)'
+  public aaButton: string = 'rgb(51, 204, 255, 0.7)'
   public tphGradient: any;
-  public tphBorder: string = "rgb(0, 204, 153)"
-  public tphButton: string = "rgb(0, 204, 153, 0.4)"
+  public tphBorder: string = "rgb(0, 255, 0)" //"rgb(0, 204, 153)"
+  public tphButton: string = "rgb(0, 255, 0, 0.6)" //"rgb(0, 204, 153, 0.4)"
 
   mainchainBaseColor: string = '#000'
   mainchainActivateColor: string = 'rgb(240, 50, 107)' //"rgb(204, 51, 153, 0.85)"
@@ -452,8 +448,6 @@ export class StatsPage {
   }
 
   public selectHashrate() {
-    console.log(this.hashrateLabelsAll)
-    console.log(this.hashrateDataAll)
     this.hashrateActive = true;
     this.aaActive = false;
     this.tphActive = false;
@@ -463,9 +457,6 @@ export class StatsPage {
   }
 
   public selectAA() {
-    console.log(this.aaLabelsAll)
-    console.log(this.aaLabels)
-    console.log(this.aaDataAll)
     this.hashrateActive = false;
     this.aaActive = true;
     this.tphActive = false;
@@ -475,8 +466,6 @@ export class StatsPage {
   }
 
   public selectTPH() {
-    console.log(this.tphLabelsAll)
-    console.log(this.tphDataAll)
     this.hashrateActive = false;
     this.aaActive = false;
     this.tphActive = true;
@@ -740,8 +729,8 @@ export class StatsPage {
           {
             data: [staked, unstaked],
             fill: true,
-            backgroundColor: ['rgb(179, 26, 255, 0.4)', 'rgb(73, 101, 242, 0.4)'],
-            borderColor: ['rgb(179, 26, 255)', 'rgb(73, 101, 242)'],
+            backgroundColor: ['rgb(0, 255, 0, 0.25)', 'rgb(204, 0, 255, 0.25)'], //'rgb(63, 30, 250, 0.4)'], // 'rgb(51, 204, 255, 0.4)'
+            borderColor: ['rgb(0, 255, 0)', 'rgb(204, 0, 255)' ], //'rgb(63, 30, 250)'], //rgb(51, 204, 255)'
             borderWidth: 1.75,
             datalabels: {
               formatter: function(value, context) {
@@ -759,11 +748,12 @@ export class StatsPage {
           display: false,
         },
         tooltips: {
-          callbacks: {
-            label: function(tooltipItem, data) {
-              return data.labels[tooltipItem.index] + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%'
-            }
-          }
+          enabled: false,
+          // callbacks: {
+          //   label: function(tooltipItem, data) {
+          //     return data.labels[tooltipItem.index] + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%'
+          //   }
+          // }
         }
       }
     });
@@ -837,20 +827,8 @@ export class StatsPage {
           label: '% BTC',
           barThickness: 100,
           data: [ELA_hashrate],
-          backgroundColor: [
-            "rgb(0, 204, 153, 0.2)"
-            //'rgb(51, 204, 255, 0.2)'
-            //"rgb(255, 195, 77, 0.2)"
-            // "rgb(0, 204, 153, 0.2)"
-            // 'rgb(0, 150, 171, 0.4)'
-          ],
-          borderColor: [
-            "rgb(0, 204, 153, 0.8)"
-            //'rgb(51, 204, 255, 0.8)'
-            //"rgb(255, 195, 77)"
-            // "rgb(0, 204, 153, 0.75)"
-            //  'rgb(0, 150, 171)'
-          ],
+          backgroundColor: ['rgb(0, 255, 0, 0.25)'],
+          borderColor: ['rgb(0, 255, 0)'],
           borderWidth: 1.75,
           datalabels: {
             formatter: function(value, context) {
@@ -862,18 +840,8 @@ export class StatsPage {
           label: 'BTC',
           barThickness: 100,
           data: [BTC_hashrate],
-          backgroundColor: [
-            'rgb(240, 50, 107, 0.4)'
-            //'rgb(240, 50, 107, 0.2)'
-            //'rgb(179, 26, 255, 0.2)'
-            //'rgba(255, 99, 132, 0.4)'
-          ],
-          borderColor: [
-            'rgb(240, 50, 107)'
-            //'rgb(240, 50, 107)'
-            // 'rgb(179, 26, 255, 0.75)'
-            // 'rgba(255,99,132,1)'
-          ],
+          backgroundColor: ['rgb(204, 0, 255, 0.25)'],
+          borderColor: ['rgb(204, 0, 255)'],
           borderWidth: 1.75,
           datalabels: {
             formatter: function(value, context) {
@@ -917,51 +885,5 @@ export class StatsPage {
     });
 
   }
-
-  // //// Define Values ////
-  // fixHeight(): string {
-  //   return this.nodesService.currentHeight.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixTotalVotes(): string {
-  //   return this.nodesService.totalVotes.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixTotalEla(): string {
-  //   let ela: number = parseFloat(this.nodesService.voters.ELA);
-  //   return ela.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixTotalVoters(): string {
-  //   return this.nodesService.voters.total.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixActiveAddresses(): string {
-  //   return this.nodesService.mainchain.activeaddresses.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixSupply(): string {
-  //   let supply: number = parseFloat(this.nodesService.price.circ_supply);
-  //   return supply.toLocaleString().split(/\s/).join(',');
-  // }
-
-  // fixVolume(): string {
-  //   let volume: number = parseFloat(this.nodesService.price.volume);
-  //   return volume.toLocaleString().split(/\s/).join(',');
-  // }
-
-  /*   getVotePercent(): string {
-    let votePercent: number = this.nodesService.totalVotes / (parseFloat(this.nodesService.price.circ_supply) * 36) * 100;
-    return votePercent.toFixed(2);
-  } */
-
-  /* getTotalRewards(): string {
-    let totalRewards = 0;
-    this.nodesService._nodes.map(node => {
-      totalRewards += parseInt(node.EstRewardPerYear);
-    });
-    totalRewards = totalRewards / 365
-    return totalRewards.toLocaleString().split(/\s/).join(',');
-  } */
 
 }

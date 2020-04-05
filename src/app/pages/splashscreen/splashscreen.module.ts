@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { IonicImageLoader } from 'ionic-image-loader';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SplashscreenPage } from './splashscreen.page';
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     TranslateModule,
+    IonicImageLoader,
     RouterModule.forChild(routes)
   ],
   declarations: [SplashscreenPage]

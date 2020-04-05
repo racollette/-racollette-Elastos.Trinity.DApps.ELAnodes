@@ -84,7 +84,6 @@ export function TranslateLoaderFactory() {
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     FontAwesomeModule,
     ChartsModule,
     AppRoutingModule,

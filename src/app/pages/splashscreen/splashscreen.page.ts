@@ -1,7 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: AppManagerPlugin.AppManager;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-splashscreen',
@@ -10,12 +11,43 @@ declare let appManager: AppManagerPlugin.AppManager;
 })
 export class SplashscreenPage implements OnInit {
 
-    constructor() {}
+    constructor(
+      private translate: TranslateService,
+    ) {
+    
+    }
 
     ngOnInit() {
     }
 
-    ionViewDidEnter() {
-        appManager.setVisible("show", ()=>{}, (err)=>{});
+    ionViewWillEnter() {
+      console.log('SPLASHSCREEN WILL ENTER')
+      appManager.setVisible("show", ()=>{}, (err)=>{});
+      titleBarManager.setTitle(this.translate.instant('ELAnodes'))
+      titleBarManager.setBackgroundColor("#000000");
+      titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+      titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
+      let menuItems = [
+          {
+              key: "minimize", 
+              iconPath: "assets/icon/minimize1.png", 
+              title: "Minimize"
+          },
+          {
+              key: "close", 
+              iconPath: "assets/icon/close1.png", 
+              title: "Close"
+          }
+      ];
+      titleBarManager.setupMenuItems(menuItems, (selectedMenuItem)=>{
+          switch (selectedMenuItem.key) {
+              case "minimize":
+                  appManager.launcher();
+                  break;
+              case "close":
+                  appManager.close();
+                  break;
+          }
+      });
     }
 }

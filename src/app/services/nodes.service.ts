@@ -8,8 +8,6 @@ import { Node } from '../models/nodes.model';
 import { Vote } from '../models/history.model';
 import { Mainchain, Voters, Price, Block } from '../models/stats.model';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,38 +30,11 @@ export class NodesService {
   public price: Price;
   public block: Block;
 
+  public firstLoad: boolean = false;
+
   // Storage
   private firstVisit: boolean = false;
-  public _votes: Vote[] = [
-   /* {
-      date: new Date(),
-      tx: 'a2677487ba6c406f70b22c6902b3b2ffe582f99b58848bbfba9127c5fa47c712',
-      keys: [
-        '0368044f3b3582000597d40c9293ea894237a88b2cd55f79a18193399937d22664',
-        '03d55285f06683c9e5c6b5892a688affd046940c7161571611ea3a98330f72459f',
-        '024b527700491895b79fc5bfde8a60395307c5416a075503e6ac7d1df61c971c78'
-      ]
-    },
-    {
-      date: new Date(),
-      tx: 'd42da61ad9d12e0adf167d9451506cc119ad6384cae6d57158e643192720cf10',
-      keys: [
-        '03674a7867f2d4a557764d1f61138b9f98542c9a77e8773953432ac3e48ae60226',
-        '02d6f8ff72eaa9aada515d6b316cff2cbc55be09ddab17981d74a585ae20617a72',
-        '02a85be1f6244b40b8778b626bde33e1d666b3b5863f195487e72dc0e2a6af33a1'
-      ]
-    },
-    {
-      date: new Date(),
-      tx: '241315309c645e52fabafe9e8963037829f025526b9b616972b8b7a0965e6ac4',
-      keys: [
-        '026c8ce246d2587df8a669eee82be4f365ab6cf4fc45e3e539cf0ab91fbab3a809',
-        '0315067144eaad471ed0c355e6f9822c51b93308e0cd9febf0792304c605973916',
-        '030cda9b67897652dbf9f85cb0aba39a09203004f59366517a5461b1e48d9faa64',
-        '02b6052f5f65089be3b94efb91c98a5f94c0bf7fbefdbd85c1d547aa7b3d547710'
-      ]
-    } */
-  ];
+  public _votes: Vote[] = [];
 
   constructor(
     private http: HttpClient,
@@ -73,8 +44,6 @@ export class NodesService {
 
   // Fetch
   private nodeApi: string = 'https://node1.elaphant.app/api/';
-  private elaNodeUrl: string = 'https://elanodes.com/wp-content/uploads/custom/images/';
-  private proxyurl = "https://cors-anywhere.herokuapp.com/";
 
   get nodes(): Node[] {
     return [...this._nodes.filter((a,b) => this._nodes.indexOf(a) === b)];
@@ -90,53 +59,24 @@ export class NodesService {
 
   async init() {
     console.log('NODE SERVICE INITIATED')
-    this.getVisit();
-    this.getStoredVotes();
-    this.fetchStats();
-
-  /*   setInterval(() => {
-      this.fetchStats();
-    }, 5000); */
-
     const height: number = await this.fetchCurrentHeight();
     this.fetchNodes();
+    this.fetchStats();
+    //this.getStoredVotes();
   }
 
-   //Storage
-   getVisit() {
-    this.storageService.getVisit().then(data => {
-      if(data || data === true) {
-        this.firstVisit = false;
-        console.log('First visit?', this.firstVisit);
-      } else {
-        this.router.navigate(['vote']);
-      }
-    });
-   }
-
-   getStoredVotes() {
-    this.storageService.getVotes().then(data => {
-      console.log('Vote history', data);
-      if(data) {
-        this._votes = data;
-      }
-    });
-  }
-
-  // getStoredNodes() {
-  //   this.storageService.getNodes().then(data => {
-  //     console.log(data);
-  //     this._nodes.map(node => {
-  //       if (data && data.includes(node.Ownerpublickey) && node.State === 'Active') {
-  //         node.isChecked = true;
-  //       }
-  //     });
+  //  getStoredVotes() {
+  //   this.storageService.getVotes().then(data => {
+  //     console.log('Vote history', data);
+  //     if(data) {
+  //       this._votes = data;
+  //     }
   //   });
   // }
 
   fetchStats() {
     return new Promise((resolve, reject) => {
-      this.http.get<any>(this.proxyurl + 'https://elanodes.com/api/widgets?=12345671').subscribe((res) => {
+      this.http.get<any>('https://elanodes.com/api/widgets?=12345671').subscribe((res) => {
         console.log('General Stats Fetched', res);
         this.statsFetched = true;
         this.mainchain = res.mainchain;
@@ -149,10 +89,9 @@ export class NodesService {
   }
 
   fetchCurrentHeight(): Promise<number> {
-    console.log('Fetching height');
     return new Promise((resolve, reject) => {
       this.http.get<any>(this.nodeApi + '1/currHeight').subscribe((res) => {
-        console.log('Current height fetched' + res.result);
+        console.log('Current height: ' + res.result);
         this.currentHeight = res.result;
         resolve(res.result);
       }, (err) => {
@@ -173,26 +112,35 @@ export class NodesService {
   fetchNodes() {
     console.log('Fetching Nodes..');
     this._nodes = []
-    //this.http.get<any>(this.nodeApi + 'v1/dpos/rank/height/' + height).subscribe((res) => {
     return new Promise((resolve, reject) => {
-      this.http.get<any>(this.proxyurl + 'https://elanodes.com/api/node-metrics').subscribe((res) => { 
+      this.http.get<any>('https://elanodes.com/api/node-metrics').subscribe((res) => { 
         this._nodes = this._nodes.concat(res.result);
         this.getNodeIcon();
         this.getNodeDayChange();
-        //this.getStoredNodes();
         this.nodeLoader(this._nodes)
-        console.log('Nodes Added..', this._nodes);
+        this.getVisit();
+        console.log('Nodes retrieved..', this._nodes);
         resolve();
       });
     });
   }
 
-  // getTotalVotes(nodes: Node[]) {
-  //   nodes.map(node => {
-  //     this.totalVotes += parseFloat(node.Votes);
-  //   });
-  //   console.log('Total votes counted', this.totalVotes);
-  // }
+  getVisit() {
+    if (!this.firstLoad) {
+      this.storageService.getVisit().then(data => {
+        this.firstLoad = true;
+        if(data || data === true) {
+          this.firstVisit = false;
+          this.router.navigate(['']);  
+        } else {
+          this.router.navigate(['']);
+        }
+
+      });
+    }
+  }
+    
+
 
   getNodeDayChange() {
     this._nodes.map(node => {
@@ -295,11 +243,9 @@ export class NodesService {
       else {
          return '../../assets/logos/Default.png'
       }
-      
       // else {
       //   node.imageUrl = 'https://elanodes.com/logos/' + node.Nickname + '.png'
       // }
-
     });
   }
 
@@ -380,7 +326,6 @@ export class NodesService {
       } else {
          return '../../assets/logos/Default.png'
       }
-
   }
 
  }

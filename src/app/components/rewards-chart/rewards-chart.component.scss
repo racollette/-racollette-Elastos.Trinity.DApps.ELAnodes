@@ -1,9 +1,18 @@
 * {
-  background-color: #000; 
+  --background: #000;
   color: #fff; 
 }
 
 .slider-back {
   font-size: 1.5rem;  
   color: #fff;
+}
+
+ion-button.chart-button {
+  margin: 0;
+  height: 4vh;
+  --background: transparent;
+  border-radius: 5px;
+  text-transform: none;
+  font-size: 0.8rem;
 }

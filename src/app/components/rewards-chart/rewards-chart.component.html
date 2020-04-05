@@ -1,3 +1,5 @@
+<ion-content>
+
 <ion-row class="ion-no-padding">
   <ion-col size="2.25">
     <ion-row style="padding: 10px;">
@@ -16,8 +18,6 @@
     </ion-row>
   </ion-col> -->
 </ion-row>
-
-<ion-content>
 
   <ion-row>
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
@@ -40,6 +40,36 @@
           #historyChart
           ></canvas>
         </div>
+      </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch1M()" [ngStyle]="{'background-color': color1M }">
+            <strong>
+              1M
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch6M()" [ngStyle]="{'background-color': color6M }">
+            <strong>
+              6M
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switch1Y()" [ngStyle]="{'background-color': color1Y }">
+            <strong>
+              1Y
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">    
+          <ion-button class="chart-button" (click)="switchAll()" [ngStyle]="{'background-color': colorAll }">
+            <strong>
+              {{ 'all-text' | translate }}
+            </strong>
+          </ion-button>
+        </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>

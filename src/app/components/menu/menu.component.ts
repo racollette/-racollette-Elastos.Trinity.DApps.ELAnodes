@@ -185,6 +185,7 @@ export class MenuComponent implements OnInit {
   }
 
   myLastVote(data) {
+    this.clearSelections()
     let voteArr = data
     let nodes = this.nodeLoad
     console.log(nodes)
@@ -240,7 +241,6 @@ export class MenuComponent implements OnInit {
        rowsROI.push(nodes[index])
        el[index].classList.add("active");
      }
-    console.log('NODE TABLE DO YOU FUCKING EXIST')
     console.log(this.nodeTable)
     console.log(rowsROI)
     this.onSelect({selected: rowsROI});
@@ -373,7 +373,7 @@ export class MenuComponent implements OnInit {
     this.toast = await this.toastController.create({
       mode: 'ios',
       header: this.translate.instant('vote-success-header'),
-      message: 'Txid:' + res,//.slice(0,30) + '...',
+      message: 'TxID: ' + res,//.slice(0,30) + '...',
       cssClass: "toaster",
       position: "middle",
       buttons: [

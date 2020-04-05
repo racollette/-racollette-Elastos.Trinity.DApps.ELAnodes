@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Directive, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Injectable, NgZone } from '@angular/core';
 import { NodesService } from 'src/app/services/nodes.service';
@@ -61,9 +61,6 @@ export class VotePage implements OnInit {
   public nodeIndex: number = 0;
   public node: any;
 
-  // Loading
-  public loaded: boolean = false;
-
   constructor(
     public nodesService: NodesService,
     private router: Router,
@@ -77,27 +74,12 @@ export class VotePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    console.log('ENTERING VOTE PAGE')
     titleBarManager.setTitle(this.translate.instant('Supernodes'))
     titleBarManager.setBackgroundColor("#000000");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
-    appManager.setVisible("show", ()=>{}, (err)=>{});
-    let menuItems = [
-        {
-            key: "close", 
-            iconPath: "assets/icon/close2.png", 
-            title: "Close"
-        }
-    ];
-    titleBarManager.setupMenuItems(menuItems, (selectedMenuItem)=>{
-        switch (selectedMenuItem.key) {
-            case "close":
-                appManager.close();
-                break;
-        }
-    });
-    //this.data.loaded.subscribe(load => this.loaded = load)
-    //this.wait();
+    //appManager.setVisible("show", ()=>{}, (err)=>{});
   }
 
   ionViewDidEnter() {
@@ -105,7 +87,6 @@ export class VotePage implements OnInit {
 
   public pushMenu() {
     this.nodesService.nodesLoaded.subscribe(nodeLoad => this.nodeLoad = nodeLoad)
-    //this.data.loaded.subscribe(load => this.loaded = load)
     this.tableStyle = this.nodesService.tableStyle;
     this.data.currentselectedCount.subscribe(input => this.input = input)
     this.data.currentselectedARR.subscribe(input1 => this.input1 = input1)
@@ -134,13 +115,6 @@ export class VotePage implements OnInit {
      row.click();
      row.click();
   }
-
-  // wait() {
-  //   setTimeout(() => {           
-  //     this.loaded = true 
-  //     this.data.loadTimer(this.loaded)
-  //   }, 2000);
-  // }
 
   updateNodes(event) {
     setTimeout(() => {
@@ -209,7 +183,7 @@ export class VotePage implements OnInit {
 
   onSelect({ selected }) {
     this.voteDocument = document.querySelectorAll('.datatable-body-row');
-
+ 
     console.log('Select Event', selected, this.selected);
     this.selected.splice(0, this.selected.length);
     this.selected.push(selected);
@@ -289,32 +263,8 @@ export class VotePage implements OnInit {
     }
 
     getMessage() {
+      console.log('getmessage')
       this.showDetails = !this.showDetails;
     }
-
-  //  _showNode(index, row) {
-  //   console.log(index)
-  //   console.log(row)
-  // }
-
-  // clearSelections(event) {
-  //    let el = document.querySelectorAll('.active');
-
-  //      for (let i = 0; i < el.length; i++){
-  //        el[i].className = '';
-  //        el[i].classList.add("datatable-body-row");
-  //        //el[i].classList.add("datatable-row-even");
-  //        el[i].attributes[5].value = 'false'
-  //      }
- 
-  //    this.onSelect({selected: []});
-  //    this.ngxDataTable.selected = []
-  // }
-
-  // checkSelectable(event) {
-  //   console.log('Checking if selectable', event);
-  //   //return event.name !== 'Ethel Price';
-  // }
-
 
 }

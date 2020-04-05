@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
+import { Native } from '../../services/native.service';
 
 declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
@@ -16,7 +17,8 @@ export class AboutPage implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private navController: NavController
+    private navController: NavController,
+    private native: Native
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,14 @@ export class AboutPage implements OnInit {
   }
 
   ionViewDidEnter() {
+  }
+
+  public goWebsite() {
+    this.native.openUrl("https://starfish-supernode.tech");
+  }
+
+  public goSocial(link: string) {
+    this.native.openUrl(link);
   }
 
 }

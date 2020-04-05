@@ -1,7 +1,7 @@
 export const en = {
 
     // Splashscreen
-    "splash-loading": "",
+    "splash-loading": "You look great today",
 
     // Nav Tabs
     "Supernodes": "Supernodes",
@@ -47,7 +47,7 @@ export const en = {
     "save-alert-message": "Save address to device storage for faster loading?",
     "no-alert": "No",
     "yes-alert": "Yes",
-    "alias-alert": "alias",
+    "alias-alert": "Alias",
     "optional-alert": "(optional)",
     "no-thanks-alert": "No thanks",
     "add-alert": "Add",

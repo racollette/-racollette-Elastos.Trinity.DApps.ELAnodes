@@ -6,29 +6,28 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { TruncateModule } from '@yellowspot/ng-truncate';
 import { TranslateModule } from '@ngx-translate/core';
 
-//import { TranslateModule } from '@ngx-translate/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faCog } from '@fortawesome/free-solid-svg-icons';
 
 import { HeaderBarComponent } from './header-bar/header-bar.component';
-import { NavComponent } from './nav/nav.component';
 import { MenuComponent } from './menu/menu.component';
 import { NodeSliderComponent } from './node-slider/node-slider.component';
 
 @NgModule({
-  declarations: [HeaderBarComponent, NavComponent, MenuComponent, NodeSliderComponent],
+  declarations: [HeaderBarComponent, MenuComponent, NodeSliderComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     IonicImageLoader,
     TranslateModule,
+    RouterModule,
     FontAwesomeModule,
     TruncateModule
-//  TranslateModule,
   ],
-  exports: [HeaderBarComponent, NavComponent, MenuComponent, NodeSliderComponent],
+  exports: [HeaderBarComponent,  MenuComponent, NodeSliderComponent],
   providers: [
   ],
   entryComponents: [],

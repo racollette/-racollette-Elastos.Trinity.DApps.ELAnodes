@@ -1,6 +1,22 @@
- <ion-content>
-  <div id="splash">
-      <ion-spinner name="dots" duration='3000'></ion-spinner>
-      <p>{{'text-loading' | translate }}</p>
-  </div>
-</ion-content>
+<ion-grid id="splash">
+  <ion-row style="margin-top: 30vh;" text-center>
+    <img-loader useImg
+      ><img class="logo"
+        src="../../../assets/images/logo3.png"
+    /></img-loader>
+  </ion-row>
+  <ion-row class="ion-justify-content-center"> 
+    <p
+      class="ion-no-margin ion-no-padding"
+      style="margin-top: 1.6vh; font-weight: 500; font-size: 2rem; color: #fff; letter-spacing: 2px; font-variant: small-caps;"
+    >
+      ELAnodes
+    </p>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-spinner style="margin-top: 11vh; --color:#fff;" name="dots" duration="2000"></ion-spinner>
+  </ion-row>
+  <ion-row class="ion-justify-content-center" >
+    <p style="font-size: 1rem; font-weight: 600; color: #fff;">{{ 'splash-loading' | translate }}</p>
+  </ion-row>
+</ion-grid>

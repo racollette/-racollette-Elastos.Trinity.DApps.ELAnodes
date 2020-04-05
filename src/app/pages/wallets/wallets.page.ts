@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: any;
@@ -18,6 +19,7 @@ export class WalletsPage implements OnInit {
         private toastController: ToastController,
         private navController: NavController,
         public data: DataService,
+        public storageService: StorageService,
         private translate: TranslateService,
     ) {}
 
@@ -48,9 +50,13 @@ export class WalletsPage implements OnInit {
           wallet.active = false;
         }
       });
+      this.storageService.setWallets(this.data.wallets);
       this.data.updateAlias(item.alias)
-      this.data.fetchWallet(item.address)
       this.data.updateInputAddress(item.address)
+
+      if (!this.data.walletRequested) {
+        this.data.fetchWallet(item.address)
+      } 
     }
 
     async addWallet() {

@@ -4,14 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../components/components.module';
-import { IonicModule } from '@ionic/angular';
+import { TabsPageRoutingModule } from './tabs-routing.module';
 
-import { WalletsPage } from './wallets.page';
+import { IonicModule } from '@ionic/angular';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog } from '@fortawesome/free-solid-svg-icons';
+
+import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: WalletsPage
+    component: TabsPage
   }
 ];
 
@@ -19,12 +23,15 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule.forRoot(),
+    IonicModule,
     TranslateModule,
     ComponentsModule,
+    TabsPageRoutingModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [WalletsPage]
+  declarations: [TabsPage]
 })
-export class WalletsPageModule {
+export class TabsPageModule {
+
 }

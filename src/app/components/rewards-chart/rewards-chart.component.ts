@@ -38,54 +38,135 @@ export class RewardsChartComponent implements OnInit {
     private navController: NavController
   ) { }
 
+  ngOnInit() {
+  }
+
   lineChart: any;
   horizontalBar: any;
   public context: CanvasRenderingContext2D;
 
-  ngOnInit() {
-  }
+  data = []
+  public gradient: any;
 
-  // ionViewWillEnter() {
-  //   titleBarManager.setTitle(this.translate.instant('rewards-tab'))
-  //   titleBarManager.setBackgroundColor("#000000");
-  //   titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-  //   titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
-  //   appManager.setListener((ret) => { this.onMessageReceived(ret) });
-  // }
+  public time = Date.now() / 1000
+  public month = 2628000
+  baseColor: string = '#000'
+  activateColor: string = 'rgb(51, 204, 255, 0.7)'
+  color1M = this.baseColor
+  color6M = this.baseColor
+  color1Y = this.baseColor
+  colorAll = this.activateColor
 
-  // onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-  //   if (ret.message == "navback") {
-  //     this.navController.back();
-  //   }
-  // }
+  public historyChartLabelsAll: any;
+  public historyChartDataAll: any;
 
   ionViewDidEnter() {
-    const gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
-    gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
+    console.log(this.historyChartData)
+    console.log(this.historyChartLabels)
+    this.gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
+    this.gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
+    this.gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
 
-    this.lineChartMethod(gradient);
+    this.historyChartLabelsAll = this.historyChartLabels.map(function(e) { return moment.unix(e).format('LL') });
+    this.historyChartDataAll = this.historyChartData.map(function(e) { return e.toFixed(4) });
+
+    this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
     this.horizontalBarMethod();
   }
 
-  lineChartMethod(gradient) {
+  public toggleColor(button) {
+    this.color1M = this.baseColor
+    this.color6M = this.baseColor
+    this.color1Y = this.baseColor
+    this.colorAll = this.baseColor
+
+    if (button == '1M') {
+      this.color1M = this.activateColor
+    }
+    if (button == '6M') {
+      this.color6M = this.activateColor
+    }
+    if (button == '1Y') {
+      this.color1Y = this.activateColor
+    }
+    if (button == 'All') {
+      this.colorAll = this.activateColor
+    }
+  }
+
+  public switch1M() {
+    console.log(this.historyChartLabels)
+    console.log(this.historyChartData)
+    this.toggleColor('1M');
+    let labels = this.historyChartLabels
+    let historyLabels1M = []
+    let historyData1M = []
+    let formatData1M = []
+
+    for (let i = 0; i < labels.length; i++) {
+      if (labels[i] > (this.time - this.month * 1)) {
+        historyLabels1M.push(moment.unix(labels[i]).format('LL'))
+      }
+    }
+
+    this.data = this.historyChartData
+    historyData1M = this.data.slice(-1 * historyLabels1M.length)
+    formatData1M = historyData1M.map(function(e) { return e.toFixed(4) })
+    
+    console.log(historyLabels1M)
+    console.log(formatData1M)
+    this.lineChartMethod(historyLabels1M, formatData1M, this.gradient);
+  }
+
+  public switch6M() {
+    this.toggleColor('6M');
+    let labels = this.historyChartLabels
+    let historyLabels6M = []
+    let historyData6M = []
+    let formatData6M = []
+
+    for (let i = 0; i < labels.length; i++) {
+      if (labels[i] > (this.time - this.month * 6)) {
+        historyLabels6M.push(moment.unix(labels[i]).format('LL'))
+      }
+    }
+
+    this.data = this.historyChartData
+    historyData6M = this.data.slice(-1 * historyLabels6M.length)
+    formatData6M = historyData6M.map(function(e) { return e.toFixed(4) })
+    
+    this.lineChartMethod(historyLabels6M, formatData6M, this.gradient);
+  }
+
+  public switch1Y() {
+    this.toggleColor('1Y');
+    this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
+  }
+
+  public switchAll() {
+    this.toggleColor('All');
+    this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
+  }
+
+
+  lineChartMethod(labels, data, gradient) {
 
     Chart.defaults.global.defaultFontColor = '#fff';
     this.lineChart = new Chart(this.historyCanvas.nativeElement, {
       type: 'line',
       data: {
-        labels: this.historyChartLabels,
+        labels: labels,
         datasets: [
           {
-            data: this.historyChartData,
+            data: data,
             fill: true,
             backgroundColor: gradient,
             borderColor: 'rgb(51, 204, 255)',
             borderWidth: 0.4,
             borderCapStyle: 'round',
             borderJoinStyle: 'round',
-            pointRadius: 0.35,
-            pointHitRadius: 3,
+            pointRadius: 0.39,
+            pointHitRadius: 5,
             datalabels: {
               display: false
             }
@@ -112,7 +193,7 @@ export class RewardsChartComponent implements OnInit {
             type: 'time',
             distribution: 'linear',
             ticks: {
-              maxTicksLimit: 5,
+              maxTicksLimit: 4,
               maxRotation: 0,
               minRotation: 0,
             }

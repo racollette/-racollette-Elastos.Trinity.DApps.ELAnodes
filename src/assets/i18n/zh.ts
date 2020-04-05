@@ -1,7 +1,7 @@
 export const zh = {
 
     // Splashscreen
-    "splash-loading": "",
+    "splash-loading": "你今天看起来很棒",
     
     // Nav Tabs
     "Supernodes": "超节点",

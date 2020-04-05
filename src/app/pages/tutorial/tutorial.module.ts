@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { ComponentsModule } from '../../components/components.module';
+import { IonicImageLoader } from 'ionic-image-loader';
+
 import { IonicModule } from '@ionic/angular';
 
-import { WalletsPage } from './wallets.page';
+import { TutorialPage } from './tutorial.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: WalletsPage
+    component: TutorialPage
   }
 ];
 
@@ -19,12 +20,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule.forRoot(),
-    TranslateModule,
-    ComponentsModule,
+    IonicModule,
+    IonicImageLoader,
     RouterModule.forChild(routes)
   ],
-  declarations: [WalletsPage]
+  declarations: [TutorialPage]
 })
-export class WalletsPageModule {
-}
+export class TutorialPageModule {}

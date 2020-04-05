@@ -37,13 +37,13 @@ export class StorageService {
 
   public setVisit(value: boolean) {
     return this.storage.set("visited", JSON.stringify(value)).then((data) => {
-      console.log('Set first visit', data)
+      console.log('Set first visit: ', data)
     });
   }
 
   public getVisit(): Promise<boolean> {
     return this.storage.get("visited").then((data) => {
-      console.log('Already visited', data)
+      console.log('First visit? ', data)
       return JSON.parse(data);
     });
   }

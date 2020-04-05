@@ -31,10 +31,7 @@ export class DataService {
     private alertController: AlertController,
     private translate: TranslateService,
     private zone: NgZone
-  ) {
-    // this language will be used as a fallback when a translation isn't found in the current language
-    // translate.setDefaultLang('en');
-  }
+  ) {}
 
   public language: string;
   public wallets = []
@@ -57,7 +54,6 @@ export class DataService {
     }
 
   setCurLang(lang: string) {
-      console.log(lang)
       this.zone.run(()=> {
           this.translate.use(lang);
           this.language = lang
@@ -101,8 +97,6 @@ export class DataService {
         this.voteDocumentSource.next(voteDocument)
     }
 
-
-
     private NA_Source: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     private SA_Source: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     private EU_Source: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -144,18 +138,6 @@ export class DataService {
       this.inputAddressSource.next(address);
     }
 
-
-          // {
-      // address: "EXnTnfzbz3xdnarzruf9rLzawGrw7ENnMd",
-      // alias: "elephant",
-      // active: true
-      // },
-      // {
-      // address: "EK5TPYQVP4AuS9i1ytY5j8xuG5x4qWL9a6",
-      // alias: "vlyx",
-      // active: false
-      // },
-
     private activeAliasSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
     activeAlias = this.activeAliasSource.asObservable();
 
@@ -164,7 +146,6 @@ export class DataService {
     }
 
     getStoredWallets() {
-      console.log('stored wallets function called')
       this.storageService.getWallets().then(data => {
        if(data) {
         this.wallets = data
@@ -201,12 +182,10 @@ export class DataService {
     }
 
     expandStorage(data) {
-      console.log(data)
       let address = data.address
       let alias = data.alias
       let noDupes: boolean = true;
 
-      //let wallets = this.data.wallets
       let wallet = Object.create(null)
 
       this.wallets.forEach(wallet => {
@@ -286,8 +265,6 @@ export class DataService {
     //////////////////  Wallet History Retrieval //////////////////////////
     
     private nodeApi: string = 'https://node1.elaphant.app/api/v1';
-    private proxyurl = "https://cors-anywhere.herokuapp.com/";
-
 
     private toast: any = null;
     public rewardsObjectCreated: boolean = false;
@@ -313,11 +290,8 @@ export class DataService {
 
     public perNodeEarningsObject: any;
 
-
     public fetchPayoutAddresses() {
-      console.log('Fetching Payout Address object..');
-      //this.http.get<any>(this.nodeApi + 'v1/dpos/rank/height/' + height).subscribe((res) => {
-      this.http.get<any>(this.proxyurl + 'https://elanodes.com/api/payout-addresses').subscribe((res) => { 
+      this.http.get<any>('https://elanodes.com/api/payout-addresses').subscribe((res) => { 
         console.log('Payout Address fetch response', res)
         this._payoutAddresses = res.result
       });
@@ -329,14 +303,11 @@ export class DataService {
       this.rewardsObjectCreated = false;
       this.walletRequested = true;
       this._rewards = []
-      
-      console.log('Fetching Address History..');
   
-      this.http.get<any>(this.proxyurl + this.nodeApi + '/history/' + address).subscribe((res) => {
+      this.http.get<any>(this.nodeApi + '/history/' + address).subscribe((res) => {
         if (res.status == 200) { 
         console.log('Address Fetch Response', res)
         this._wallet = (res.result.History) 
-        console.log(this._walletAddress)
         this.fetchBalance(this._walletAddress)
         } else {
           let translation = this.translate.instant('invalid-address-toast-error');
@@ -353,10 +324,8 @@ export class DataService {
 
 
   public fetchBalance(address: string) {
-    console.log(address)
-      this.http.get<any>(this.proxyurl + this.nodeApi + '/asset/balances/' + address).subscribe((res) => {
+      this.http.get<any>(this.nodeApi + '/asset/balances/' + address).subscribe((res) => {
         if (res.Error == 0) { 
-        console.log('Address Fetch Balance', res)
         this._walletBalance = res.Result
         this.matchDelegate(this._wallet)
         } else {
@@ -375,7 +344,6 @@ export class DataService {
       let sender = wallet[i].Inputs
         for (let j=0; j < sender.length; j++) {
           const result = this._payoutAddresses.filter(node => node.Payout_wallet.includes(sender[j]));
-          //console.log(result)
 
        if (result.length > 0) {
          let entry = Object.create(null)
@@ -383,6 +351,7 @@ export class DataService {
          entry.CreateTime = wallet[i].CreateTime
          entry.imageUrl = this.nodesService.getRewardIcon(result[0].Nickname)
          entry.Delegate = this.truncateNames(result[0].Nickname)
+         entry.ValueFloat = (wallet[i].Value/100000000)
          entry.Value = (wallet[i].Value/100000000).toFixed(6)
          entry.Memo =  wallet[i].Memo.slice(14)
          entry.Address = wallet[i].Inputs[0] //.substr(0,10) + '... ' + wallet[i].Inputs[0].substr(24,10)
@@ -392,23 +361,22 @@ export class DataService {
        }
       }
     }
-    console.log(this._rewards)
 
     this.formatChartData(this._rewards)
     this.calculateReturnRates(this._rewards)
     this.rewardsPerNode(this._rewards)
-    this.walletRequested = false;
     this.rewardsObjectCreated = true;
+    this.walletRequested = false;
   }
 
   public formatChartData(rewards) {
     let labels = rewards.map(function(e) {
-      return e.Time
+      return e.CreateTime
     });
     labels = labels.reverse()
 
     let data = rewards.map(function(e) {
-      return e.Value
+      return e.ValueFloat
     });
     data = data.reverse()
 
@@ -418,15 +386,7 @@ export class DataService {
       data[i] = starting_balance
     }
 
-    // let reduceData: string[] = []
-    // let reduceLabels: string[] = []
-
-    // for (let j = 0; j < data.length; j=j+10) {
-    //   reduceData.push(data[j]);
-    //   reduceLabels.push(labels[j]);
-    // }
-
-    this.firstPayout = moment(labels[0]).format('LL')
+    this.firstPayout = moment.unix(labels[0]).format('LL')
     this.totalEarned = data.slice(-1).pop().toFixed(4)
     this.totalPayouts = data.length
 
@@ -435,13 +395,11 @@ export class DataService {
   }
 
   public calculateReturnRates(data) {
-    //let recentVote = 0
     let week = 0
     let month = 0
     let timeNow = Date.now()/1000
     let timeWeek = 604800
     let timeMonth = 2628000
-    //timestampRecentVote= block_time
     let timestampWeek = timeNow - timeWeek
     let timestampMonth = timeNow - timeMonth
 
@@ -452,9 +410,7 @@ export class DataService {
       if (data[i].CreateTime > timestampWeek) {
         week += parseFloat(data[i].Value)
       }
-      // if (data[i].CreateTime > timestampRecentVote) {
-      //   recentVote += data[i].Value
-      // }
+  
     }
     // yearsElapsedRecentVote = parseFloat((timeNow - timestampRecentVote)/31536000)
     // recentVoteARR = parseFloat((recentVote/yearsElapsedRecentVote)/this._walletBalance*100)
@@ -531,7 +487,6 @@ export class DataService {
     this.closeToast();
     this.toast = await this.toastController.create({
       mode: 'ios',
-      //header: 'Failed to get an address from your wallet',
       message: res,
       position: "middle",
       cssClass: 'toaster',

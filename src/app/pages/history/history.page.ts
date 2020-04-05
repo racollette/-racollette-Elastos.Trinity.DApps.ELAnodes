@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgZone, Injectable, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, NgZone, Injectable, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ToastController, NavController, ModalController, AlertController } from '@ionic/angular';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { Router } from '@angular/router';
@@ -39,11 +39,15 @@ export class HistoryPage implements OnInit {
     private clipboard: Clipboard,
     public data: DataService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private changeDetection: ChangeDetectorRef
   ) { }
 
   // Toast for voteFailed/voteSuccess
   private toast: any = null;
+
+  // Tabledata
+  public render: boolean = false;
 
   ngOnInit() {
   }
@@ -58,6 +62,7 @@ export class HistoryPage implements OnInit {
     this.data.setActiveAlias();
     this.data.activeAlias.subscribe(alias => this.alias = alias)
     this.data.inputAddress.subscribe(address => this.address = address)
+
   }
 
   onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
@@ -68,24 +73,18 @@ export class HistoryPage implements OnInit {
 
   ionViewDidEnter() {
     this.data.setActiveAlias();
+    this.resetChildForm();
   }
 
-  // modDate(date) {
-  //   return moment(date).format("MMM Do YY, h:mm:ss a");
-  // }
-
-  // setActiveAlias() {
-  //   let wallets = this.data.wallets
-
-  //   wallets.forEach(wallet => {
-  //     if (wallet.active == true ) {
-  //       this.activeAlias = wallet.alias
-  //     }
-  //   })
-  // }
+  resetChildForm(){
+    this.render = false;
+    setTimeout(() => {
+      this.render = true;
+    }, 50);
+  }
 
   switchWallets() {
-    this.router.navigate(['wallets']);
+    this.router.navigate(["/tabs/wallets"]);
   }
 
 
@@ -93,17 +92,17 @@ export class HistoryPage implements OnInit {
     appManager.sendIntent("walletaccess", { elaaddress: { reason: 'Check staking rewards history' } }, {}, (res) => {
       this.zone.run(() => {
         console.log(res)
+        console.log(res.result)
         if (res.result.elaaddress) {
-          console.log('success?')
           this.address = res.result.elaaddress;
           this.addressReturned = !this.addressReturned
-          console.log(this.address)
           this.data.updateInputAddress(this.address)
           this.addWalletStorage();
         } else if (res.result.walletinfo) {
-
-          console.log('else if?')
           this.address = res.result.walletinfo[0].elaaddress
+          this.addressReturned = !this.addressReturned
+          this.data.updateInputAddress(this.address)
+          this.addWalletStorage();
         } else {
           this.toastWalletErr();
         }
@@ -120,9 +119,13 @@ export class HistoryPage implements OnInit {
 
     this.data.wallets.forEach(wallet => {
       if (wallet.address == address) {
-        match = true
+        match = true;
+        wallet.active = true;
+      } else {
+        wallet.active = false;
       }
     })
+    this.data.setActiveAlias();
 
     if (!match) {
 
@@ -195,7 +198,7 @@ export class HistoryPage implements OnInit {
   pasteAddress() {
     this.clipboard.paste().then((resolve: string) => {
       //console.log(resolve);
-      this.address = resolve;
+      this.address = resolve
       this.data.updateInputAddress(this.address)
       this.addWalletStorage();
 
@@ -206,49 +209,10 @@ export class HistoryPage implements OnInit {
   };
 
   toggleExpandRow(row) {
+    console.log(row)
     this.table.rowDetail.toggleExpandRow(row.selected[0]);
+    console.log(this.table.rowDetail)
   }
-
-  // async voteSuccess(res: string) {
-  //   this.closeToast();
-  //   this.toast = await this.toastController.create({
-  //     mode: 'ios',
-  //     header: 'Votes successfully submitted.',
-  //     message: 'Txid:' + res,//.slice(0,30) + '...',
-  //     cssClass: "toaster",
-  //     position: "middle",
-  //     buttons: [
-  //       {
-  //         text: 'Ok',
-  //         handler: () => {
-  //           this.toast.dismiss();
-  //         }
-  //       }
-  //     ],
-  //   });
-  //   this.toast.present();
-  // }
-
-  // async toastError(res: string) {
-  //   this.closeToast();
-  //   this.toast = await this.toastController.create({
-  //     mode: 'ios',
-  //     //header: 'Failed to get an address from your wallet',
-  //     message: res,
-  //     //color: "primary",
-  //     position: "middle",
-  //     cssClass: 'toaster',
-  //     buttons: [
-  //       {
-  //         text: 'Ok',
-  //         handler: () => {
-  //           this.toast.dismiss();
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   this.toast.present();
-  // }
 
   async toastWalletErr() {
     this.closeToast();
@@ -256,7 +220,6 @@ export class HistoryPage implements OnInit {
       mode: 'ios',
       header: this.translate.instant('access-fail-toast-header'),
       message: this.translate.instant('access-fail-toast-message'),
-      //color: "primary",
       position: "middle",
       cssClass: 'toaster',
       buttons: [
