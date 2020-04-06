@@ -7,27 +7,25 @@ import { RewardsChartComponent } from '../../components/rewards-chart/rewards-ch
 import { NodesService } from 'src/app/services/nodes.service';
 import { DataService } from 'src/app/services/data.service';
 import { Node } from 'src/app/models/nodes.model';
-import { Vote } from 'src/app/models/history.model';
 import { TranslateService } from '@ngx-translate/core';
-
 
 declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+  selector: 'app-rewards',
+  templateUrl: './rewards.page.html',
+  styleUrls: ['./rewards.page.scss'],
 })
 
-export class HistoryPage implements OnInit {
+export class RewardsPage implements OnInit {
 
   @ViewChild('rewardsTable', { static: false }) table: any;
 
-  public _votes: Vote[] = [];
   public address: string;
   public addressReturned: boolean = false;
   public alias: string;
+  public modalOpen: boolean = false;
 
   constructor(
     public nodesService: NodesService,
@@ -66,7 +64,10 @@ export class HistoryPage implements OnInit {
   }
 
   onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback") {
+    if (ret.message == "navback" && this.modalOpen) {
+      this.modalController.dismiss();
+      this.modalOpen = false;
+    } else if (ret.message == "navback") {
       this.navController.back();
     }
   }
@@ -89,7 +90,7 @@ export class HistoryPage implements OnInit {
 
 
   requestWalletAccess() {
-    appManager.sendIntent("walletaccess", { elaaddress: { reason: 'Check staking rewards history' } }, {}, (res) => {
+    appManager.sendIntent("walletaccess", { elaaddress: { reason: 'Check staking rewards rewards' } }, {}, (res) => {
       this.zone.run(() => {
         console.log(res)
         console.log(res.result)
@@ -138,7 +139,7 @@ export class HistoryPage implements OnInit {
             text: this.translate.instant('no-alert'),
             role: 'cancel',
             handler: () => {
-              this.retrieveTxHistory();
+              this.retrieveTxRewards();
             }
           }, {
             text: this.translate.instant('yes-alert'),
@@ -152,7 +153,7 @@ export class HistoryPage implements OnInit {
       await alert.present();
 
     } else {
-      this.retrieveTxHistory();
+      this.retrieveTxRewards();
     }
   }
 
@@ -190,7 +191,7 @@ export class HistoryPage implements OnInit {
     await alert.present();
   }
 
-  retrieveTxHistory() {
+  retrieveTxRewards() {
     let address = (this.address).trim()
     this.data.fetchWallet(address)
   }
@@ -258,6 +259,7 @@ export class HistoryPage implements OnInit {
         perNodeEarningsObject: this.data.perNodeEarningsObject
       }
     });
+    this.modalOpen = true;
     return await modal.present();
   }
 

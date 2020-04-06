@@ -13,11 +13,11 @@ declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.page.html',
-  styleUrls: ['./stats.page.scss'],
+  selector: 'app-analytics',
+  templateUrl: './analytics.page.html',
+  styleUrls: ['./analytics.page.scss'],
 })
-export class StatsPage {
+export class AnalyticsPage {
 
   @ViewChild('coinChart', { static: false }) coinCanvas;
   @ViewChild('stakedChart', { static: false }) stakedCanvas;
@@ -90,8 +90,8 @@ export class StatsPage {
   public coinsBorder: string = 'rgb(51, 204, 255)'
   public coinsButton: string = 'rgb(51, 204, 255, 0.7)'
   public supplyGradient: any;
-  public supplyBorder: string = 'rgb(255, 128, 255)'
-  public supplyButton: string = 'rgb(179, 26, 255, 0.75)'
+  public supplyBorder: string = 'rgb(240, 50, 107)'
+  public supplyButton: string = 'rgb(240, 50, 107, 0.75)'
   public votersGradient: any;
   public votersBorder: string = 'rgb(73, 101, 242)' // "rgb(204, 51, 153)"
   public votersButton: string = 'rgb(73, 101, 242, 0.7)' //"rgb(204, 51, 153, 0.85)"
@@ -168,7 +168,7 @@ export class StatsPage {
 
     this.supplyGradient = this.coinCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.supplyGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    this.supplyGradient.addColorStop(0, "rgb(179, 26, 255, 0.4)") // F50057 rgb(245, 0, 87)
+    this.supplyGradient.addColorStop(0, 'rgb(245, 112, 152, 0.6)') // F50057 rgb(245, 0, 87)
 
     this.votersGradient = this.coinCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.votersGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
@@ -180,11 +180,11 @@ export class StatsPage {
 
     this.aaGradient = this.mainchainCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.aaGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    this.aaGradient.addColorStop(0, 'rgb(0, 150, 171, 0.4)') // F50057 rgb(245, 0, 87)
+    this.aaGradient.addColorStop(0, "rgb(73, 101, 242, 0.4)") // F50057 rgb(245, 0, 87)
 
     this.tphGradient = this.mainchainCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 200);
     this.tphGradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    this.tphGradient.addColorStop(0, "rgb(0, 204, 153, 0.6)") // F50057 rgb(245, 0, 87)
+    this.tphGradient.addColorStop(0, 'rgb(0, 150, 171, 0.4)') // F50057 rgb(245, 0, 87)
 
     this.stakingChartMethod(this.stakingLabelsAll, this.stakingDataAll, this.coinsAxis, this.coinsGradient, this.coinsBorder);
     this.pieChartMethod(this.staked);
@@ -383,11 +383,11 @@ export class StatsPage {
   public hashrateBorder: string = 'rgb(240, 50, 107)' // //rgb(240, 50, 107)"
   public hashrateButton: string = 'rgb(240, 50, 107, 0.75)' //"rgb(204, 51, 153, 0.85)" //"rgb(240, 50, 107, 0.75)" 
   public aaGradient: any;
-  public aaBorder: string = 'rgb(51, 204, 255)'
-  public aaButton: string = 'rgb(51, 204, 255, 0.7)'
+  public aaBorder: string = 'rgb(73, 101, 242)' //'rgb(51, 204, 255)'
+  public aaButton: string = 'rgb(73, 101, 242, 0.7)' //'rgb(51, 204, 255, 0.7)'
   public tphGradient: any;
-  public tphBorder: string = "rgb(0, 255, 0)" //"rgb(0, 204, 153)"
-  public tphButton: string = "rgb(0, 255, 0, 0.6)" //"rgb(0, 204, 153, 0.4)"
+  public tphBorder: string = 'rgb(51, 204, 255)' //"rgb(0, 204, 153)"
+  public tphButton: string = 'rgb(51, 204, 255, 0.7)' //"rgb(0, 204, 153, 0.4)"
 
   mainchainBaseColor: string = '#000'
   mainchainActivateColor: string = 'rgb(240, 50, 107)' //"rgb(204, 51, 153, 0.85)"
@@ -729,9 +729,9 @@ export class StatsPage {
           {
             data: [staked, unstaked],
             fill: true,
-            backgroundColor: ['rgb(0, 255, 0, 0.25)', 'rgb(204, 0, 255, 0.25)'], //'rgb(63, 30, 250, 0.4)'], // 'rgb(51, 204, 255, 0.4)'
-            borderColor: ['rgb(0, 255, 0)', 'rgb(204, 0, 255)' ], //'rgb(63, 30, 250)'], //rgb(51, 204, 255)'
-            borderWidth: 1.75,
+            backgroundColor: ['rgb(0, 230, 170, 0.25)', 'rgb(204, 0, 255, 0.25)'], 
+            borderColor: ['rgb(0, 230, 170)', 'rgb(204, 0, 255)' ], 
+            borderWidth: 1,
             datalabels: {
               formatter: function(value, context) {
                 return value + '%';
@@ -827,9 +827,9 @@ export class StatsPage {
           label: '% BTC',
           barThickness: 100,
           data: [ELA_hashrate],
-          backgroundColor: ['rgb(0, 255, 0, 0.25)'],
-          borderColor: ['rgb(0, 255, 0)'],
-          borderWidth: 1.75,
+          backgroundColor: ['rgb(0, 230, 170, 0.25)'],
+          borderColor: ['rgb(0, 230, 170)'],
+          borderWidth: 1,
           datalabels: {
             formatter: function(value, context) {
               return 'ELA: ' + value + '%';
@@ -842,7 +842,7 @@ export class StatsPage {
           data: [BTC_hashrate],
           backgroundColor: ['rgb(204, 0, 255, 0.25)'],
           borderColor: ['rgb(204, 0, 255)'],
-          borderWidth: 1.75,
+          borderWidth: 1,
           datalabels: {
             formatter: function(value, context) {
               return 'BTC';

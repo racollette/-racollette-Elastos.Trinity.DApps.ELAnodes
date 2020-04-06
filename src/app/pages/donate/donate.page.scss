@@ -27,24 +27,26 @@ fa-icon {
     height: 32px !important;
 }
 
-ion-list {
-    background-color: #000;
-    ion-item {
-        height: px2rem(104px);
-    }
-    ion-icon {
-        margin: 10px;
-        width: px2rem(32px);
-        height: px2rem(32px);
-    }
-    ion-label {
-        font-size: 15px;
-    }
-    ion-note {
-        font-size: 13px;
-    }
 
+ion-item {
+    height: px2rem(104px);
 }
+ion-label {
+    font-size: 15px;
+}
+ion-note {
+    font-size: 13px;
+}
+h1 {
+    font-weight: 550;
+    font-size: 1.3rem;
+}
+h2 {
+    font-weight: 400;
+    font-size: 0.925rem;
+    color: #b3b3b3;
+}  
+
 
 ion-range {
     padding-left: 0vw;

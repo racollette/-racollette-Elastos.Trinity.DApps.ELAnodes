@@ -8,7 +8,6 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog } from '@fortawesome/free-solid-svg-icons';
 
 import { TabsPage } from './tabs.page';
 

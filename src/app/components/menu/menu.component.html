@@ -1,11 +1,22 @@
   <!-- <ion-menu side="end" menuId='m1' (ionDrag)="menuOpened()"> -->
-    <ion-header color=primary no-border>
-      <ion-toolbar>
-        <ion-title>
-          {{ 'menu-title' | translate }}
-        </ion-title>
-      </ion-toolbar>
-    </ion-header>
+
+    <!-- <ion-row style="margin: 0; border-radius: 0; height: 50px; font-weight: 550; font-size: 24px;" class="header ion-no-padding ion-no-margin ion-align-items-center ion-justify-content-center"> 
+        <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 18px; padding-right: 10px;"></fa-icon>
+        {{ 'menu-title' | translate }}
+        <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 18px; padding-left: 10px;"></fa-icon>
+    </ion-row>
+     -->
+
+
+  <ion-header no-border>
+      <ion-row class="header" style="padding-top: 5px; padding-bottom: 5px; margin-right: 10px; margin-left: 10px;" > 
+      <ion-title class="ion-justify-content-center">
+        <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 18px; padding-right: 5px;"></fa-icon>
+        {{ 'menu-title' | translate }}
+        <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 18px; padding-left: 5px;"></fa-icon>
+      </ion-title>
+    </ion-row>
+  </ion-header>
 
 
     <ion-content class="vote-menu-content">
@@ -105,19 +116,19 @@
 
         <ion-row class="row2 ion-align-items-end ion-justify-content-center">
           <ion-col class="ion-no-margin">
-            <ion-button class="green-button" (click)="maxReturn()">
+            <ion-button class="blue-button" (click)="maxReturn()">
               <strong>
                 {{ 'max-return-button' | translate }}
               </strong>
             </ion-button>
-            <ion-button class="green-button" (click)="getStoredNodes()">
+            <ion-button class="blue-button" (click)="getStoredNodes()">
               <strong>
                 {{ 'last-vote-button' | translate }}
               </strong>
             </ion-button>
           </ion-col>
           <ion-col class="ion-no-margin">
-            <ion-button class="green-button" (click)="top36()">
+            <ion-button class="blue-button" (click)="top36()">
               <strong>
                 {{ 'top-36-button' | translate }}
               </strong>
@@ -138,7 +149,7 @@
 
         <ion-row class="row2 ion-align-items-end ion-justify-content-center">
           <ion-col class="ion-no-margin">
-            <ion-button class="blue-button" (click)="elastOSVote()">
+            <ion-button class="purple-button" (click)="elastOSVote()">
               <ion-img class="wallet-logo" src="../assets/images/elastOS.png"></ion-img>
               <strong>
                 {{ 'elastOS-button' | translate }}

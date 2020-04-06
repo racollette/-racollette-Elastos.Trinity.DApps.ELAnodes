@@ -38,7 +38,7 @@ export class TutorialPage implements OnInit {
 
   ionViewWillEnter() {
     appManager.setVisible("show", () => { }, (err) => { });
-    titleBarManager.setTitle("ELAnodes");
+    titleBarManager.setTitle("Tutorial");
     titleBarManager.setBackgroundColor("#000000");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
@@ -54,13 +54,13 @@ export class TutorialPage implements OnInit {
   ionViewDidEnter() {
   }
 
-  goToVote() {
+  goToSupernodes() {
     this.storageService.setVisit(true);
-    this.router.navigate(['vote']);
+    this.router.navigate(['tabs/vote']);
   }
 
-  // appManager
   closeApp() {
     appManager.close();
   }
+
 }

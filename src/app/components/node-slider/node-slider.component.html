@@ -1,5 +1,5 @@
+<!-- *ngIf="showDetails" -->
 <ion-slides
-  *ngIf="showDetails"
   #slider
   [options]="slideOpts"
   (ionSlideNextEnd)="loadNext()"
@@ -8,24 +8,15 @@
   <ion-slide *ngFor="let node of displayedArr" scrollY="true">
     <ion-card text-center>
       <ion-grid>
-        <ion-row class="header-container ion-no-padding">
-          <ion-col size="2.25" class="ion-no-margin" style="padding-right: 0">
-            <ion-button fill="clear" (click)="sendtoParent()">
-              <ion-icon
-                class="slider-back"
-                slot="icon-only"
-                name="arrow-round-back"
-              ></ion-icon>
-            </ion-button>
-          </ion-col>
+        <ion-row class="header-container ion-no-padding" style="padding-left: 5vw;">
           <ion-col
             size="2"
             class="ion-no-margin"
-            style="padding-right: 0; align-self: center;"
+            style="padding-right: 5px; align-self: center;"
           >
             <div *ngIf="node">
-              <img-loader *ngIf="node.imageUrl" useImg
-                ><img class="logo" [src]="node.imageUrl"
+              <img-loader *ngIf="node.imageUrl"                
+              ><img class="logo" [src]="node.imageUrl"
               /></img-loader>
             </div>
             <img-loader *ngIf="!node.imageUrl" useImg
@@ -35,7 +26,7 @@
             /></img-loader>
           </ion-col>
           <ion-col
-            size="7.75"
+            size="10"
             class="name-container ion-no-margin"
             style="padding-left: 0"
           >

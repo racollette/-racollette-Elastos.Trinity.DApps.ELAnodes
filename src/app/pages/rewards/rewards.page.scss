@@ -2,24 +2,12 @@
   color: #fff;
 }
 
-ion-button.purple-button {
-  --background:  #b31aff;
-  text-transform: none;
-  font-size: 0.9rem;
-}
-
 ion-button.blue-button {
-  --background:  #0096ab;
+  --background: linear-gradient(rgb(0, 150, 171), rgb(0, 150, 171, 0.2));
   text-transform: none;
   font-size: 0.9rem;
   width: 96%;
   height: 30px;
-}
-
-ion-button.green-button {
-  --background:  #29a329;
-  text-transform: none;
-  font-size: 0.9rem;
 }
 
 ion-content {

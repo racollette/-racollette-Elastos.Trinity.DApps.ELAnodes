@@ -67,27 +67,47 @@ export class VotePage implements OnInit {
     private data: DataService,
     private storageService: StorageService,
     private translate: TranslateService,
-    private navController: NavController
+    private navController: NavController,
+    private zone: NgZone
     ) {}
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    console.log('ENTERING VOTE PAGE')
     titleBarManager.setTitle(this.translate.instant('Supernodes'))
     titleBarManager.setBackgroundColor("#000000");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
-    //appManager.setVisible("show", ()=>{}, (err)=>{});
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+    appManager.setListener((ret) => {this.onMessageReceived(ret)});
   }
 
   ionViewDidEnter() {
   }
 
+  ionViewDidLeave() {
+    this.showDetails = false;
+  }
+
+  // Node slider navigation handling
+  _showDetails(index: number, node: Node) {
+      this.showDetails = true;
+      this.nodeIndex = index - 1;
+      this.node = node;
+  }
+
+  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
+    if (ret.message == "navback" && this.showDetails) {
+      this.zone.run(()=> {
+          this.showDetails = false;
+      });
+    } else {
+      appManager.launcher();
+    }
+  }
+
   public pushMenu() {
     this.nodesService.nodesLoaded.subscribe(nodeLoad => this.nodeLoad = nodeLoad)
-    this.tableStyle = this.nodesService.tableStyle;
     this.data.currentselectedCount.subscribe(input => this.input = input)
     this.data.currentselectedARR.subscribe(input1 => this.input1 = input1)
     this.data.currentselectedAvgPay.subscribe(input2 => this.input2 = input2)
@@ -249,22 +269,5 @@ export class VotePage implements OnInit {
     this.data.updateContinents(this.NA, this.SA, this.EU, this.AS, this.OC, this.AF)
 
   }
-
-   _showDetails(index: number, node: Node) {
-    console.log(index)
-    console.log(node)
-    this.nodeIndex = index - 1;
-    this.showDetails = !this.showDetails;
-    this.node = node;
-    }
-
-    return() {
-      this.showDetails = false;
-    }
-
-    getMessage() {
-      console.log('getmessage')
-      this.showDetails = !this.showDetails;
-    }
 
 }

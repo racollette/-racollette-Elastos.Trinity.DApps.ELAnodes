@@ -2,6 +2,12 @@ export const zh = {
 
     // Splashscreen
     "splash-loading": "你今天看起来很棒",
+
+    // Tutorial Slides
+    "tutorial-title": "讲解",
+    "welcome": "欢迎！",
+    "dpos": "共识",
+    "voting": "表决",
     
     // Nav Tabs
     "Supernodes": "超节点",
@@ -19,7 +25,8 @@ export const zh = {
 
     // Donate Page
     "donate-title": "捐",
-    "donate-text": "目前，该应用程序是完全免费的。但是，欢迎捐款，这有助于激励我们继续增加功能。谢谢！",
+    "donate-header": "享受dApp吗？",
+    "donate-text": "欢迎捐款，这有助于激励我们继续增加功能。谢谢！",
     "donate-success-toast": "成功！感谢您的支持！",
     "donate-canceled-toast": "付款已取消",
     "donate-error-toast": "错误。无法访问钱包应用程序。",
@@ -51,10 +58,6 @@ export const zh = {
     "optional-alert": "（可选的）",
     "no-thanks-alert": "不用了，谢谢",
     "add-alert": "加",
-
-    // Home Loading Page
-
-    // Introduction/Tutorial Slides
 
     // Language Page
     "language-title": "语言",
@@ -145,7 +148,7 @@ export const zh = {
 
     // Node Slider Component
     "node-rank-text": "秩",
-    "node-votes-text": "投票",
+    "node-votes-text": "投票数",
     "node-voters-text": "选民",
     "node-active": "活性",
     "node-standby": "支持",

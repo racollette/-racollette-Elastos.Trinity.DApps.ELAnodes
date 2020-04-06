@@ -8,12 +8,12 @@ import { ComponentsModule } from '../../components/components.module';
 
 import { IonicModule } from '@ionic/angular';
 
-import { StatsPage } from './stats.page';
+import { AnalyticsPage } from './analytics.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: StatsPage
+    component: AnalyticsPage
   }
 ];
 
@@ -26,6 +26,6 @@ const routes: Routes = [
     TranslateModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [StatsPage]
+  declarations: [AnalyticsPage]
 })
-export class StatsPageModule {}
+export class AnalyticsPageModule {}

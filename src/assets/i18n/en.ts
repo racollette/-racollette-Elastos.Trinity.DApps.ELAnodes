@@ -19,7 +19,8 @@ export const en = {
 
     // Donate Page
     "donate-title": "Donate",
-    "donate-text": "Currently, this app is completely free. However, donations are welcome and help motivate us to keep adding features. Thank you!",
+    "donate-header": "Enjoying the dApp?",
+    "donate-text": "Donations are welcome and help motivate us to keep adding features. Thank you!",
     "donate-success-toast": "Success! We appreciate your support!",
     "donate-canceled-toast": "Payment canceled",
     "donate-error-toast": "Error. Unable to access wallet application.",
@@ -55,6 +56,10 @@ export const en = {
     // Home Loading Page
 
     // Introduction/Tutorial Slides
+    "tutorial-title": "Tutorial",
+    "welcome": "Welcome!",
+    "dpos": "Consensus",
+    "voting-rules": "Voting",
 
     // Language Page
     "language-title": "Language",
@@ -132,7 +137,7 @@ export const en = {
     "top-36-button": "Top 36",
     "last-vote-button": "Last Vote",
     "clear-button": "Clear",
-    "vote-text": "Vote",
+    "vote-text": "VOTE",
     "elastOS-button": "elastOS",
     "elephant-button": "Elephant",
     "no-voting-history": "No voting history found",
@@ -145,7 +150,7 @@ export const en = {
 
     // Node Slider Component
     "node-rank-text": "Rank",
-    "node-votes-text": "Vote",
+    "node-votes-text": "Votes",
     "node-voters-text": "Voters",
     "node-active": "Active",
     "node-standby": "Standby",

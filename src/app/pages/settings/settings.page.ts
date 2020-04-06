@@ -70,7 +70,7 @@ export class SettingsPage implements OnInit {
       note: "v1.0",
     },
     {
-      route: "/tabs/tutorial",
+      route: "/tutorial",
       label: "Tutorial",
       label_zh: "讲解",
       icon: "md-photos",

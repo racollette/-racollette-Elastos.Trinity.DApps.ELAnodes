@@ -5,22 +5,22 @@
       <ion-label>{{'Supernodes' | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="history">
+    <ion-menu-toggle>
+      <ion-tab-button>
+          <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" size="2x"></fa-icon>
+          <ion-label>{{'staking-tab' | translate }}</ion-label>
+      </ion-tab-button>
+      </ion-menu-toggle>
+
+    <ion-tab-button tab="rewards">
       <fa-icon [fixedWidth]="true" [icon]="['fas', 'hand-holding-usd']" size="2x"></fa-icon>
       <ion-label>{{'rewards-tab' | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="stats">
+    <ion-tab-button tab="analytics">
       <fa-icon [fixedWidth]="true" [icon]="['fas', 'chart-area']" size="2x"></fa-icon>
       <ion-label>{{'analytics-tab' | translate }}</ion-label>
     </ion-tab-button>
-
-    <ion-menu-toggle>
-    <ion-tab-button>
-        <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" size="2x"></fa-icon>
-        <ion-label>{{'staking-tab' | translate }}</ion-label>
-    </ion-tab-button>
-    </ion-menu-toggle>
 
     <ion-tab-button tab="settings">
       <fa-icon [fixedWidth]="true" [icon]="['fas', 'cog']" size="2x"></fa-icon>

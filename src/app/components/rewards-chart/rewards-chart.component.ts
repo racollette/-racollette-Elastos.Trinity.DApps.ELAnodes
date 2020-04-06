@@ -61,8 +61,6 @@ export class RewardsChartComponent implements OnInit {
   public historyChartDataAll: any;
 
   ionViewDidEnter() {
-    console.log(this.historyChartData)
-    console.log(this.historyChartLabels)
     this.gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
     this.gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
     this.gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)

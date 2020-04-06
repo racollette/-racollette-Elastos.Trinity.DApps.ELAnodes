@@ -16,9 +16,9 @@ export class NodeSliderComponent implements OnInit {
   //@Input() totalVotes: number = 0;
   @Input() nodeIndex: number;
   @Input() node: Node;
-  @Input() showDetails: boolean;
+  // @Input() showDetails: boolean;
 
-  @Output() updateSlideToggle = new EventEmitter<string>();
+  // @Output() updateSlideToggle = new EventEmitter<string>();
 
   // Truncate
   @Input() limit: number = 250;
@@ -37,21 +37,17 @@ export class NodeSliderComponent implements OnInit {
     slidesPerView: 1,
   };
 
-  sendtoParent() {
-    this.showDetails = false;
-    this.updateSlideToggle.emit()
-  }
+  // sendtoParent() {
+  //   this.showDetails = false;
+  //   this.updateSlideToggle.emit()
+  // }
 
   ngOnInit() {
     this.displayedArr = this._nodes.slice(0, this.nodeIndex + 2);
-    console.log(this.nodeIndex)
-    console.log(this._nodes)
-    console.log(this.displayedArr)
     this.slideOpts.initialSlide = this.displayedArr.indexOf(this.node);
-    console.log(this.slideOpts.initialSlide)
   }
 
-  //// Increment nodes array when sliding forward ////
+  // Increment nodes array when sliding forward
   loadNext() {
     let lastNode: Node = this.displayedArr.slice(-1)[0]
     let nextNodeIndex: number = this._nodes.indexOf(lastNode) + 1;
@@ -69,16 +65,11 @@ export class NodeSliderComponent implements OnInit {
       return 'Standy'
     }
   }
-  //// Define Values ////
+
   getVotes(votes: string): string {
     const fixedVotes = parseInt(votes);
     return fixedVotes.toLocaleString().split(/\s/).join(',');
   }
-
-  // getVotePercent(votes: string): string {
-  //   const votePercent: number = parseFloat(votes) / this.totalVotes * 100;
-  //   return votePercent.toFixed(2);
-  // }
 
   getRewards(rewards) {
     const income: number =  parseFloat(rewards) / 365;

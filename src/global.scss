@@ -18,9 +18,16 @@
 @import "~@swimlane/ngx-datatable/index.css";
 @import "~@swimlane/ngx-datatable/assets/icons.css";
 
-* {
-  font-family: "Roboto" !important;
+@font-face {
+  font-family: 'Nasalization';
+  font-weight: 400;
+  font-style: normal;
+  src: url('assets/fonts/nasalization-rg.ttf') format('truetype');
 }
+
+// * {
+//   font-family: "Roboto" !important;
+// }
 
 ion-title {
   font-weight: 700;

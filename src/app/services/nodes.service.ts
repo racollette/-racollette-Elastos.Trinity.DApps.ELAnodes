@@ -19,9 +19,6 @@ export class NodesService {
   public activeNodes: Node[] = [];
   public totalVotes: number = 0;
 
-  // Style
-  public tableStyle: string = 'dark';
-
   // Stats
   public statsFetched: boolean = false;
   public currentHeight: number = 0;
@@ -126,22 +123,15 @@ export class NodesService {
   }
 
   getVisit() {
-    if (!this.firstLoad) {
       this.storageService.getVisit().then(data => {
-        this.firstLoad = true;
-        if(data || data === true) {
-          this.firstVisit = false;
-          this.router.navigate(['']);  
+        if( data || data === true) {
+          this.router.navigate(['/tabs/vote']);  
         } else {
-          this.router.navigate(['']);
+          this.router.navigate(['/tutorial']);
         }
-
       });
-    }
   }
     
-
-
   getNodeDayChange() {
     this._nodes.map(node => {
       if (node.deltaRank < 0) {

@@ -6,18 +6,18 @@
 
 <ion-content *ngIf="nodesService._nodes.length > 0">
 
-  <ion-refresher slot="fixed" (ionRefresh)="updateNodes($event)" pullMin="100" pullMax="125">
+  <ion-refresher *ngIf="!showDetails" slot="fixed" (ionRefresh)="updateNodes($event)" pullMin="100" pullMax="125">
     <ion-refresher-content pullingIcon="arrow-round-up" pullingText="Refresh Data">
     </ion-refresher-content>
   </ion-refresher>
 
+  <!-- [showDetails]="showDetails" -->
+  <!-- (updateSlideToggle)="getMessage($event)" -->
   <app-node-slider
   *ngIf="showDetails" 
-  [showDetails]="showDetails"
   [nodeIndex]="nodeIndex" 
   [node]="node" 
   [_nodes]="nodesService._nodes"
-  (updateSlideToggle)="getMessage($event)"
   ></app-node-slider>
 
   <ion-list class="node-table-container">

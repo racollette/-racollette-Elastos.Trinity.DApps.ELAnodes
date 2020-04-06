@@ -22,10 +22,6 @@ ion-icon {
   font-size: 36px;
 }
 
-ion-toolbar {
-  --background: #0096ab;
-}
-
 ion-grid {
   height: 100%;
   display: flex;
@@ -65,6 +61,16 @@ ion-row {
 .inner-col {
   padding: 0px 5px 0px 5px;
 }
+.header {
+  height: 40px;
+  //flex: 0;
+  //background-image: linear-gradient(to right, rgb(232, 0, 127), rgb(179, 26, 255), rgb(0, 150, 171) );
+  background-image: url("../../../assets/images/StackingToolsHeader2.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  //margin-bottom: 0;
+}
 
 
 
@@ -84,27 +90,27 @@ ion-row {
 }
 
 ion-button.pink-button {
-  --background: #e8007f;
-}
-
-ion-button.green-button {
-  --background:  #29a329;
-}
-
-ion-button.last-vote-button {
-  --background:  #0096ab;
+  --background: linear-gradient(rgb(232, 0, 127), rgb(232, 0, 127, 0.2));
+  padding: 2.5px;
 }
 
 ion-button.blue-button {
-  --background:  #0096ab;
-  text-transform: none;
-  font-size: 0.9rem;
+  --background: linear-gradient(rgb(0, 150, 171), rgb(0, 150, 171, 0.2));
+  padding: 2.5px;
 }
 
+// ion-button.blue-button {
+//   --background:  #0096ab;
+//   text-transform: none;
+//   font-size: 0.9rem;
+//   padding: 2.5px;
+// }
+
 ion-button.purple-button {
-  --background:  #b31aff;
+  --background: linear-gradient(rgb(179, 26, 255), rgb(179, 26, 255, 0.2));
   text-transform: none;
   font-size: 0.9rem;
+  padding: 2.5px;
 }
 
 .wallet-logo {

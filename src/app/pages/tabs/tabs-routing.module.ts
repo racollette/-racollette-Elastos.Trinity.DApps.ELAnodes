@@ -19,22 +19,22 @@ const routes: Routes = [
             ]
         },
         {
-          path: 'history',
+          path: 'rewards',
           children:
             [
               {
                 path: '',
-                loadChildren: '../history/history.module#HistoryPageModule'
+                loadChildren: '../rewards/rewards.module#RewardsPageModule'
               }
             ]
         },
         {
-          path: 'stats',
+          path: 'analytics',
           children:
             [
               {
                 path: '',
-                loadChildren: '../stats/stats.module#StatsPageModule'
+                loadChildren: '../analytics/analytics.module#AnalyticsPageModule'
               }
             ]
         },
@@ -45,16 +45,6 @@ const routes: Routes = [
               {
                 path: '',
                 loadChildren: '../settings/settings.module#SettingsPageModule'
-              }
-            ]
-        },
-         {
-          path: 'tutorial',
-          children:
-            [
-              {
-                path: '',
-                loadChildren: '../tutorial/tutorial.module#TutorialPageModule'
               }
             ]
         },

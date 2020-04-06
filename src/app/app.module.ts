@@ -23,18 +23,15 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ComponentsModule } from './components/components.module';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam } from '@fortawesome/free-solid-svg-icons';
 
 import { RewardsChartComponent } from './components/rewards-chart/rewards-chart.component';
-//import { NodeSliderComponent } from './components/node-slider/node-slider.component'
 import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as Sentry from "@sentry/browser";
-
-//import 'chartjs-plugin-zoom';
 
 Sentry.init({
   dsn: "https://acb9a7ff020f4a4aacdb8a5e9e8214e4@sentry.io/1875730"
@@ -101,7 +98,6 @@ export function TranslateLoaderFactory() {
   bootstrap: [MyApp],
   entryComponents: [
     RewardsChartComponent,
-    //NodeSliderComponent
   ],
   providers: [
     StatusBar,
@@ -116,6 +112,6 @@ export function TranslateLoaderFactory() {
 })
 export class AppModule {
     constructor(private library: FaIconLibrary) {
-    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog);
+    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam);
   }  
 }

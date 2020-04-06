@@ -1,65 +1,70 @@
 .container {
+  // background-image: url("../../../assets/images/tutorialSplash1.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
   min-height: 100%;
-  background: linear-gradient(to bottom, #8FDFFF 0%, #A25BFE 100%);
+  background-color: #171717;
+
+.arrow-container {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+ion-list {
+  --ion-item-background: transparent;
+}
+
+
+ion-item {
+  --color: #fff;
+  font-size: 13px;
+  --border-radius: 10px;
+  --border-width: 1px !important;
+  --background: #000;
+  margin-bottom: 7.5px;
+  --inner-padding-bottom: 5px;
+  --inner-padding-end: 7.5px;
+  // --inner-padding-start: 5px;
+  --inner-padding-top: 5px;
+}
+
+ion-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: white;
   margin: 0;
-  padding: 0;
-  z-index: 0;
+}
 
-  ion-card-title {
-    .img-container {
-      display: flex;
-      justify-content: center;
-      padding: 0;
+fa-icon {
+  color: #fff;
+  font-size: 26px;
+}
 
-      img {
-        object-fit: contain;
-      }
-    }
+h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+}
 
-    .title {
-      color: white;
-      font-weight: 600;
-      font-size: 26px;
-      padding: 0;
-      margin: 0;
-    }
+.icon-box {
+  margin-top: 2.5vh;
+  margin-bottom: 2.5vh;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(#000, #000), linear-gradient(-45deg, rgb(0, 150, 171),  rgb(232, 0, 127) );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
 
-    .subtitle {
-      color: white;
-      line-height: 1.5;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 20px 60px 40px;
-      margin: 0;
-    }
+.complete-item {
+  --border-color: #fff; 
+  --detail-icon-color: #fff !important; 
+  --detail-icon-size: 18px !important; 
+  --detail-icon-opacity: 100 !important;
+  margin-top: 5vh; 
+}
 
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      padding: 30px 5px;
 
-      .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 75%;
-        background: transparent;
-        border: 3px solid white;
-        border-radius: 20px;
-        padding: 10px;
-
-        ion-label {
-          font-size: 14px;
-          font-weight: 700;
-          color: white;
-        }
-      }
-    }
-
-    .arrow-container {
-      color: white;
-      display: flex;
-      align-items: center;
-    }
-  }
 }

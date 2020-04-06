@@ -8,12 +8,12 @@ import { IonicModule } from '@ionic/angular';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { ComponentsModule } from '../../components/components.module';
 
-import { HistoryPage } from './history.page';
+import { RewardsPage } from './rewards.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HistoryPage
+    component: RewardsPage
   }
 ];
 
@@ -28,6 +28,6 @@ const routes: Routes = [
     IonicImageLoader,
     RouterModule.forChild(routes)
   ],
-  declarations: [HistoryPage]
+  declarations: [RewardsPage]
 })
-export class HistoryPageModule {}
+export class RewardsPageModule {}

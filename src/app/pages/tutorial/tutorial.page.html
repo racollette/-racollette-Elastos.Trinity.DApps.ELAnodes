@@ -1,92 +1,293 @@
 <ion-content>
-  <ion-grid class="container">
     <ion-slides
+      class="container"
       #slide
       pager="true"
       [options]="slideOpts"
     >
 
-      <ion-slide>
-        <ion-card-title>
-          <ion-row class="img-container">
-            <img-loader useImg><img src="../assets/icon/onboard1.svg"></img-loader>
-          </ion-row>
+    <ion-slide>
+      <ion-card-title>
+        <ion-grid id="splash">
           <ion-row>
-            <ion-col offset="1.25" size="9.5">
-              <h4 class="title">Welcome</h4>
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center">
+              </ion-col>    
+              <ion-col>
+              <div class="icon-box">
+              <ion-row style="padding-top: 5vh;" class="ion-justify-content-center ion-align-items-center">
+                <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'smile-beam']" size="2x"></fa-icon>
+              </ion-row>
+              <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                <h2 style="margin: 0; padding: 0;">{{ 'welcome' | translate }}</h2>    
+              </ion-row> 
+              </div>
             </ion-col>
-            <ion-col size="1.25" class="arrow-container" (click)="next(slide)">
-              <ion-icon name="arrow-round-forward"></ion-icon>
-            </ion-col>
-          </ion-row>
-          <p class="subtitle">
-            DPoS supernodes are part of the Elastos ecosystem security.
-            They participate in validating ELA Transactions
-          </p>
-          <ion-row class="btn-container">
-            <div class="btn" (click)="next(slide)">
-              <ion-label>Next</ion-label>
-            </div>
-          </ion-row>
-        </ion-card-title>
-      </ion-slide>
-
-      <ion-slide> 
-        <!-- style="background-image: url('../assets/images/SplashBackgroundD.png');" -->
-        <ion-card-title>
-          <ion-row class="img-container">
-            <img-loader useImg><img src="../assets/images/SplashBackgroundD.png"></img-loader>
-          </ion-row>
-          <ion-row>
-            <ion-col size="1.25" class="arrow-container" (click)="prev(slide)">
-              <ion-icon name="arrow-round-back"></ion-icon>
-            </ion-col>
-            <ion-col>
-              <h4 class="title" size="9.5">36 Votes for 1 ELA</h4>
-            </ion-col>
-            <ion-col size="1.25" class="arrow-container" (click)="next(slide)">
-              <ion-icon name="arrow-round-forward"></ion-icon>
-            </ion-col>
-          </ion-row>
-          <p class="subtitle">
-            Each ELA gives you 1 voting power so you can vote for 36 nodes.
-            You don't spend your ELA. You can get your ELA back any time
-          </p>
-          <ion-row class="btn-container">
-            <div class="btn" (click)="next(slide)">
-              <ion-label>Next</ion-label>
-            </div>
-          </ion-row>
-        </ion-card-title>
-      </ion-slide>
+            <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+              <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+            </ion-col>    
+        </ion-row>
+        <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+          <ion-list >
+            <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+              <ion-label class="ion-text-wrap">You are seeing this page because this is your first time opening ELAnodes on elastOS.</ion-label>
+            </ion-item>
+            <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+              <ion-label class="ion-text-wrap">This dApp was created out of a desire to streamline and simplify the Elastos staking process for users.</ion-label>
+            </ion-item >
+            <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+              <ion-label class="ion-text-wrap">The following tutorial will provide an overview of the features included.</ion-label>
+            </ion-item >
+          </ion-list>
+        </ion-row>
+        </ion-grid>
+      </ion-card-title>
+    </ion-slide>
 
       <ion-slide>
         <ion-card-title>
-          <ion-row class="img-container">
-            <img-loader useImg><img src="../assets/icon/onboard3.svg"></img-loader>
+          <ion-grid id="splash">
+            <ion-row>
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>      
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center ion-align-items-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'server']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{'dpos' | translate }}</h2>    
+                </ion-row> 
+                </div>
+              </ion-col>
+              <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+              </ion-col>    
           </ion-row>
-          <ion-row>
-            <ion-col size="1.25" class="arrow-container" (click)="prev(slide)">
-              <ion-icon name="arrow-round-back"></ion-icon>
-            </ion-col>
-            <ion-col>
-              <h4 class="title">ELA Transactions</h4>
-            </ion-col>
-            <ion-col size="1.25">
-            </ion-col>
+          <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+            <ion-list >
+              <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                <ion-label class="ion-text-wrap">Supernode operators are elected by coin holders and are tasked with validating the blocks created by Bitcoin merge-miners as part of the Elastos's hybrid consensus mechanism.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                <ion-label class="ion-text-wrap">There are 108 total supernodes. The top 24 validate blocks along with 12 supernodes that belong to the Cyber Republic council. The remaining 72 supernodes are on standby.</ion-label>
+              </ion-item >
+              <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                <ion-label class="ion-text-wrap">Supernodes earn income based on their vote totals and receive an addtional static bonus if they are actively validating blocks.</ion-label>
+              </ion-item >
+            </ion-list>
           </ion-row>
-          <p class="subtitle">
-            If you make payment transactions using your ELA,
-            your votes are cancelled and you need to vote again
-          </p>
-          <ion-row class="btn-container">
-            <div class="btn" (click)="goToVote()">
-              <ion-label>Continue to Voting</ion-label>
-            </div>
-          </ion-row>
+          </ion-grid>
         </ion-card-title>
       </ion-slide>
 
+      <ion-slide>
+        <ion-card-title>
+          <ion-grid id="splash">
+            <ion-row>
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>      
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'vote-yea']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{'voting-rules' | translate }}</h2>    
+                </ion-row> 
+                </div>
+            </ion-col>
+            <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+              <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+            </ion-col>    
+          </ion-row>
+            <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+              <ion-list >
+                <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                  <ion-label class="ion-text-wrap">Each ELA allows you to vote for up to 36 unique supernodes.</ion-label>
+                </ion-item>
+                <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
+                  <ion-label class="ion-text-wrap">There is no benefit to voting for less than 36.</ion-label>
+                </ion-item >
+                <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                  <ion-label class="ion-text-wrap">Each voting transactions costs only a small fee (~0.0004 ELA).</ion-label>
+                </ion-item>
+                <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                  <ion-label class="ion-text-wrap">There is no lock in period. However, if you send coins out of your wallet your votes will be cancelled and you will need to vote again.</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card-title>
+          <ion-grid id="splash">
+            <ion-row> 
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>       
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'network-wired']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{'Supernodes' | translate }}</h2>    
+                </ion-row> 
+                </div>
+            </ion-col>
+            <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+              <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+            </ion-col>     
+          </ion-row>
+          <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+            <ion-list >
+              <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                <ion-label class="ion-text-wrap">In the supernode section you will find the current delegate rankings. Green and red text represents positive and negative flucations within the last day. All columns can be sorted by tapping the header.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
+                <ion-label class="ion-text-wrap">The rewards column details the estimated annual rate of return you will earn for voting for a particular supernode. Underneath is the percent of the supernode operators income that they share with their voters.</ion-label>
+              </ion-item >
+              <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                <ion-label class="ion-text-wrap">To add a supernode to your voting list, simply tap the row.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                <ion-label class="ion-text-wrap">More detailed information about each supernode operator may be found by pressing the detail icon.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card-title>
+          <ion-grid id="splash">
+            <ion-row>   
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>     
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'tools']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{'staking-tab' | translate }}</h2>    
+                </ion-row> 
+                </div>
+              </ion-col> 
+            <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+              <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+            </ion-col>     
+          </ion-row>
+          <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+            <ion-list >
+              <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                <ion-label class="ion-text-wrap">The staking tools menu can be opened using the navigation tab or simply swiping from the right edge of your device. This menu is accessible from all sections.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
+                <ion-label class="ion-text-wrap">Here you will find summary statistics for your selected supernodes.</ion-label>
+              </ion-item >
+              <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                <ion-label class="ion-text-wrap">Buttons are available that will automatically select preset lists or reset your selections. After submitting a vote through the dApp, the 'Last Vote' button can used to retrieve your previous voting list.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                <ion-label class="ion-text-wrap">When you're ready to vote, simply choose your supported wallet and follow the prompts. Please note that voting with the Elephant wallets requires that you approve in app browser access.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card-title>
+          <ion-grid id="splash">
+            <ion-row> 
+              <ion-col size="3" class="arrow-container ion-justify-content-center ion-align-items-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>       
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'hand-holding-usd']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{ 'rewards-tab' | translate }}</h2>    
+                </ion-row> 
+                </div>
+              </ion-col>  
+            <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+              <ion-icon style="font-size: 30px;" name="arrow-round-forward"></ion-icon>
+            </ion-col>    
+          </ion-row>
+          <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+            <ion-list >
+              <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                <ion-label class="ion-text-wrap">The rewards section is your personal data dashboard. Wallet addresses may be added using any of three methods: (1) request it from your elastOS wallet, (2) paste it using the clipboard, (3) or add it manually using the wallets section.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
+                <ion-label class="ion-text-wrap">You can store as many addresses as you wish. Aliases are optional. Selecting a wallet inside the wallets section will retrieve the latest rewards transactions and display them.</ion-label>
+              </ion-item >
+              <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                <ion-label class="ion-text-wrap">The table categorizes all staking rewards sent to the selected wallet. Tap the header to sort, tap the entry to view details, and use the pager at the bottom to navigate.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                <ion-label class="ion-text-wrap">The 'Advanced Data' button will open a window with summary and graphical rewards information for the selected wallet.</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-slide>
+
+    
+
+      <ion-slide>
+        <ion-card-title>
+          <ion-grid id="splash">
+            <ion-row>
+              <ion-col size="3" class="arrow-container ion-justify-content-center" (click)="prev(slide)">
+                <ion-icon style="font-size: 30px;" name="arrow-round-back"></ion-icon>
+              </ion-col>     
+                <ion-col>
+                <div class="icon-box">
+                <ion-row style="padding-top: 5vh;" class="ion-justify-content-center">
+                  <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'chart-area']" size="2x"></fa-icon>
+                </ion-row>
+                <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
+                  <h2 style="margin: 0; padding: 0;">{{'analytics-tab' | translate }}</h2>    
+                </ion-row> 
+                </div>
+              </ion-col> 
+            <ion-col size="3" class="arrow-container ion-justify-content-center">
+            </ion-col>     
+          </ion-row>
+          <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
+            <ion-list >
+              <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
+                <ion-label class="ion-text-wrap">The analytics section presents current and historical data for the Elastos mainchain.</ion-label>
+              </ion-item>
+              <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
+                <ion-label class="ion-text-wrap">You can use the options to toggle the charts between various datasets and time intervals.</ion-label>
+              </ion-item >
+              <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
+                <ion-label class="ion-text-wrap">That's it. If you need to reference this tutorial again you can find it under the settings section. Enjoy!</ion-label>
+              </ion-item>
+              <ion-item class="complete-item" lines="none" detail (click)="goToSupernodes()">
+                  <fa-icon style="font-size: 18px; padding-right: 2.5vw;" [fixedWidth]="true" [icon]="['fas', 'check-double']"></fa-icon>
+                  <ion-label style="font-size: 18px; font-weight: 600;">Complete Tutorial</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-slide>
+
+     
     </ion-slides>
-  </ion-grid>
 </ion-content>
