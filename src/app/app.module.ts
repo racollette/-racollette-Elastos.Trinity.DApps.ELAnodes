@@ -23,7 +23,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ComponentsModule } from './components/components.module';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram, faTwitter, faGithub, faMedium, faFacebook, faYoutube, faChrome, faRedditAlien, faLinkedin, faWeixin, faWeibo, faQq, faReddit } from '@fortawesome/free-brands-svg-icons';
 
 import { RewardsChartComponent } from './components/rewards-chart/rewards-chart.component';
 import { ChartsModule } from 'ng2-charts';
@@ -112,6 +113,6 @@ export function TranslateLoaderFactory() {
 })
 export class AppModule {
     constructor(private library: FaIconLibrary) {
-    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam);
+    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam, faTelegram, faTwitter, faGithub, faMedium, faFacebook, faYoutube, faWeixin, faChrome, faWeibo, faQq, faReddit, faRedditAlien, faLinkedin, faEnvelope);
   }  
 }

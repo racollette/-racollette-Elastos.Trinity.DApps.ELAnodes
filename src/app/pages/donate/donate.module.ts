@@ -23,7 +23,6 @@ const routes: Routes = [
     IonicModule,
     ComponentsModule,
     TranslateModule,
-    //FontAwesomeModule,
     RouterModule.forChild(routes)
   ],
   declarations: [DonatePage]
