@@ -1,7 +1,7 @@
 export const en = {
 
     // Splashscreen
-    "splash-loading": "Wow, you look great today",
+    "splash-loading": "",
 
     // Nav Tabs
     "Supernodes": "Supernodes",

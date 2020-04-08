@@ -59,17 +59,8 @@ export class NodesService {
     const height: number = await this.fetchCurrentHeight();
     this.fetchNodes();
     this.fetchStats();
-    //this.getStoredVotes();
-  }
 
-  //  getStoredVotes() {
-  //   this.storageService.getVotes().then(data => {
-  //     console.log('Vote history', data);
-  //     if(data) {
-  //       this._votes = data;
-  //     }
-  //   });
-  // }
+  }
 
   fetchStats() {
     return new Promise((resolve, reject) => {

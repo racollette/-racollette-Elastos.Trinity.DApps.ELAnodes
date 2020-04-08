@@ -1,7 +1,7 @@
 export const zh = {
 
     // Splashscreen
-    "splash-loading": "哇，你今天看起来很棒",
+    "splash-loading": "",
 
     // Tutorial Slides
     "tutorial-title": "讲解",
