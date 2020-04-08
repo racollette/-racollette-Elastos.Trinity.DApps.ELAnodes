@@ -29,13 +29,13 @@
         <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
           <ion-list >
             <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-              <ion-label class="ion-text-wrap">You are seeing this page because this is your first time opening ELAnodes on elastOS.</ion-label>
+              <ion-label class="ion-text-wrap">{{ 'welcome-1' | translate }}</ion-label>
             </ion-item>
             <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-              <ion-label class="ion-text-wrap">This dApp was created out of a desire to streamline and simplify the Elastos staking process for users.</ion-label>
+              <ion-label class="ion-text-wrap">{{ 'welcome-2' | translate }}</ion-label>
             </ion-item >
             <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-              <ion-label class="ion-text-wrap">The following tutorial will provide an overview of the features included.</ion-label>
+              <ion-label class="ion-text-wrap">{{ 'welcome-3' | translate }}</ion-label>
             </ion-item >
           </ion-list>
         </ion-row>
@@ -56,7 +56,7 @@
                   <fa-icon style="padding-bottom: 2vh;" [fixedWidth]="true" [icon]="['fas', 'server']" size="2x"></fa-icon>
                 </ion-row>
                 <ion-row style="padding-bottom: 5vh;" class="ion-justify-content-center">
-                  <h2 style="margin: 0; padding: 0;">{{'dpos' | translate }}</h2>    
+                  <h2 style="margin: 0; padding: 0;">{{'consensus' | translate }}</h2>    
                 </ion-row> 
                 </div>
               </ion-col>
@@ -67,13 +67,13 @@
           <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
             <ion-list >
               <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                <ion-label class="ion-text-wrap">Supernode operators are elected by coin holders and are tasked with validating the blocks created by Bitcoin merge-miners as part of the Elastos's hybrid consensus mechanism.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'consensus-1' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                <ion-label class="ion-text-wrap">There are 108 total supernodes. The top 24 validate blocks along with 12 supernodes that belong to the Cyber Republic council. The remaining 72 supernodes are on standby.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'consensus-2' | translate }}</ion-label>
               </ion-item >
               <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                <ion-label class="ion-text-wrap">Supernodes earn income based on their vote totals and receive an addtional static bonus if they are actively validating blocks.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'consensus-3' | translate }}</ion-label>
               </ion-item >
             </ion-list>
           </ion-row>
@@ -105,16 +105,16 @@
             <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
               <ion-list >
                 <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                  <ion-label class="ion-text-wrap">Each ELA allows you to vote for up to 36 unique supernodes.</ion-label>
+                  <ion-label class="ion-text-wrap">{{ 'voting-rules-1' | translate }}</ion-label>
                 </ion-item>
                 <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
-                  <ion-label class="ion-text-wrap">There is no benefit to voting for less than 36.</ion-label>
+                  <ion-label class="ion-text-wrap">{{ 'voting-rules-2' | translate }}</ion-label>
                 </ion-item >
                 <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                  <ion-label class="ion-text-wrap">Each voting transactions costs only a small fee (~0.0004 ELA).</ion-label>
+                  <ion-label class="ion-text-wrap">{{ 'voting-rules-3' | translate }}</ion-label>
                 </ion-item>
                 <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                  <ion-label class="ion-text-wrap">There is no lock in period. However, if you send coins out of your wallet your votes will be cancelled and you will need to vote again.</ion-label>
+                  <ion-label class="ion-text-wrap">{{ 'voting-rules-4' | translate }}</ion-label>
                 </ion-item>
               </ion-list>
             </ion-row>
@@ -146,16 +146,16 @@
           <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
             <ion-list >
               <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                <ion-label class="ion-text-wrap">In the supernode section you will find the current delegate rankings. Green and red text represents positive and negative flucations within the last day. All columns can be sorted by tapping the header.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'supernodes-1' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
-                <ion-label class="ion-text-wrap">The rewards column details the estimated annual rate of return you will earn for voting for a particular supernode. Underneath is the percent of the supernode operators income that they share with their voters.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'supernodes-2' | translate }}</ion-label>
               </ion-item >
               <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                <ion-label class="ion-text-wrap">To add a supernode to your voting list, simply tap the row.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'supernodes-3' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                <ion-label class="ion-text-wrap">More detailed information about each supernode operator may be found by pressing the detail icon.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'supernodes-4' | translate }}</ion-label>
               </ion-item>
             </ion-list>
           </ion-row>
@@ -187,16 +187,16 @@
           <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
             <ion-list >
               <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                <ion-label class="ion-text-wrap">The staking tools menu can be opened using the navigation tab or simply swiping from the right edge of your device. This menu is accessible from all sections.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'staking-1' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
-                <ion-label class="ion-text-wrap">Here you will find summary statistics for your selected supernodes.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'staking-2' | translate }}</ion-label>
               </ion-item >
               <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                <ion-label class="ion-text-wrap">Buttons are available that will automatically select preset lists or reset your selections. After submitting a vote through the dApp, the 'Last Vote' button can used to retrieve your previous voting list.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'staking-3' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                <ion-label class="ion-text-wrap">When you're ready to vote, simply choose your supported wallet and follow the prompts. Please note that voting with the Elephant wallets requires that you approve in app browser access.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'staking-4' | translate }}</ion-label>
               </ion-item>
             </ion-list>
           </ion-row>
@@ -228,16 +228,16 @@
           <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
             <ion-list >
               <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                <ion-label class="ion-text-wrap">The rewards section is your personal data dashboard. Wallet addresses may be added using any of three methods: (1) request it from your elastOS wallet, (2) paste it using the clipboard, (3) or add it manually using the wallets section.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'rewards-1' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(73, 101, 242);">
-                <ion-label class="ion-text-wrap">You can store as many addresses as you wish. Aliases are optional. Selecting a wallet inside the wallets section will retrieve the latest rewards transactions and display them.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'rewards-2' | translate }}</ion-label>
               </ion-item >
               <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                <ion-label class="ion-text-wrap">The table categorizes all staking rewards sent to the selected wallet. Tap the header to sort, tap the entry to view details, and use the pager at the bottom to navigate.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'rewards-3' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                <ion-label class="ion-text-wrap">The 'Advanced Data' button will open a window with summary and graphical rewards information for the selected wallet.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'rewards-4' | translate }}</ion-label>
               </ion-item>
             </ion-list>
           </ion-row>
@@ -270,17 +270,18 @@
           <ion-row class="ion-justify-content-center" style="margin-bottom: 20px;">
             <ion-list >
               <ion-item lines="none" style="--border-color: rgb(0, 150, 171);">
-                <ion-label class="ion-text-wrap">The analytics section presents current and historical data for the Elastos mainchain.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'analytics-1' | translate }}</ion-label>
               </ion-item>
               <ion-item lines="none" style="--border-color: rgb(179, 26, 255);">
-                <ion-label class="ion-text-wrap">You can use the options to toggle the charts between various datasets and time intervals.</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'analytics-2' | translate }}</ion-label>
               </ion-item >
               <ion-item lines="none" style="--border-color: rgb(232, 0, 127);">
-                <ion-label class="ion-text-wrap">That's it. If you need to reference this tutorial again you can find it under the settings section. Enjoy!</ion-label>
+                <ion-label class="ion-text-wrap">{{ 'analytics-3' | translate }}</ion-label>
               </ion-item>
-              <ion-item class="complete-item" lines="none" detail (click)="goToSupernodes()">
+              <ion-item class="complete-item ion-activatable ripple-parent" lines="none" detail (click)="goToSupernodes()">
+                  <ion-ripple-effect></ion-ripple-effect>
                   <fa-icon style="font-size: 18px; padding-right: 2.5vw;" [fixedWidth]="true" [icon]="['fas', 'check-double']"></fa-icon>
-                  <ion-label style="font-size: 18px; font-weight: 600;">Complete Tutorial</ion-label>
+                  <ion-label style="font-size: 18px; font-weight: 600;">{{ 'tutorial-complete' | translate }}</ion-label>
               </ion-item>
             </ion-list>
           </ion-row>

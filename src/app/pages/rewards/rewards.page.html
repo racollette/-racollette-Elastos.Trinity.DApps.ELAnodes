@@ -53,7 +53,7 @@
     <p class="ion-no-margin ion-no-padding" style="font-weight: 500; font-size: 0.8rem;">{{ ('fetching-text' | translate) + '...' }}</p>
   </ion-list>
 
-  <ion-list *ngIf="data.rewardsObjectCreated && render" class="rewards-table-container">
+  <ion-list *ngIf="data.rewardsObjectCreated && render && data.rewardsMatched" class="rewards-table-container">
     <ion-row>
       <ion-col>
         <ion-row class="ion-justify-content-center">

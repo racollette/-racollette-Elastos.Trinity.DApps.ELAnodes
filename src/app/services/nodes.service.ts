@@ -30,7 +30,7 @@ export class NodesService {
   public firstLoad: boolean = false;
 
   // Storage
-  private firstVisit: boolean = false;
+  public firstVisit: boolean = false;
   public _votes: Vote[] = [];
 
   constructor(
@@ -127,6 +127,7 @@ export class NodesService {
         if( data || data === true) {
           this.router.navigate(['/tabs/vote']);  
         } else {
+          this.firstVisit = true;
           this.router.navigate(['/tutorial']);
         }
       });

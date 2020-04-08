@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Native } from '../../services/native.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
@@ -17,7 +17,8 @@ export class LanguagePage implements OnInit {
   constructor(public native: Native,
     public translate: TranslateService,
     public data: DataService,
-    private navController: NavController
+    private navController: NavController,
+    private zone: NgZone
   ) { }
 
   public lang: string;
@@ -44,8 +45,11 @@ export class LanguagePage implements OnInit {
   }
 
   languageChoice(event) {
-    this.lang = event.detail.value
-    console.log('Language Set: ' + this.lang)
-    this.data.setCurLang(this.lang)
+    this.zone.run(()=> {
+      this.lang = event.detail.value
+      console.log('Language Set: ' + this.lang)
+      this.data.setCurLang(this.lang)
+    });
   }
+
 }

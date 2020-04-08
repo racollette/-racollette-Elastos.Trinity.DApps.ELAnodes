@@ -1,14 +1,14 @@
 <ion-grid id="splash">
-  <ion-row style="margin-top: 30vh;" text-center>
+  <ion-row style="margin-top: 31vh;" text-center>
     <img-loader useImg
       ><img class="logo"
-        src="../../../assets/images/logo3.png"
+        src="../../../assets/images/splashLogo.png"
     /></img-loader>
   </ion-row>
   <ion-row class="ion-justify-content-center"> 
     <p
-      class="ion-no-margin ion-no-padding"
-      style="font-family: Nasalization; margin-top: 1.6vh; font-weight: 500; font-size: 2rem; color: #fff; letter-spacing: 2px;"
+      class="ion-no-margin ion-no-padding brand"
+      style="margin-top: 1.75vh"
     >
       ELAnodes
     </p>
@@ -17,6 +17,6 @@
     <ion-spinner style="margin-top: 11vh; --color:#fff;" name="dots" duration="2000"></ion-spinner>
   </ion-row>
   <ion-row class="ion-justify-content-center" >
-    <p style="font-family: Nasalization; font-size: 1rem; font-weight: 600; color: #fff;">{{ 'splash-loading' | translate }}</p>
+    <p class="load-text">{{ 'splash-loading' | translate }}</p>
   </ion-row>
 </ion-grid>

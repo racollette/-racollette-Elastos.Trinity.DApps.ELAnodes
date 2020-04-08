@@ -122,5 +122,16 @@ export class NodeSliderComponent implements OnInit {
     this.native.openUrl(url)
   }
 
+  fixWebURL(url) {
+    let httpString = 'http://';
+    let httpsString = 'https://';
+    if (url.substr(0, httpString.length) !== httpString && url.substr(0, httpsString.length) !== httpsString) {
+        url = httpString + url;
+        this.socialLink(url)
+    } else {
+      this.socialLink(url)
+    }
+  }
+
 }
 

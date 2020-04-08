@@ -222,7 +222,7 @@ export class RewardsPage implements OnInit {
       header: this.translate.instant('access-fail-toast-header'),
       message: this.translate.instant('access-fail-toast-message'),
       position: "middle",
-      cssClass: 'toaster',
+      cssClass: 'toast-warn',
       buttons: [
         {
           text: this.translate.instant('ok-toast'),

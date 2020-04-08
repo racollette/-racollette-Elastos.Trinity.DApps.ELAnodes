@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NodesService } from 'src/app/services/nodes.service';
 
 declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
@@ -29,7 +31,9 @@ export class TutorialPage implements OnInit {
   constructor(
     private router: Router,
     private storageService: StorageService,
-    private navController: NavController
+    private navController: NavController,
+    private translate: TranslateService,
+    private nodesService: NodesService
   ) {
   }
 
@@ -38,7 +42,7 @@ export class TutorialPage implements OnInit {
 
   ionViewWillEnter() {
     appManager.setVisible("show", () => { }, (err) => { });
-    titleBarManager.setTitle("Tutorial");
+    titleBarManager.setTitle(this.translate.instant('tutorial-title'))
     titleBarManager.setBackgroundColor("#000000");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
@@ -46,7 +50,9 @@ export class TutorialPage implements OnInit {
   }
 
   onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback") {
+    if (ret.message == "navback" && this.nodesService.firstVisit) {
+      this.closeApp();
+    } else {
       this.navController.back();
     }
   }

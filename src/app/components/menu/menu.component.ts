@@ -374,7 +374,7 @@ export class MenuComponent implements OnInit {
       mode: 'ios',
       header: this.translate.instant('vote-success-header'),
       message: 'TxID: ' + res,//.slice(0,30) + '...',
-      cssClass: "toaster",
+      cssClass: "toast-success",
       position: "middle",
       buttons: [
         {
@@ -396,7 +396,7 @@ export class MenuComponent implements OnInit {
       message: res,
       //color: "primary",
       position: "middle",
-      cssClass: 'toaster',
+      cssClass: 'toast-warn',
       buttons: [
         {
           text: this.translate.instant('toast-ok'),
@@ -421,7 +421,7 @@ export class MenuComponent implements OnInit {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: this.translate.instant('select-36-toast'),
-      cssClass: "toaster",
+      cssClass: "toast-warn",
       position: "middle",
       duration: 2000
     });

@@ -1,7 +1,7 @@
 export const en = {
 
     // Splashscreen
-    "splash-loading": "You look great today",
+    "splash-loading": "Wow, you look great today",
 
     // Nav Tabs
     "Supernodes": "Supernodes",
@@ -38,8 +38,8 @@ export const en = {
     "payout-address-text": "Payout Address",
     "height-text": "Height",
     "txid-text": "Transaction ID",
-    "table-date": "DATE",
-    "table-delegate": "DELEGATE",
+    "table-date": "Date",
+    "table-delegate": "Delegate",
     "wallet-access-request-text":"Check staking rewards history",
     "access-fail-toast-header": "Failed to get an address from your wallet",
     "access-fail-toast-message": "Is your wallet set up?",
@@ -53,13 +53,37 @@ export const en = {
     "no-thanks-alert": "No thanks",
     "add-alert": "Add",
 
-    // Home Loading Page
-
     // Introduction/Tutorial Slides
     "tutorial-title": "Tutorial",
     "welcome": "Welcome!",
-    "dpos": "Consensus",
+    "consensus": "Consensus",
     "voting-rules": "Voting",
+    "welcome-1": "You are viewing this because this is your first visit to ELAnodes.",
+    "welcome-2": "This app was created to streamline and simplify the Elastos staking process for users.",
+    "welcome-3": "The following tutorial will provide a brief overview of the staking process and features available inside the app.",
+    "consensus-1": "Supernode operators are elected by coin holders and are tasked with validating the blocks created by Bitcoin merge-miners as part of the Elastos' hybrid consensus model.",
+    "consensus-2": "There are 108 total supernodes. The top 24 elected supernodes, along with 12 that belong to the Cyber Republic council, validate the blocks. The remaining 72 supernodes wait on standby.",
+    "consensus-3": "Supernodes earn income based on their vote totals and receive an addtional static bonus if they are actively validating blocks.",
+    "voting-rules-1": "Each ELA allows you to vote for up to 36 unique supernodes. There is no benefit to voting for less than 36.",
+    "voting-rules-2": "Each voting transactions costs only a small fee of 0.0004 ELA.",
+    "voting-rules-3": "There is no lock in period. However, if you send coins out of your wallet your votes will be cancelled and you will need to vote again.",
+    "voting-rules-4": "As an incentive to vote, some delegates choose to share a portion of their ELA income with their voters. Since this is completely optional, there is no standard share percentage, payment frequency, or distribution method. This is where ELAnodes is designed to help.",
+    "supernodes-1": "In the supernode section you will find the current delegate rankings.",
+    "supernodes-2": "The rewards column details the estimated annual rate of return you will earn for voting for a particular supernode delegate. Underneath is the percent of income the delegate shares with their voters.",
+    "supernodes-3": "To add or remove a supernode from your voting list, simply tap an entry.",
+    "supernodes-4": "More detailed information about each supernode operator may be found by opening the detail slider.",
+    "staking-1": "The staking tools menu can be opened using the navigation tab or swiping from the right edge of your device. This menu is accessible anywhere within the app.",
+    "staking-2": "Here you will find summary statistics for your selected supernodes.",
+    "staking-3": "Several presets are available that will automatically generate voting lists. After successfully submitting a vote through the app, you will be able to recover your selections during future visits.",    
+    "staking-4": "When you're ready to vote, choose from a supported wallet and follow the prompts.",
+    "rewards-1": "The rewards section is your personal data dashboard.",
+    "rewards-2": "You can add and store as many addresses as you wish. Addresses are stored on your device only. Aliases are optional.",
+    "rewards-3": "The table categorizes all staking rewards received by the selected wallet. The columns are sortable and each entry is expandable.",
+    "rewards-4": "The advanced section includes summary statistics and visual representations of your earnings history.",
+    "analytics-1": "The analytics section presents current and historical data for the Elastos mainchain.",
+    "analytics-2": "You can use the options to toggle the charts between various datasets.",
+    "analytics-3": "That's it. If you need to reference this tutorial again you can find it under the settings section. Enjoy!",
+    "tutorial-complete": "Complete Tutorial",             
 
     // Language Page
     "language-title": "Language",
@@ -115,6 +139,7 @@ export const en = {
     "duplicate-toast-error": "Duplicate address detected. Please remove the old one before updating the alias.",
     "invalid-address-toast-error": "Not a valid address. Please try again.",
     "balance-fetch-toast-error": "Balance fetch error",
+    'no-rewards': "No rewards found. Have any votes been cast from this address?",
     "unknown-toast-error": "There was an error retrieving data. Please check your connection. If the problem persists the node may be offline.",
     "toast-ok": "Ok",
 

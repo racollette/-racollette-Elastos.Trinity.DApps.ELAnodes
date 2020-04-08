@@ -19,10 +19,17 @@
 @import "~@swimlane/ngx-datatable/assets/icons.css";
 
 @font-face {
-  font-family: 'Nasalization';
+  font-family: 'Conthrax';
   font-weight: 400;
   font-style: normal;
-  src: url('assets/fonts/nasalization-rg.ttf') format('truetype');
+  src: url('assets/fonts/conthrax-sb.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'X-Scale';
+  font-weight: 400;
+  font-style: normal;
+  src: url('assets/fonts/X-SCALE_.TTF') format('truetype');
 }
 
 // * {
@@ -37,13 +44,31 @@ ion-content {
   --background: transparent;
 }
 
-ion-toast {
+// ion-toast {
+//   --background: #000;
+//   --border-color: #e8007f; 
+//   --color: #fff;
+//   --border-radius: 7.5px;
+//   --border-width: 1.5px;
+//   --border-style: solid;
+// }
+
+.toast-success {
   --background: #000;
-  --border-color: #e8007f; 
+  --border-color: #0096ab;
   --color: #fff;
   --border-radius: 7.5px;
   --border-width: 1.5px;
   --border-style: solid;
+}
+
+.toast-warn {
+    --background: #000;
+    --border-color: #e8007f; 
+    --color: #fff;
+    --border-radius: 7.5px;
+    --border-width: 1.5px;
+    --border-style: solid;
 }
 
 :root {

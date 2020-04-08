@@ -39,7 +39,7 @@
                 </div>
                 <div style="text-align:left; padding-top: 2.5px">
                   <span
-                    ><a href="{{ node.Url }}"
+                    ><a (click)="fixWebURL(node.Url)"
                       ><fa-icon [icon]="['fab', 'chrome']"></fa-icon></a
                   ></span>
                   <span
@@ -48,60 +48,61 @@
                   >
                     <a
                       *ngIf="node.socials.twitter"
-                      href="{{ node.socials.twitter }}"
+                     (click)="socialLink(node.socials.twitter)"
                       ><fa-icon [icon]="['fab', 'twitter']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.telegram"
-                      href="{{ node.socials.telegram }}"
+                      (click)="socialLink(node.socials.telegram)"
                       ><fa-icon [icon]="['fab', 'telegram']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.weixin"
-                      href="{{ node.socials.weixin }}"
+                      (click)="socialLink(node.socials.weixin)"
                       ><fa-icon [icon]="['fab', 'weixin']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.weibo"
-                      href="{{ node.socials.weibo }}"
+                      (click)="socialLink(node.socials.weibo)"
                       ><fa-icon [icon]="['fab', 'weibo']"></fa-icon
                     ></a>
-                    <a *ngIf="node.socials.qq" href="{{ node.socials.qq }}"
+                    <a *ngIf="node.socials.qq"
+                     (click)="socialLink(node.socials.qq)"
                       ><fa-icon [icon]="['fab', 'qq']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.medium"
-                      href="{{ node.socials.medium }}"
+                      (click)="socialLink(node.socials.medium)"
                       ><fa-icon [icon]="['fab', 'medium']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.facebook"
-                      href="{{ node.socials.facebook }}"
+                      (click)="socialLink(node.socials.facebook)"
                       ><fa-icon [icon]="['fab', 'facebook']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.youtube"
-                      href="{{ node.socials.youtube }}"
+                      (click)="socialLink(node.socials.youtube)"
                       ><fa-icon [icon]="['fab', 'youtube']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.linkedin"
-                      href="{{ node.socials.linkedin }}"
+                      (click)="socialLink(node.socials.linkedin)"
                       ><fa-icon [icon]="['fab', 'linkedin']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.github"
-                      href="{{ node.socials.github }}"
+                      (click)="socialLink(node.socials.github)"
                       ><fa-icon [icon]="['fab', 'github']"></fa-icon
                     ></a>
                     <a
                       *ngIf="node.socials.reddit"
-                      href="{{ node.socials.reddit }}"
+                     (click)="socialLink(node.socials.reddit)"
                       ><fa-icon [icon]="['fab', 'reddit']"></fa-icon
                     ></a>
                     <a
-                      *ngIf="node.socials.envelope"
-                      href="{{ node.socials.envelope }}"
+                      *ngIf="node.socials.envelope" 
+                       (click)="socialLink(node.socials.envelope)"
                       ><fa-icon [icon]="['fas', 'envelope']"></fa-icon
                     ></a>
                   </span>

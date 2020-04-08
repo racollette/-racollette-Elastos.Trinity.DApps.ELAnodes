@@ -1,6 +1,5 @@
-import { Component, OnInit, Directive, ViewChild } from '@angular/core';
+import { Component, OnInit, Directive, ViewChild, Injectable, NgZone } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Injectable, NgZone } from '@angular/core';
 import { NodesService } from 'src/app/services/nodes.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
@@ -60,6 +59,8 @@ export class VotePage implements OnInit {
   public showDetails: boolean = false;
   public nodeIndex: number = 0;
   public node: any;
+
+  public triggered: boolean = false;
 
   constructor(
     public nodesService: NodesService,
@@ -131,9 +132,13 @@ export class VotePage implements OnInit {
   }
 
   simulateClick() {
+    //if (!this.triggered) {
+     console.log('triggered')
+     this.triggered = true;
      let row: HTMLElement = document.getElementsByTagName("datatable-body-cell")[0] as HTMLElement;
      row.click();
      row.click();
+    //}
   }
 
   updateNodes(event) {

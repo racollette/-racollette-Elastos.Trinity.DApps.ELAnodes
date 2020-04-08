@@ -1,10 +1,19 @@
+* {
+ letter-spacing: 0.85px;
+}
+
 .container {
-  // background-image: url("../../../assets/images/tutorialSplash1.png");
+  background-image: url("../../../assets/images/tutorialSplash.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
   min-height: 100%;
-  background-color: #171717;
+  // background-color: #171717;
+  // background-image: linear-gradient( rgb(0, 150, 171),  rgb(232, 0, 127));
+
+  //background-image: linear-gradient( rgba(0, 150, 171, 1),  rgba(232, 0, 127, 1));
+  //background-image: linear-gradient(#0d0d0d, #404040);
+  // background-image: linear-gradient(#000, #4d4d4d, rgb(232, 0, 127));
 
 .arrow-container {
   color: white;
@@ -28,6 +37,10 @@ ion-item {
   --inner-padding-end: 7.5px;
   // --inner-padding-start: 5px;
   --inner-padding-top: 5px;
+}
+
+.info-item {
+  --border-color: #fff;
 }
 
 ion-label {
@@ -64,6 +77,11 @@ h2 {
   --detail-icon-size: 18px !important; 
   --detail-icon-opacity: 100 !important;
   margin-top: 5vh; 
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
 }
 
 

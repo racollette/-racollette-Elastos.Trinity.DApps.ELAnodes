@@ -77,7 +77,7 @@ export class DonatePage implements OnInit {
       mode: 'ios',
       header: this.translate.instant('Success! We appreciate your support!'),
       message: res,
-      cssClass: "toaster",
+      cssClass: "toast-success",
       position: "middle",
       buttons: [
         {
@@ -97,7 +97,7 @@ export class DonatePage implements OnInit {
       mode: 'ios',
       message: res,
       position: "middle",
-      cssClass: 'toaster',
+      cssClass: 'toast-warn',
       buttons: [
         {
           text: 'Ok',

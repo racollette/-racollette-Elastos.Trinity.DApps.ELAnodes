@@ -31,6 +31,8 @@ export class MyApp {
     this.initializeApp();
   }
 
+  public menuInitialized: boolean = false;
+
   initializeApp() {
     console.log('Initializing the application')
     this.platform.ready().then(() => {
@@ -43,7 +45,10 @@ export class MyApp {
   }
 
   menuOpened() {
-    this.votePage.pushMenu();
+    if (!this.menuInitialized) {
+      this.votePage.pushMenu();
+      this.menuInitialized = true;
+    }
   }
 
 }

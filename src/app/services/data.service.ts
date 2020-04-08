@@ -268,6 +268,7 @@ export class DataService {
 
     private toast: any = null;
     public rewardsObjectCreated: boolean = false;
+    public rewardsMatched: boolean = false;
     public walletRequested: boolean = false;
     public requestFailed: boolean = false;
     private _wallet: Transaction[] = [];
@@ -362,11 +363,20 @@ export class DataService {
       }
     }
 
-    this.formatChartData(this._rewards)
-    this.calculateReturnRates(this._rewards)
-    this.rewardsPerNode(this._rewards)
+    // If wallet has no matching rewards throw error
+    if (this._rewards.length === 0) {
+      let translation = this.translate.instant('no-rewards') + '\n\n'  + this._walletAddress.substr(0,14) + '... ' + this._walletAddress.substr(20,14)
+      this.toastErrorConfirm(translation)
+      this.rewardsMatched = false;
+    } else {
+      this.formatChartData(this._rewards)
+      this.calculateReturnRates(this._rewards)
+      this.rewardsPerNode(this._rewards)
+      this.rewardsMatched = true;
+    }
     this.rewardsObjectCreated = true;
     this.walletRequested = false;
+
   }
 
   public formatChartData(rewards) {
@@ -489,7 +499,7 @@ export class DataService {
       mode: 'ios',
       message: res,
       position: "middle",
-      cssClass: 'toaster',
+      cssClass: 'toast-warn',
       duration: 2000
     });
     this.toast.present();
@@ -501,7 +511,7 @@ export class DataService {
           mode: 'ios',
           message: res,
           position: "middle",
-          cssClass: 'toaster',
+          cssClass: 'toast-warn',
           buttons: [
             {
               text: this.translate.instant('toast-ok'),
