@@ -30,12 +30,12 @@ export class SplashscreenPage implements OnInit {
       let menuItems = [
           {
               key: "minimize", 
-              iconPath: "assets/icon/minimize2.png", 
+              iconPath: "assets/icon/minimize.png", 
               title: "Minimize"
           },
           {
               key: "close", 
-              iconPath: "assets/icon/close2.png", 
+              iconPath: "assets/icon/close.png", 
               title: "Close"
           }
       ];

@@ -47,7 +47,7 @@ export class DataService {
   getLanguage() {
         appManager.getLocale(
             (defaultLang, currentLang, systemLang) => {
-                console.log('defaultLang', defaultLang, ' currentLang:', currentLang, ' systemLang:', systemLang);
+                console.log('DefaultLang', defaultLang, ' CurrentLang:', currentLang, ' SystemLang:', systemLang);
                 this.setCurLang(currentLang);
             }
         );

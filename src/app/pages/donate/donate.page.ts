@@ -17,6 +17,8 @@ export class DonatePage implements OnInit {
   // Toast for donate Failed/Success
   private toast: any = null;
 
+  public donationAddress: string = "EWgdfwohScg3SPHr9PL14iu8odZJLc76u5"
+
   constructor(
     private toastController: ToastController,
     private navController: NavController,
@@ -46,12 +48,11 @@ export class DonatePage implements OnInit {
 
   rangeValue(event) {
     this.value = (event.detail.value).toFixed(1)
-    console.log('Donation Value: ' + this.value)
   }
 
   donate() {
     appManager.sendIntent("pay", {
-      receiver: 'EXnTnfzbz3xdnarzruf9rLzawGrw7ENnMd',
+      receiver: this.donationAddress,
       amount: this.value,
       type: 'payment-confirm'
     }, {}, (res) => {

@@ -46,6 +46,8 @@ export const zh = {
     // About Page
     "about-title": "关于",
     "version-text": "版",
+    "author-text": "作者",
+    "author-name": "海星实验室",
     "commit-text": "承诺",
     "website-text": "网站",
     "community-text-normal": "社区",

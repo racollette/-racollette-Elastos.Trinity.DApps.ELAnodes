@@ -8,9 +8,6 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import * as moment from 'moment';
 
-// declare let appManager: any;
-// declare let titleBarManager: TitleBarPlugin.TitleBarManager;
-
 @Component({
   selector: 'rewards-chart',
   templateUrl: './rewards-chart.component.html',
@@ -62,8 +59,8 @@ export class RewardsChartComponent implements OnInit {
 
   ionViewDidEnter() {
     this.gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
-    this.gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)") // F44336 rgb(244, 67, 54)
-    this.gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)") // F50057 rgb(245, 0, 87)
+    this.gradient.addColorStop(1, "rgb(0, 0, 0, 0.4)")
+    this.gradient.addColorStop(0, "rgb(0, 150, 171, 0.4)")
 
     this.historyChartLabelsAll = this.historyChartLabels.map(function(e) { return moment.unix(e).format('LL') });
     this.historyChartDataAll = this.historyChartData.map(function(e) { return e.toFixed(4) });
@@ -93,8 +90,6 @@ export class RewardsChartComponent implements OnInit {
   }
 
   public switch1M() {
-    console.log(this.historyChartLabels)
-    console.log(this.historyChartData)
     this.toggleColor('1M');
     let labels = this.historyChartLabels
     let historyLabels1M = []
@@ -111,8 +106,6 @@ export class RewardsChartComponent implements OnInit {
     historyData1M = this.data.slice(-1 * historyLabels1M.length)
     formatData1M = historyData1M.map(function(e) { return e.toFixed(4) })
     
-    console.log(historyLabels1M)
-    console.log(formatData1M)
     this.lineChartMethod(historyLabels1M, formatData1M, this.gradient);
   }
 
@@ -213,9 +206,6 @@ export class RewardsChartComponent implements OnInit {
       colorLabels.push(colorOptions[i])
     }
 
-    console.log(nodeLabels)
-    console.log(earningData)
-
     this.perNodeEarningsCanvas.nativeElement.height = nodeLabels.length * 16 + 40
 
     this.horizontalBar = new Chart(this.perNodeEarningsCanvas.nativeElement, {
@@ -225,7 +215,6 @@ export class RewardsChartComponent implements OnInit {
         datasets: [{
           data: earningData,
           backgroundColor: colorLabels,
-          //barThickness: ,
           barPercentage: 0.8,
           minBarLength: 12,
           maxBarThickness: 8,
@@ -263,10 +252,6 @@ export class RewardsChartComponent implements OnInit {
     this.modalCtrl.dismiss({
       'dismissed': true
     });
-  }
-
-  onChartClick(event) {
-    console.log(event);
   }
 
 }

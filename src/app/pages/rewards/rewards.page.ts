@@ -235,7 +235,7 @@ export class RewardsPage implements OnInit {
     this.toast.present();
   }
 
-  // // If we get response from sendIntent, we need to close the toast showed for timeout
+  // If we get response from sendIntent, close the toast showed for timeout
   closeToast() {
     if (this.toast) {
       this.toast.dismiss();

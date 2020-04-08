@@ -1,7 +1,7 @@
 {
   "id": "starfish.labs.elanodes",
-  "version": "0.1.0",
-  "version_code": 2,
+  "version": "0.8.0",
+  "version_code": 1,
   "name": "ELAnodes",
   "short_name": "ELAnodes",
   "description": "Elastos staking services and personal rewards dashboard",

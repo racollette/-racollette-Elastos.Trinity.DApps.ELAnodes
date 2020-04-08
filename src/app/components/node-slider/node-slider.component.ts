@@ -17,7 +17,6 @@ export class NodeSliderComponent implements OnInit {
   @Input() nodeIndex: number;
   @Input() node: Node;
   // @Input() showDetails: boolean;
-
   // @Output() updateSlideToggle = new EventEmitter<string>();
 
   // Truncate
@@ -37,11 +36,6 @@ export class NodeSliderComponent implements OnInit {
     slidesPerView: 1,
   };
 
-  // sendtoParent() {
-  //   this.showDetails = false;
-  //   this.updateSlideToggle.emit()
-  // }
-
   ngOnInit() {
     this.displayedArr = this._nodes.slice(0, this.nodeIndex + 2);
     this.slideOpts.initialSlide = this.displayedArr.indexOf(this.node);
@@ -54,8 +48,8 @@ export class NodeSliderComponent implements OnInit {
     if(nextNodeIndex) {
       this.displayedArr.push(this._nodes[nextNodeIndex]);
     }
-    console.log('last node', lastNode);
-    console.log('next node', this._nodes[nextNodeIndex]);
+    // console.log('last node', lastNode);
+    // console.log('next node', this._nodes[nextNodeIndex]);
   }
   
   getState(rank: number) {

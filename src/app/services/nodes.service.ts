@@ -88,7 +88,7 @@ export class NodesService {
   fetchCurrentHeight(): Promise<number> {
     return new Promise((resolve, reject) => {
       this.http.get<any>(this.nodeApi + '1/currHeight').subscribe((res) => {
-        console.log('Current height: ' + res.result);
+        // console.log('Current height: ' + res.result);
         this.currentHeight = res.result;
         resolve(res.result);
       }, (err) => {
@@ -107,7 +107,6 @@ export class NodesService {
   }
 
   fetchNodes() {
-    console.log('Fetching Nodes..');
     this._nodes = []
     return new Promise((resolve, reject) => {
       this.http.get<any>('https://elanodes.com/api/node-metrics').subscribe((res) => { 

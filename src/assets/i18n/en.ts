@@ -13,6 +13,8 @@ export const en = {
     // About Page
     "about-title": "About",
     "version-text": "Version",
+    "author-text": "Author",
+    "author-name": "Starfish Labs",
     "commit-text": "Commit",
     "website-text": "Website",
     "community-text-normal": "Community",

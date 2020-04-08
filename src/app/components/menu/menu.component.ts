@@ -59,7 +59,6 @@ export class MenuComponent implements OnInit {
   
 
   ngOnInit() {
-    //this.data.loaded.subscribe(load => this.loaded = load)
     this.data.currentselectedCount.subscribe(input => this.input = input)
     this.data.currentselectedARR.subscribe(input1 => this.input1 = input1)
     this.data.currentselectedAvgPay.subscribe(input2 => this.input2 = input2)
@@ -92,8 +91,6 @@ export class MenuComponent implements OnInit {
     if (selected.length == 0) {
       this.nodesSelected = []
     }
-    //console.log(selected)
-    //console.log('Select Event', selected, this.selected);
     this.nodesSelected.splice(0, this.nodesSelected.length);
     this.nodesSelected.push(selected);
     this.input = this.nodesSelected[0].length
@@ -157,8 +154,7 @@ export class MenuComponent implements OnInit {
   }
 
   clearSelections() {
-    let el = this.voteDocument //document.querySelectorAll('.active');
-    console.log(el)
+    let el = this.voteDocument
 
        for (let i = 0; i < el.length; i++){
          el[i].className = '';
@@ -188,11 +184,6 @@ export class MenuComponent implements OnInit {
     this.clearSelections()
     let voteArr = data
     let nodes = this.nodeLoad
-    console.log(nodes)
-  
-    // data.forEach(node => {
-    //   voteArr.push(node.Producer_public_key)
-    // })
 
     let nodeRows: any = []
     let el = this.voteDocument
@@ -203,15 +194,12 @@ export class MenuComponent implements OnInit {
       }
     })
 
-    console.log(nodeRows)
-
     let length = nodeRows.length
     for (let j=0; j < length; j++) {
-      console.log(j)
-      console.log(nodeRows[j])
        let index = nodeRows[j].Rank - 1
        el[index].classList.add("active");
      }
+
     console.log(nodeRows)
     this.onSelect({selected: nodeRows});
     this.nodeTable.selected = nodeRows
@@ -222,7 +210,6 @@ export class MenuComponent implements OnInit {
     this.clearSelections()
 
     let nodes = this.nodeLoad
-    console.log(nodes)
     let arrayROI: string[] = []
 
     for (let i=0; i < nodes.length; i++) {
@@ -234,14 +221,13 @@ export class MenuComponent implements OnInit {
            .map((obj) => obj.ind);
 
     let rowsROI: string[] = []
-    let el = this.voteDocument //document.querySelectorAll('.datatable-body-row');
+    let el = this.voteDocument
 
      for (let j=0; j < 36; j++) {
        let index = sortROI[j]
        rowsROI.push(nodes[index])
        el[index].classList.add("active");
      }
-    console.log(this.nodeTable)
     console.log(rowsROI)
     this.onSelect({selected: rowsROI});
     this.nodeTable.selected = rowsROI
@@ -260,17 +246,12 @@ export class MenuComponent implements OnInit {
       el[j].classList.add("active");
     }
 
-
+    console.log(rows36)
     this.onSelect({selected: rows36});
     this.nodeTable.selected = rows36
   }
 
-  contributors() {
-    console.log('TBD')
-  }
-
-
-  //// Vote intent ////
+  // Vote intent 
   elastOSVote() {
     let submitNodeKeys: string[] = [];
 
@@ -335,7 +316,6 @@ export class MenuComponent implements OnInit {
   elephantVote() {
     let submitNodeKeys: string[] = [];
     let elephantKeys: string = ''
-    //let i: number = 0;
 
     if (this.nodesSelected[0] === undefined) {
       this.nodesSelected = [[]]
@@ -394,7 +374,6 @@ export class MenuComponent implements OnInit {
       mode: 'ios',
       header: this.translate.instant('vote-failed-toast'),
       message: res,
-      //color: "primary",
       position: "middle",
       cssClass: 'toast-warn',
       buttons: [
@@ -409,7 +388,7 @@ export class MenuComponent implements OnInit {
     this.toast.present();
   }
 
-  // If we get response from sendIntent, we need to close the toast showed for timeout
+  // If received response from sendIntent, close the toast displayed for timeout
   closeToast() {
     if (this.toast) {
       this.toast.dismiss();

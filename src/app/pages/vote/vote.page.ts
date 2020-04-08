@@ -132,13 +132,10 @@ export class VotePage implements OnInit {
   }
 
   simulateClick() {
-    //if (!this.triggered) {
-     console.log('triggered')
      this.triggered = true;
      let row: HTMLElement = document.getElementsByTagName("datatable-body-cell")[0] as HTMLElement;
      row.click();
      row.click();
-    //}
   }
 
   updateNodes(event) {
