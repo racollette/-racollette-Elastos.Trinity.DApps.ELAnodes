@@ -159,7 +159,7 @@ export class MenuComponent implements OnInit {
        for (let i = 0; i < el.length; i++){
          el[i].className = '';
          el[i].classList.add("datatable-body-row");
-         el[i].attributes[5].value = 'false'
+         //el[i].attributes[5].value = 'false'
        }
  
      this.onSelect({selected: []});

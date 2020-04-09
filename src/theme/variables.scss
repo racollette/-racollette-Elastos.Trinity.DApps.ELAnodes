@@ -3,12 +3,12 @@
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-color-primary: linear-gradient(360deg, #C6A3FE 0%, #9D64FB 100%);
+  --ion-color-primary: linear-gradient(360deg, #00b4cc 0%, #008799 100%);
   --ion-color-primary-rgb: 33,49,61;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 0,0,0;
-  --ion-color-primary-shade:linear-gradient(360deg, rgb(168, 137, 216) 0%, rgb(131, 82, 209) 100%);
-  --ion-color-primary-tint: linear-gradient(360deg, rgb(168, 137, 216) 0%, rgb(131, 82, 209) 100%);
+  --ion-color-primary-shade:linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%);
+  --ion-color-primary-tint: linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%);
 
   --ion-color-secondary: #ffffff;
   --ion-color-secondary-rgb: 255,255,255;
@@ -42,8 +42,8 @@
   --ion-color-danger-rgb: 245,61,61;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 0,0,0;
-  --ion-color-danger-shade: linear-gradient(180deg, rgb(168, 137, 216) 0%, rgb(131, 82, 209) 100%);
-  --ion-color-danger-tint: linear-gradient(180deg, rgb(168, 137, 216) 0%, rgb(131, 82, 209) 100%);
+  --ion-color-danger-shade: linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%);
+  --ion-color-danger-tint: linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%);
 
   --ion-color-dark: #222428;
   --ion-color-dark-rgb: 34,34,34;

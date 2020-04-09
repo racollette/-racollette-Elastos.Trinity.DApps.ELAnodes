@@ -34,9 +34,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import * as Sentry from "@sentry/browser";
 
-Sentry.init({
-  dsn: "https://acb9a7ff020f4a4aacdb8a5e9e8214e4@sentry.io/1875730"
-});
+// Sentry.init({
+//   dsn: ""
+// });
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
@@ -113,6 +113,6 @@ export function TranslateLoaderFactory() {
 })
 export class AppModule {
     constructor(private library: FaIconLibrary) {
-    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam, faTelegram, faTwitter, faGithub, faMedium, faFacebook, faYoutube, faWeixin, faChrome, faWeibo, faQq, faReddit, faRedditAlien, faLinkedin, faEnvelope);
+    library.addIcons(faCoins, faHandHoldingUsd, faQuestionCircle, faNetworkWired, faChartBar, faChartLine, faChartArea, faTools, faCog, faServer, faVoteYea, faCheckDouble, faSmileBeam, faTelegram, faTwitter, faGithub, faMedium, faFacebook, faYoutube, faWeixin, faChrome, faWeibo, faQq, faReddit, faRedditAlien, faLinkedin, faEnvelope)
   }  
 }

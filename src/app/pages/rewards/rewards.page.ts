@@ -116,6 +116,13 @@ export class RewardsPage implements OnInit {
 
   async addWalletStorage() {
     let address = (this.address).trim()
+    
+    if (address.length !== 34) {
+        let translation = this.translate.instant('invalid-address-toast-error');
+        this.data.toastErrorConfirm(translation)
+    } else {
+    
+
     let match: boolean = false
 
     this.data.wallets.forEach(wallet => {
@@ -154,6 +161,8 @@ export class RewardsPage implements OnInit {
 
     } else {
       this.retrieveTxRewards();
+    }
+    
     }
   }
 

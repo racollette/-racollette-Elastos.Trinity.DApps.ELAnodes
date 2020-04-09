@@ -43,5 +43,8 @@ ion-list {
     ion-note {
         font-size: 13px;
     }
+}
 
+ion-radio {
+    --color: linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%);
 }
