@@ -49,6 +49,7 @@ export class LanguagePage implements OnInit {
       this.lang = event.detail.value
       console.log('Language Set: ' + this.lang)
       this.data.setCurLang(this.lang)
+      titleBarManager.setTitle(this.translate.instant('language-title'))
     });
   }
 

@@ -67,7 +67,7 @@ export const en = {
     "consensus-2": "There are 108 total supernodes. The top 24 elected supernodes, along with 12 that belong to the Cyber Republic council, validate the blocks. The remaining 72 supernodes wait on standby.",
     "consensus-3": "Supernodes earn income based on their vote totals and receive an addtional static bonus if they are actively validating blocks.",
     "voting-rules-1": "Each ELA allows you to vote for up to 36 unique supernodes. There is no benefit to voting for less than 36.",
-    "voting-rules-2": "Each voting transactions costs only a small fee of 0.0004 ELA.",
+    "voting-rules-2": "Each voting transaction costs only a small fee of 0.0004 ELA.",
     "voting-rules-3": "There is no lock in period. However, if you send coins out of your wallet your votes will be cancelled and you will need to vote again.",
     "voting-rules-4": "As an incentive to vote, some delegates choose to share a portion of their ELA income with their voters. Since this is completely optional, there is no standard share percentage, payment frequency, or distribution method. This is where ELAnodes is designed to help.",
     "supernodes-1": "In the supernode section you will find the current delegate rankings.",

@@ -183,7 +183,7 @@ export class RewardsPage implements OnInit {
           text: this.translate.instant('no-thanks-alert'),
           role: 'cancel',
           handler: () => {
-            let data = address
+            let data = { 'alias': address }
             this.data.firstTimeStorage(data, address);
             this.data.setActiveAlias();
           }

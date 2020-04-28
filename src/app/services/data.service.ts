@@ -238,7 +238,8 @@ export class DataService {
         if (item.active = true) {
           this.wallets[0].active = true
         }
-      }
+      } 
+      
       this.setActiveAlias();
       this.storageService.setWallets(this.wallets);
     }

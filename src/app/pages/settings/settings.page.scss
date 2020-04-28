@@ -1,4 +1,4 @@
-* { 
+* {
     color: #fff;
 }
 
@@ -11,18 +11,23 @@ ion-list {
     ion-item {
         height: 42px;
         --background: #000 !important;
+
     }
     ion-icon {
         margin: 10px;
         width: px2rem(32px);
         height: px2rem(32px);
-        color: #fff;
+        color: #fff !important;
     }
     ion-label {
         font-size: 17px;
+        color: #fff !important;
     }
     ion-note {
         font-size: 15px;
+    }
+    h2 {
+        color: #fff !important;
     }
 
 }
