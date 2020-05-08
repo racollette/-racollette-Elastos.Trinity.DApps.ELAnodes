@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class RewardsChartComponent implements OnInit {
 
+  @Input() balance: any;
   @Input() historyChartData: any;
   @Input() historyChartLabels: any;
   @Input() firstPayout: string;
@@ -25,7 +26,6 @@ export class RewardsChartComponent implements OnInit {
   @Input() monthEarn: string;
   @Input() monthARR: string;
   @Input() perNodeEarningsObject: any;
-
 
   @ViewChild('historyChart', { static: false }) historyCanvas;
   @ViewChild('perNodeEarningsChart', { static: false }) perNodeEarningsCanvas;
@@ -49,13 +49,22 @@ export class RewardsChartComponent implements OnInit {
   public month = 2628000
   baseColor: string = '#000'
   activateColor: string = 'rgb(51, 204, 255, 0.7)'
+  activateColor1: string = 'rgb(204, 0, 255, 0.7)'
   color1M = this.baseColor
   color6M = this.baseColor
   color1Y = this.baseColor
   colorAll = this.activateColor
+  colorBar1W = this.baseColor
+  colorBar1M = this.baseColor
+  colorBar6M = this.baseColor
+  colorBar1Y = this.baseColor
+  colorBarAll = this.activateColor1
 
   public historyChartLabelsAll: any;
   public historyChartDataAll: any;
+
+  public nodeLabels: any;
+  public earningData: any;
 
   ionViewDidEnter() {
     this.gradient = this.historyCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 260);
@@ -66,14 +75,19 @@ export class RewardsChartComponent implements OnInit {
     this.historyChartDataAll = this.historyChartData.map(function(e) { return e.toFixed(4) });
 
     this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
-    this.horizontalBarMethod();
+
+    this.nodeLabels = this.perNodeEarningsObject.all.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.all.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
   }
 
-  public toggleColor(button) {
-    this.color1M = this.baseColor
-    this.color6M = this.baseColor
-    this.color1Y = this.baseColor
-    this.colorAll = this.baseColor
+  public toggleColor(chart, button) {
+
+    if (chart == 'line') {
+      this.color1M = this.baseColor
+      this.color6M = this.baseColor
+      this.color1Y = this.baseColor
+      this.colorAll = this.baseColor
 
     if (button == '1M') {
       this.color1M = this.activateColor
@@ -87,10 +101,35 @@ export class RewardsChartComponent implements OnInit {
     if (button == 'All') {
       this.colorAll = this.activateColor
     }
+    }
+
+    if (chart == 'bar') {
+      this.colorBar1W = this.baseColor
+      this.colorBar1M = this.baseColor
+      this.colorBar6M = this.baseColor
+      this.colorBar1Y = this.baseColor
+      this.colorBarAll = this.baseColor
+
+    if (button == '1W') {
+      this.colorBar1W = this.activateColor1
+    }
+    if (button == '1M') {
+      this.colorBar1M = this.activateColor1
+    }
+    if (button == '6M') {
+      this.colorBar6M = this.activateColor1
+    }
+    if (button == '1Y') {
+      this.colorBar1Y = this.activateColor1
+    }
+    if (button == 'All') {
+      this.colorBarAll = this.activateColor1
+    }
+    }
   }
 
   public switch1M() {
-    this.toggleColor('1M');
+    this.toggleColor('line', '1M');
     let labels = this.historyChartLabels
     let historyLabels1M = []
     let historyData1M = []
@@ -110,7 +149,7 @@ export class RewardsChartComponent implements OnInit {
   }
 
   public switch6M() {
-    this.toggleColor('6M');
+    this.toggleColor('line','6M');
     let labels = this.historyChartLabels
     let historyLabels6M = []
     let historyData6M = []
@@ -130,12 +169,12 @@ export class RewardsChartComponent implements OnInit {
   }
 
   public switch1Y() {
-    this.toggleColor('1Y');
+    this.toggleColor('line', '1Y');
     this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
   }
 
   public switchAll() {
-    this.toggleColor('All');
+    this.toggleColor('line', 'All');
     this.lineChartMethod(this.historyChartLabelsAll, this.historyChartDataAll, this.gradient);
   }
 
@@ -194,10 +233,45 @@ export class RewardsChartComponent implements OnInit {
     });
   }
 
-  horizontalBarMethod() {
+  // Per Node Earnings Chart //
 
-    let nodeLabels = this.perNodeEarningsObject.map(function(d) { return d.Name });
-    let earningData = this.perNodeEarningsObject.map(function(d) { return d.Earnings });
+  public switchPerNode1W() {
+    this.toggleColor('bar', '1W');
+    this.nodeLabels = this.perNodeEarningsObject.last1Week.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.last1Week.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
+  }
+
+  public switchPerNode1M() {
+    this.toggleColor('bar', '1M');
+    this.nodeLabels = this.perNodeEarningsObject.last1Month.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.last1Month.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
+  }
+
+  public switchPerNode6M() {
+    this.toggleColor('bar', '6M');
+    this.nodeLabels = this.perNodeEarningsObject.last6Months.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.last6Months.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
+  }
+
+  public switchPerNode1Y() {
+    this.toggleColor('bar', '1Y');
+    this.nodeLabels = this.perNodeEarningsObject.last1Year.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.last1Year.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
+  }
+
+  public switchPerNodeAll() {
+    this.toggleColor('bar', 'All');
+    this.nodeLabels = this.perNodeEarningsObject.all.map(function(d) { return d.Name });
+    this.earningData = this.perNodeEarningsObject.all.map(function(d) { return d.Earnings });
+    this.horizontalBarMethod(this.nodeLabels, this.earningData);
+  }
+
+
+  horizontalBarMethod(nodeLabels, earningData) {
 
     let colorOptions = ['#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c', '#5fc8e8', '#d225f5', '#4965f2', '#f0326b', '#e8885f', '#ede47c']
 

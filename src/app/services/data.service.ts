@@ -274,8 +274,10 @@ export class DataService {
     public requestFailed: boolean = false;
     private _wallet: Transaction[] = [];
     private _walletAddress: string;
-    private _walletBalance: any;
+    public _walletBalance: any;
     public _rewards: string[] = []
+    public _rewardRows: string[] = []
+    public _temp: any;
     public _payoutAddresses: any;
 
     // Chart Variables //
@@ -290,7 +292,7 @@ export class DataService {
     public monthEarn: string;
     public monthARR: any;
 
-    public perNodeEarningsObject: any;
+    public perNodeEarningsObject = Object.create(null)
 
     public fetchPayoutAddresses() {
       this.http.get<any>('https://elanodes.com/api/payout-addresses').subscribe((res) => { 
@@ -328,7 +330,7 @@ export class DataService {
   public fetchBalance(address: string) {
       this.http.get<any>(this.nodeApi + '/asset/balances/' + address).subscribe((res) => {
         if (res.Error == 0) { 
-        this._walletBalance = res.Result
+        this._walletBalance = parseFloat(res.Result).toFixed(2)
         this.matchDelegate(this._wallet)
         } else {
           let translation = this.translate.instant('balance-fetch-toast-error');
@@ -373,11 +375,27 @@ export class DataService {
       this.formatChartData(this._rewards)
       this.calculateReturnRates(this._rewards)
       this.rewardsPerNode(this._rewards)
+      this._rewardRows = [...this._rewards]
       this.rewardsMatched = true;
     }
     this.rewardsObjectCreated = true;
     this.walletRequested = false;
 
+  }
+
+  updateFilter(event) {
+    this._temp = [...this._rewards]
+    const val = event.target.value.toLowerCase().trim();
+
+    // filter our data
+    const temp = this._temp.filter(function (d) {
+      return d.Delegate.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this._rewardRows = temp;
+    // Whenever the filter changes, always go back to the first page
+    //this.table.offset = 0;
   }
 
   public formatChartData(rewards) {
@@ -398,7 +416,7 @@ export class DataService {
     }
 
     this.firstPayout = moment.unix(labels[0]).format('LL')
-    this.totalEarned = data.slice(-1).pop().toFixed(4)
+    this.totalEarned = data.slice(-1).pop().toFixed(2)
     this.totalPayouts = data.length
 
     this.historyChartLabels = labels
@@ -432,7 +450,57 @@ export class DataService {
   }
 
   public rewardsPerNode(data) {
-    let starfishSum: number = 0;
+    console.log('Rewards per node')
+    console.log(data)
+    let week = 0
+    let month = 0
+    let timeNow = Date.now()/1000
+    let timeWeek = 604800
+    let timeMonth = 2628000
+    let timestampWeek = timeNow - timeWeek
+    let timestampMonth = timeNow - timeMonth
+    let timestamp6Month = timeNow - timeMonth*6
+    let timestamp1Year = timeNow - timeMonth*12
+
+    let rewards1W = []
+    let rewards1M = []
+    let rewards6M = []
+    let rewards1Y = []
+    let rewardsAll = []
+
+    data.forEach(payment => {
+      if (payment.CreateTime > timestampWeek) {
+        rewards1W.push(payment)
+        rewards1M.push(payment)
+        rewards6M.push(payment)
+        rewards1Y.push(payment)
+        rewardsAll.push(payment)
+      } else if (payment.CreateTime > timestampMonth) {
+        rewards1M.push(payment)
+        rewards6M.push(payment)
+        rewards1Y.push(payment)
+        rewardsAll.push(payment)
+      } else if (payment.CreateTime > timestamp6Month) {
+        rewards6M.push(payment)
+        rewards1Y.push(payment)
+        rewardsAll.push(payment)
+      } else if (payment.CreateTime > timestamp1Year) {
+        rewards1Y.push(payment)
+        rewardsAll.push(payment)
+      } else {
+        rewardsAll.push(payment)
+      }
+    })
+
+    this.perNodeEarningsObject.last1Week = this.perNodeReduce(rewards1W)
+    this.perNodeEarningsObject.last1Month = this.perNodeReduce(rewards1M)
+    this.perNodeEarningsObject.last6Months = this.perNodeReduce(rewards6M)
+    this.perNodeEarningsObject.last1Year = this.perNodeReduce(rewards1Y)
+    this.perNodeEarningsObject.all = this.perNodeReduce(rewardsAll)
+  }
+
+  public perNodeReduce(data) {
+    // Unique nodes in time window
     let uniqueNodes = Object.create(null)
 
     data.forEach(payment => {
@@ -466,8 +534,9 @@ export class DataService {
       return b.Earnings - a.Earnings;
     });
 
-    this.perNodeEarningsObject = barChartData;
+    return barChartData
   }
+    
 
   closeToast() {
     if (this.toast) {

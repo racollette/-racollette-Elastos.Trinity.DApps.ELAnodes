@@ -17,6 +17,17 @@ fa-icon {
     color: #fff;
 }
 
+.select-check {
+  --background: #000;
+  --background-checked: #bb33ff;
+  --border-color: #fff;
+  //--border-color-checked:
+  --border-radius: 5px;
+  //--checkmark-width: 3px;
+  --checkmark-color: #fff;
+  --size: 1.8rem;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

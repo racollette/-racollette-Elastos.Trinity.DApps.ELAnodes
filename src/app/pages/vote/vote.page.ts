@@ -204,6 +204,8 @@ export class VotePage implements OnInit {
   }
 
   onSelect({ selected }) {
+    console.log(selected)
+
     this.voteDocument = document.querySelectorAll('.datatable-body-row');
  
     console.log('Select Event', selected, this.selected);
@@ -217,6 +219,7 @@ export class VotePage implements OnInit {
     this.AS = 0;
     this.OC = 0;
     this.AF = 0;
+    let checkedNodes: string[] = [];
 
     if (this.selectedCount > 0) {
 
@@ -227,32 +230,32 @@ export class VotePage implements OnInit {
     let selectedArray: any[] = Object.values(this.selected[0])
 
     for (let i=0; i < selectedArray.length; i++) {
-    if (isNaN(parseFloat(selectedArray[i].AnnualROI))) {
-    } else {
-      sumARR += parseFloat(selectedArray[i].AnnualROI)
-      avgPay += parseFloat(selectedArray[i].PercentPayout)
-      votePercent += (parseFloat(selectedArray[i].Votes) / parseFloat(selectedArray[i].Totalvotes))*100
-    }
+      if (isNaN(parseFloat(selectedArray[i].AnnualROI))) {
+      } else {
+        sumARR += parseFloat(selectedArray[i].AnnualROI)
+        avgPay += parseFloat(selectedArray[i].PercentPayout)
+        votePercent += (parseFloat(selectedArray[i].Votes) / parseFloat(selectedArray[i].Totalvotes))*100
+      }
 
-    if (selectedArray[i].Continent == 'North America') {
-      this.NA++
-    }
-    if (selectedArray[i].Continent == 'South America') {
-      this.SA++
-    }
-    if (selectedArray[i].Continent == 'Europe') {
-      this.EU++
-    }
-    if (selectedArray[i].Continent == 'Asia') {
-      this.AS++
-    }
-    if (selectedArray[i].Continent == 'Oceania') {
-      this.OC++
-    }
-    if (selectedArray[i].Continent == 'Africa') {
-      this.AF++
-    }
-
+      if (selectedArray[i].Continent == 'North America') {
+        this.NA++
+      }
+      if (selectedArray[i].Continent == 'South America') {
+        this.SA++
+      }
+      if (selectedArray[i].Continent == 'Europe') {
+        this.EU++
+      }
+      if (selectedArray[i].Continent == 'Asia') {
+        this.AS++
+      }
+      if (selectedArray[i].Continent == 'Oceania') {
+        this.OC++
+      }
+      if (selectedArray[i].Continent == 'Africa') {
+        this.AF++
+      }
+    checkedNodes.push(selectedArray[i].Producer_public_key)
     }
 
     this.selectedARR = Number(sumARR.toFixed(3))
@@ -269,7 +272,47 @@ export class VotePage implements OnInit {
     
     this.data.updateStats(this.selectedCount, this.selectedARR, this.selectedAvgPay, this.selected, this.ngxDataTable, this.selectedVotePercent, this.voteDocument)
     this.data.updateContinents(this.NA, this.SA, this.EU, this.AS, this.OC, this.AF)
+    this.resetChecks(checkedNodes);
+  }
 
+  clearSelections() {
+    let el = this.voteDocument
+
+       for (let i = 0; i < el.length; i++){
+         el[i].className = '';
+         el[i].classList.add("datatable-body-row");
+       }
+
+     //this.onSelect({selected: []});
+     if (this.nodeTable) {
+     this.nodeTable.selected = []
+     }
+  }
+
+  resetChecks(checked) {
+    this.nodesService._nodes.forEach(node => {
+      if (checked !== undefined && checked.includes(node.Producer_public_key)) {
+        node.isChecked = true;
+      } else {
+        node.isChecked = false;
+      }
+    })
+  }
+
+  onSliderCheck(node) {
+    this.clearSelections()
+
+    let el = this.voteDocument
+    let checkedNode = []
+    this.nodesService._nodes.forEach(node => {
+       if (node.isChecked) {
+         let index = node.Rank - 1
+         checkedNode.push(node)
+         el[index].classList.add("active");
+       }
+    })
+    this.onSelect({selected: checkedNode})
+    this.ngxDataTable.selected = checkedNode
   }
 
 }

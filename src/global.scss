@@ -73,7 +73,7 @@ ion-content {
 
 :root {
    --ion-color-secondary: #252525;
-   --ion-color-primary: linear-gradient(360deg, #66e0ff 0%, #00a3cc 100%)
+   --ion-color-primary: linear-gradient(360deg, #66e0ff 0%, #00a3cc 100%);
 }
 
 .blur {
@@ -147,6 +147,11 @@ ion-content {
         .datatable-body-cell-label {
           height: 100%;
         }
+      }
+
+      .datatable-body-cell:last-child {
+        text-align: left;
+        padding: 0;
       }
 
     }

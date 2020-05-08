@@ -193,8 +193,10 @@ export const en = {
     "show-less-text": "...show less",
     
     // Rewards Chart Component
+    "balance-text": "BALANCE",
     "rewards-chart-title": "HISTORY",
     "first-payout-text": "FIRST PAYOUT",
+    "total-payouts-text": "TOTAL PAYOUTS",
     "total-earnings-text": "TOTAL EARNINGS",
     "month-text": "PAST MONTH",
     "week-text": "PAST WEEK",

@@ -23,6 +23,8 @@ export class NodeSliderComponent implements OnInit {
   @Input() limit: number = 250;
   truncating = true;
 
+  @Output() nodeChecked = new EventEmitter();
+
   constructor(    
     public native: Native,
   ) { }
@@ -36,9 +38,15 @@ export class NodeSliderComponent implements OnInit {
     slidesPerView: 1,
   };
 
+  
+
   ngOnInit() {
     this.displayedArr = this._nodes.slice(0, this.nodeIndex + 2);
     this.slideOpts.initialSlide = this.displayedArr.indexOf(this.node);
+  }
+
+  updateSelections(node) {
+    this.nodeChecked.emit(node);
   }
 
   // Increment nodes array when sliding forward
@@ -75,7 +83,7 @@ export class NodeSliderComponent implements OnInit {
     return votePercent.toFixed(2) + '%'
   }
 
-    formatVotes(votes) {
+  formatVotes(votes) {
     const votesDisplay: string = ((parseFloat(votes))/1000000).toLocaleString(undefined, { maximumFractionDigits: 2 }).split(/\s/).join(',') + 'M'
     return votesDisplay
   }

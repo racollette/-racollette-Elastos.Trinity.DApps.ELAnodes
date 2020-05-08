@@ -12,6 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
 declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
+@Injectable({providedIn: 'root'})
+
 @Component({
   selector: 'app-rewards',
   templateUrl: './rewards.page.html',
@@ -27,6 +29,9 @@ export class RewardsPage implements OnInit {
   public alias: string;
   public modalOpen: boolean = false;
 
+  @Input() rows;
+  @Input() temp;
+
   constructor(
     public nodesService: NodesService,
     private toastController: ToastController,
@@ -39,15 +44,17 @@ export class RewardsPage implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private changeDetection: ChangeDetectorRef
-  ) { }
+  ) {}
 
   // Toast for voteFailed/voteSuccess
   private toast: any = null;
 
-  // Tabledata
+  // Table data and filtering
   public render: boolean = false;
 
   ngOnInit() {
+    //this.rows = this.data._rewards
+    //this.temp = [...this.data._rewards]
   }
 
   ionViewWillEnter() {
@@ -80,6 +87,8 @@ export class RewardsPage implements OnInit {
   resetChildForm(){
     this.render = false;
     setTimeout(() => {
+      //this.rows = this.data._rewards
+      // this.temp = [...this.data._rewards]
       this.render = true;
     }, 50);
   }
@@ -256,6 +265,7 @@ export class RewardsPage implements OnInit {
     const modal = await this.modalController.create({
       component: RewardsChartComponent,
       componentProps: {
+        balance: this.data._walletBalance,
         historyChartData: this.data.historyChartData,
         historyChartLabels: this.data.historyChartLabels,
         firstPayout: this.data.firstPayout,
@@ -271,6 +281,5 @@ export class RewardsPage implements OnInit {
     this.modalOpen = true;
     return await modal.present();
   }
-
 
 }

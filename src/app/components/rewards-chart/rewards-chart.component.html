@@ -1,7 +1,26 @@
 <ion-content>
+
+  <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 15px; margin-bottom: 15px;">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'balance-text' | translate }}</p>
+      </ion-row>
+      <ion-row style="margin-left: 10px; margin-right: 10px;">
+        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ balance }} ELA</p>
+      </ion-row>
+    </ion-col>
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'total-earnings-text' | translate }}</p>
+      </ion-row>
+      <ion-row style="margin-left: 10px; margin-right: 10px;">
+        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ totalEarned }} ELA</p>
+      </ion-row>
+    </ion-col>
+  </ion-row>
   
   <ion-row>
-    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 15px; margin-bottom: 15px;">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
         <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'rewards-chart-title' | translate }}</p>
       </ion-row>
@@ -46,25 +65,6 @@
   </ion-row>
 
   <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
-    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
-      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'first-payout-text' | translate }}</p>
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ firstPayout }}</p>
-      </ion-row>
-    </ion-col>
-    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
-      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
-        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'total-earnings-text' | translate }}</p>
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ totalEarned }} ELA</p>
-      </ion-row>
-    </ion-col>
-  </ion-row>
-
-  <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
     <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px;">
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
         <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'month-text' | translate }}</p>
@@ -101,12 +101,68 @@
       <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
         <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'earnings-per-node-text' | translate }}</p>
       </ion-row>
+      <ion-row class="ion-align-items-end ion-justify-content-evenly">
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switchPerNode1W()" [ngStyle]="{'background-color': colorBar1W }">
+            <strong>
+              1W
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switchPerNode1M()" [ngStyle]="{'background-color': colorBar1M }">
+            <strong>
+              1M
+            </strong>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switchPerNode6M()" [ngStyle]="{'background-color': colorBar6M }">
+            <strong>
+              6M
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">
+          <ion-button class="chart-button" (click)="switchPerNode1Y()" [ngStyle]="{'background-color': colorBar1Y }">
+            <strong>
+              1Y
+            </strong>
+          </ion-button>
+        </ion-col>  
+        <ion-col class="ion-no-margin">    
+          <ion-button class="chart-button" (click)="switchPerNodeAll()" [ngStyle]="{'background-color': colorBarAll }">
+            <strong>
+              {{ 'all-text' | translate }}
+            </strong>
+          </ion-button>
+        </ion-col>
+      </ion-row>
       <ion-row style="margin-top: 15px;">
         <div style="width: 100%;">
           <canvas 
           #perNodeEarningsChart
           ></canvas>
         </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-left: 10px; margin-right: 10px; margin-top: 0; margin-bottom: 15px;">
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-right:5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'first-payout-text' | translate }}</p>
+      </ion-row>
+      <ion-row style="margin-left: 10px; margin-right: 10px;">
+        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ firstPayout }}</p>
+      </ion-row>
+    </ion-col>
+    <ion-col style="border: 0.5px solid #a6a6a6; border-radius: 3px; margin-left: 5px">
+      <ion-row style="margin-left: 10px; margin-right: 10px; border-bottom: 0.5px solid #a6a6a6;">
+        <p class="ion-no-margin" style="padding-top: 5px; padding-bottom: 7.5px; font-size: 0.75rem; font-weight: 600;">{{ 'total-payouts-text' | translate }}</p>
+      </ion-row>
+      <ion-row style="margin-left: 10px; margin-right: 10px;">
+        <p class="ion-no-margin" style="font-size: 1rem; font-weight: 700; padding-top: 10px; padding-bottom: 10px;">{{ historyChartData.length }}</p>
       </ion-row>
     </ion-col>
   </ion-row>

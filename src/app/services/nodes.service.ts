@@ -125,6 +125,7 @@ export class NodesService {
     
   getNodeDayChange() {
     this._nodes.map(node => {
+      node.isChecked = false
       if (node.deltaRank < 0) {
         node.rankChange = true
       } else if (node.deltaRank > 0) {
@@ -207,7 +208,7 @@ export class NodesService {
       || node.Nickname === '曲率区动'
       || node.Nickname === 'Elastos Scandinavia'                   
       || node.Nickname === '比特头条BITETT '  
-      || node.Nickname === 'ELACOINS'      
+      || node.Nickname === 'Elastos.info'      
       || node.Nickname === 'Elate.ch'                                 
       || node.Nickname === '链世界') {
         node.imageUrl = '../../assets/logos/' + node.Nickname + '.png'
@@ -292,7 +293,7 @@ export class NodesService {
       || name === 'Elastos Scandinavia'                   
       || name === '比特头条BITETT '
       || name === 'Elate.ch'         
-      || name === 'ELACOINS'                         
+      || name === 'Elastos.info'                         
       || name === '链世界') {
         return '../../assets/logos/' + name + '.png'
       }

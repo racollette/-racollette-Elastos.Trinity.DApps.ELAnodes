@@ -13,7 +13,7 @@
       <h4 class="ion-no-margin" style="font-size: 0.8rem;">{{ 'address-text' | translate }}</h4>
       &nbsp;&nbsp;
       <span class="ion-no-margin" (click)="requestWalletAccess()">
-        <ion-icon name="wallet" color="danger"></ion-icon> &nbsp;
+        <ion-icon name="wallet" style="color: #fff;"></ion-icon> &nbsp;
         <p class="ion-no-margin">{{ '[' + ('access-wallet-text' | translate) + ']' }}</p>
       </span>
     </ion-col>
@@ -55,9 +55,9 @@
 
   <ion-list *ngIf="data.rewardsObjectCreated && render && data.rewardsMatched" class="rewards-table-container">
     <ion-row>
-      <ion-col>
-        <ion-row class="ion-justify-content-center">
-      <ion-button class="blue-button" (click)="presentModal()">
+      <ion-col class="ion-no-margin" style="padding-bottom: 0;">
+      <ion-row class="ion-justify-content-center">
+      <ion-button class="blue-button" (click)="presentModal()" style="margin-bottom: 0;">
         <ion-icon
         name="stats"
       ></ion-icon>
@@ -68,11 +68,23 @@
     </ion-row>
     </ion-col>
     </ion-row>
+  
+    <ion-row class="ion-align-items-center" style="padding-left: 8px; padding-right: 8px;">
+      <ion-col class="ion-no-margin" style="padding-top: 0;">
+      <ion-textarea
+        class="filterDelegates"
+        type="text"
+        placeholder="Filter by name..."
+        (keyup)="data.updateFilter($event)"
+      >
+      </ion-textarea>
+      </ion-col>
+    </ion-row>
 
     <ngx-datatable
       #rewardsTable
-      [rows]="data._rewards"
-      [rowHeight]="auto"
+      [rows]="data._rewardRows"
+      [rowHeight]="'auto'"
       [headerHeight]="30"
       [footerHeight]="30"
       [columnMode]="'flex'"
@@ -82,7 +94,7 @@
     >
 
        <!-- Row Detail Template -->
-       <ngx-datatable-row-detail [rowHeight]="auto">
+       <ngx-datatable-row-detail [rowHeight]="'auto'">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
           <div class="detail-container">
               <ion-row class="ion-no-padding ion-no-margin">

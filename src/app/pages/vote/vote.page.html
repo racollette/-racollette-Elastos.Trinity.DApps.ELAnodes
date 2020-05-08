@@ -12,10 +12,11 @@
   [nodeIndex]="nodeIndex" 
   [node]="node" 
   [_nodes]="nodesService._nodes"
+  (nodeChecked)="onSliderCheck($event)"
   ></app-node-slider>
 
   <ion-list class="node-table-container">
-    <ngx-datatable #nodeTable [rows]="nodesService._nodes" [rowHeight]="auto"
+    <ngx-datatable #nodeTable [rows]="nodesService._nodes" [rowHeight]="'auto'"
        [headerHeight]="30" [columnMode]="'flex'" [selectionType]="'multiClick'"
       (select)="onSelect($event)" (onclick)="onSelect($event)">
       <ngx-datatable-column [name]=" 'table-header-rank' | translate" prop="Rank" [flexGrow]="0.7">
@@ -50,12 +51,12 @@
       <ngx-datatable-column [name]=" 'table-header-rewards' | translate" prop="AnnualROI" [flexGrow]="1">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <p class="ion-no-margin">{{ arrPercent(row.AnnualROI) }}</p>
-          <p class="ion-no-margin nodes-small">{{ payPercent(row.PercentPayout) }}&nbsp;</p>
+          <p class="ion-no-margin nodes-small" [ngStyle]="{'color': row.PercentPayout > 0 ? '#00cc88' : '#fff'}">{{ payPercent(row.PercentPayout) }}&nbsp;</p>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column [flexGrow]="0.4">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <ion-button class="ion-no-margin ion-no-padding" fill="clear" (click)="_showDetails(row.Rank, row)">
+          <ion-button class="ion-no-margin ion-no-padding details" fill="clear" expand="block" (click)="_showDetails(row.Rank, row)">
             <ion-icon class="details-arrow" slot="icon-only" name="ios-arrow-forward"></ion-icon>
           </ion-button>
         </ng-template>

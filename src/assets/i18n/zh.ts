@@ -194,8 +194,10 @@ export const zh = {
     "show-less-text": "...显示较少",
     
     // Rewards Chart Component
+    "balance-text": "平衡",
     "rewards-chart-title": "历史",
     "first-payout-text": "首次付款",
+    "total-payouts-text": "总支出",
     "total-earnings-text": "总收入",
     "month-text": "过去的月份",
     "week-text": "上周",

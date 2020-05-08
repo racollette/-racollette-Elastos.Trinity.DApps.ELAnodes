@@ -34,6 +34,12 @@ ion-content {
   color: #fff;
 }
 
+.details {
+  position: relative;
+  height: 100% !important;
+  display: block;
+}
+
 .details-arrow {
   height: 20px;
   width: 20px;

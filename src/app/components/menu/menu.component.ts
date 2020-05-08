@@ -82,10 +82,6 @@ export class MenuComponent implements OnInit {
   ionViewDidEnter() {
     appManager.setVisible("show", ()=>{}, (err)=>{});
   }
-
-  menuOpened() {
-    console.log('Opened')
-  }
   
   onSelect({ selected }) {
     if (selected.length == 0) {
@@ -101,6 +97,7 @@ export class MenuComponent implements OnInit {
     this.AS = 0;
     this.OC = 0;
     this.AF = 0;
+    let checkedNodes: string[] = [];
 
     if (this.input > 0) {
 
@@ -136,7 +133,7 @@ export class MenuComponent implements OnInit {
     if (selectedArray[i].Continent == 'Africa') {
       this.AF++
     }
-
+    checkedNodes.push(selectedArray[i].Producer_public_key)
     }
 
     this.input1 = Number(sumARR.toFixed(3))
@@ -151,6 +148,7 @@ export class MenuComponent implements OnInit {
 
     this.data.updateStats(this.input, this.input1, this.input2, this.nodesSelected, this.nodeTable, this.input3, this.voteDocument)
     this.data.updateContinents(this.NA, this.SA, this.EU, this.AS, this.OC, this.AF)
+    this.votePage.resetChecks(checkedNodes);
   }
 
   clearSelections() {
@@ -242,6 +240,7 @@ export class MenuComponent implements OnInit {
     let rows36: string[] = []
 
     for (let j=0; j < 36; j++) {
+
       rows36.push(nodes[j])
       el[j].classList.add("active");
     }
