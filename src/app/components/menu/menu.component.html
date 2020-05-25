@@ -1,21 +1,21 @@
     <ion-content>
       <ion-grid>
 
-        <ion-row class="header ion-no-margin ion-justify-content-center"> 
-          <ion-title class="ion-justify-content-center" style="text-align: center">
+        <ion-row class="header ion-no-margin ion-justify-content-center ion-align-items-center"> 
+          <div class="title">
             <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 14px; padding-right: 5px;"></fa-icon>
             {{ 'menu-title' | translate }}
             <fa-icon [fixedWidth]="true" [icon]="['fas', 'tools']" style="font-size: 14px; padding-left: 5px;"></fa-icon>
-          </ion-title>
+          </div>
         </ion-row>
 
-        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
-          <ion-col class="col0">
+        <ion-row class="section-label-row ion-align-items-end ion-justify-content-start">
+          <ion-col class="section-label-col">
             <p class="section-label ion-no-margin">{{ 'statistics-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
-        <ion-row class="row1 ion-align-items-end ion-justify-content-center">
+        <ion-row class="section-container ion-align-items-end ion-justify-content-center">
           <ion-col>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
@@ -46,13 +46,13 @@
           </ion-col>
         </ion-row>
 
-        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
-          <ion-col class="col0">
+        <ion-row class="section-label-row ion-align-items-end ion-justify-content-start">
+          <ion-col class="section-label-col">
             <p class="section-label ion-no-margin">{{ 'geography-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
-        <ion-row class="row1 ion-align-items-end ion-justify-content-center">
+        <ion-row class="section-container ion-align-items-end ion-justify-content-center">
           <ion-col>
             <ion-row class="ion-no-margin">
               <ion-col class="ion-no-margin inner-col">
@@ -95,13 +95,13 @@
           </ion-col>
         </ion-row>
 
-        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
-          <ion-col class="col0">
+        <ion-row class="section-label-row ion-align-items-end ion-justify-content-start">
+          <ion-col class="section-label-col">
             <p class="section-label ion-no-margin">{{ 'bundles-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
-        <ion-row class="row2 ion-align-items-end ion-justify-content-center">
+        <ion-row class="section-container ion-align-items-end ion-justify-content-center">
           <ion-col class="ion-no-margin">
             <ion-button class="blue-button" (click)="maxReturn()">
               <strong>
@@ -128,13 +128,13 @@
           </ion-col>
         </ion-row>
 
-        <ion-row class="row0 ion-align-items-end ion-justify-content-start">
-          <ion-col class="col0">
+        <ion-row class="section-label-row ion-align-items-end ion-justify-content-start">
+          <ion-col class="section-label-col">
             <p class="section-label ion-no-margin">{{ 'vote-text' | translate }}</p>
           </ion-col>
         </ion-row>
 
-        <ion-row class="row2 ion-align-items-end ion-justify-content-center">
+        <ion-row class="section-container ion-align-items-end ion-justify-content-center">
           <ion-col class="ion-no-margin">
             <ion-button class="purple-button" (click)="elastOSVote()">
               <ion-img class="wallet-logo" src="../assets/images/elastOS.png"></ion-img>
@@ -155,5 +155,3 @@
         
       </ion-grid>
     </ion-content>
-
-  <!-- </ion-menu> -->

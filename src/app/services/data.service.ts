@@ -450,24 +450,23 @@ export class DataService {
   }
 
   public rewardsPerNode(data) {
-    console.log('Rewards per node')
-    console.log(data)
-    let week = 0
-    let month = 0
-    let timeNow = Date.now()/1000
-    let timeWeek = 604800
-    let timeMonth = 2628000
-    let timestampWeek = timeNow - timeWeek
-    let timestampMonth = timeNow - timeMonth
-    let timestamp6Month = timeNow - timeMonth*6
-    let timestamp1Year = timeNow - timeMonth*12
+    // Constant to use for setting the time intervals
+    const timeNow = Date.now()/1000
+    const timeWeek = 604800
+    const timeMonth = 2628000
+    const timestampWeek = timeNow - timeWeek
+    const timestampMonth = timeNow - timeMonth
+    const timestamp6Month = timeNow - timeMonth*6
+    const timestamp1Year = timeNow - timeMonth*12
 
+    // Make empty arrays for each data set
     let rewards1W = []
     let rewards1M = []
     let rewards6M = []
     let rewards1Y = []
     let rewardsAll = []
 
+    // Build the arrays for each time interval
     data.forEach(payment => {
       if (payment.CreateTime > timestampWeek) {
         rewards1W.push(payment)
@@ -492,6 +491,8 @@ export class DataService {
       }
     })
 
+    // Pass each array through the sorting/summation function
+    // and return data formatted for the chart
     this.perNodeEarningsObject.last1Week = this.perNodeReduce(rewards1W)
     this.perNodeEarningsObject.last1Month = this.perNodeReduce(rewards1M)
     this.perNodeEarningsObject.last6Months = this.perNodeReduce(rewards6M)
