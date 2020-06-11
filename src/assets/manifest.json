@@ -1,7 +1,7 @@
 {
   "id": "starfish.labs.elanodes",
-  "version": "0.8.0",
-  "version_code": 8,
+  "version": "0.8.1",
+  "version_code": 9,
   "name": "ELAnodes",
   "short_name": "ELAnodes",
   "short_description": "Staking & rewards utilities",
@@ -29,21 +29,10 @@
     "website": "elanodes.com"
   },
   "default_locale": "en",
-  "plugins": [
-    "InAppBrowser",
-    "Clipboard",
-    "Device",
-    "NetworkStatus"
-  ],
-  "urls": [
-    "https://elanodes.com/api/*",
-    "https://node1.elaphant.app/*"
-  ],
-  "platform": [
-    "android",
-    "ios"
-  ],
+  "plugins": ["InAppBrowser", "Clipboard", "Device", "NetworkStatus"],
+  "urls": ["https://elanodes.com/api/*", "https://node1.elaphant.app/*"],
+  "platform": ["android", "ios"],
   "background_color": "#4e8ef7",
   "theme_display": "show",
   "theme_color": "#4e8ef7"
- }
+}

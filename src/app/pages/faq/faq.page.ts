@@ -6,35 +6,25 @@ declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-  selector: 'app-faq',
-  templateUrl: './faq.page.html',
-  styleUrls: ['./faq.page.scss'],
+    selector: 'app-faq',
+    templateUrl: './faq.page.html',
+    styleUrls: ['./faq.page.scss'],
 })
 export class FAQPage implements OnInit {
 
-  constructor(
-    private translate: TranslateService,
-    private navController: NavController
-  ) { }
+    constructor(
+        private translate: TranslateService,
+        private navController: NavController
+    ) { }
 
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    titleBarManager.setTitle(this.translate.instant("faq-title"));
-    titleBarManager.setBackgroundColor("#000000");
-    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
-    appManager.setListener((ret) => {this.onMessageReceived(ret)});
-  }
-
-  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback") {
-      this.navController.back();
+    ngOnInit() {
     }
-  }
 
-  ionViewDidEnter() {
-  }
+    ionViewWillEnter() {
+        titleBarManager.setTitle(this.translate.instant("faq-title"));
+    }
+
+    ionViewDidEnter() {
+    }
 
 }

@@ -12,60 +12,60 @@ import { TranslateService } from '@ngx-translate/core';
 declare let appManager: any;
 
 @Component({
-  selector: 'my-app',
-  templateUrl: 'app.html',
-  styleUrls: ['./app.scss']
+    selector: 'my-app',
+    templateUrl: 'app.html',
+    styleUrls: ['./app.scss']
 })
 export class MyApp {
 
-  @ViewChild(IonRouterOutlet, {static:false} ) routerOutlet: IonRouterOutlet;
+    @ViewChild(IonRouterOutlet, { static: false }) routerOutlet: IonRouterOutlet;
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    public nodesService: NodesService,
-    private data: DataService,
-    private native: Native,
-    private votePage: VotePage,
-    public translate: TranslateService,
-    private router: Router,
-    private navController: NavController
-  ) {
-    this.initializeApp();
-  }
-
-  public menuInitialized: boolean = false;
-
-  initializeApp() {
-    console.log('Initializing the application')
-    this.platform.ready().then(() => {
-      console.log("Platform is ready");
-      this.statusBar.styleDefault();
-      this.setupBackKeyNavigation();
-      this.native.setRootRouter('/splashscreen');
-      this.nodesService.init();
-      this.data.init();
-    });
-  }
-
-  menuOpened() {
-    if (!this.menuInitialized) {
-      this.votePage.pushMenu();
-      this.menuInitialized = true;
+    constructor(
+        private platform: Platform,
+        private splashScreen: SplashScreen,
+        private statusBar: StatusBar,
+        public nodesService: NodesService,
+        private data: DataService,
+        private native: Native,
+        private votePage: VotePage,
+        public translate: TranslateService,
+        private router: Router,
+        private navController: NavController
+    ) {
+        this.initializeApp();
     }
-  }
 
-  setupBackKeyNavigation() {
-    this.platform.backButton.subscribeWithPriority(0, () => {
-        appManager.launcher();
-        // if (this.routerOutlet && this.routerOutlet.canGoBack()) {
-        //     this.routerOutlet.pop();
-        // } else {
-        //  navigator['app'].exitApp();
-        //}
-    });
-  }
+    public menuInitialized: boolean = false;
+
+    initializeApp() {
+        console.log('Initializing the application')
+        this.platform.ready().then(() => {
+            console.log("Platform is ready");
+            this.statusBar.styleDefault();
+            this.setupBackKeyNavigation();
+            this.native.setRootRouter('/splashscreen');
+            this.nodesService.init();
+            this.data.init();
+        });
+    }
+
+    menuOpened() {
+        if (!this.menuInitialized) {
+            this.votePage.pushMenu();
+            this.menuInitialized = true;
+        }
+    }
+
+    setupBackKeyNavigation() {
+        this.platform.backButton.subscribeWithPriority(0, () => {
+            appManager.launcher();
+            // if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+            //     this.routerOutlet.pop();
+            // } else {
+            //  navigator['app'].exitApp();
+            //}
+        });
+    }
 
 }
 

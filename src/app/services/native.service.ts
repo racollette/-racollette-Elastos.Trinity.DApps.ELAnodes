@@ -4,20 +4,21 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class Native {
-      
-      private loadingIsOpen: boolean = false;
+
+    private loadingIsOpen: boolean = false;
+    public modalOpen: boolean = false;
 
     constructor(
-      private inappBrowser: InAppBrowser,
-      private navController: NavController,
-      private loadingCtrl: LoadingController,
-      private router: Router,
-      private zone: NgZone
-    ) {}
+        private inappBrowser: InAppBrowser,
+        private navController: NavController,
+        private loadingCtrl: LoadingController,
+        private router: Router,
+        private zone: NgZone
+    ) { }
 
     public openUrl(url: string) {
         const target = "_system";
@@ -25,9 +26,9 @@ export class Native {
         this.inappBrowser.create(url, target, options);
     }
 
-    public setRootRouter(page: any,  options: any = {}) {
+    public setRootRouter(page: any, options: any = {}) {
         console.log("Setting root router path to:", page);
-        this.zone.run(()=>{
+        this.zone.run(() => {
             this.hideLoading();
             this.navController.setDirection('root');
             this.router.navigate([page], { queryParams: options });

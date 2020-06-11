@@ -6,280 +6,281 @@ import { Router } from '@angular/router';
 import { RewardsChartComponent } from '../../components/rewards-chart/rewards-chart.component';
 import { NodesService } from 'src/app/services/nodes.service';
 import { DataService } from 'src/app/services/data.service';
+import { Native } from 'src/app/services/native.service';
 import { Node } from 'src/app/models/nodes.model';
 import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 @Component({
-  selector: 'app-rewards',
-  templateUrl: './rewards.page.html',
-  styleUrls: ['./rewards.page.scss'],
+    selector: 'app-rewards',
+    templateUrl: './rewards.page.html',
+    styleUrls: ['./rewards.page.scss'],
 })
 
 export class RewardsPage implements OnInit {
 
-  @ViewChild('rewardsTable', { static: false }) table: any;
+    @ViewChild('rewardsTable', { static: false }) table: any;
 
-  public address: string;
-  public addressReturned: boolean = false;
-  public alias: string;
-  public modalOpen: boolean = false;
+    public address: string;
+    public addressReturned: boolean = false;
+    public alias: string;
+    //public modalOpen: boolean = false;
 
-  @Input() rows;
-  @Input() temp;
+    @Input() rows;
+    @Input() temp;
 
-  constructor(
-    public nodesService: NodesService,
-    private toastController: ToastController,
-    private modalController: ModalController,
-    private alertController: AlertController,
-    private navController: NavController,
-    private zone: NgZone,
-    private clipboard: Clipboard,
-    public data: DataService,
-    private router: Router,
-    private translate: TranslateService,
-    private changeDetection: ChangeDetectorRef
-  ) {}
+    constructor(
+        public nodesService: NodesService,
+        private toastController: ToastController,
+        private modalController: ModalController,
+        private alertController: AlertController,
+        private navController: NavController,
+        private zone: NgZone,
+        private clipboard: Clipboard,
+        public data: DataService,
+        private router: Router,
+        private translate: TranslateService,
+        private changeDetection: ChangeDetectorRef,
+        private native: Native
+    ) { }
 
-  // Toast for voteFailed/voteSuccess
-  private toast: any = null;
+    // Toast for voteFailed/voteSuccess
+    private toast: any = null;
 
-  // Table data and filtering
-  public render: boolean = false;
+    // Table data and filtering
+    public render: boolean = false;
 
-  ngOnInit() {
-    //this.rows = this.data._rewards
-    //this.temp = [...this.data._rewards]
-  }
-
-  ionViewWillEnter() {
-    titleBarManager.setTitle(this.translate.instant('rewards-tab'))
-    titleBarManager.setBackgroundColor("#000000");
-    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
-    appManager.setListener((ret) => {this.onMessageReceived(ret)});
-
-    this.data.setActiveAlias();
-    this.data.activeAlias.subscribe(alias => this.alias = alias)
-    this.data.inputAddress.subscribe(address => this.address = address)
-
-  }
-
-  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback" && this.modalOpen) {
-      this.modalController.dismiss();
-      this.modalOpen = false;
-    } else if (ret.message == "navback") {
-      this.navController.back();
+    ngOnInit() {
+        //this.rows = this.data._rewards
+        //this.temp = [...this.data._rewards]
     }
-  }
 
-  ionViewDidEnter() {
-    this.data.setActiveAlias();
-    this.resetChildForm();
-  }
+    ionViewWillEnter() {
+        titleBarManager.setTitle(this.translate.instant('rewards-tab'))
+        this.data.setActiveAlias();
+        this.data.activeAlias.subscribe(alias => this.alias = alias)
+        this.data.inputAddress.subscribe(address => this.address = address)
+        // titleBarManager.addOnItemClickedListener((menuIcon) => {
+        //     if (menuIcon.key == "back") {
+        //         if (this.modalOpen) {
+        //             this.modalController.dismiss();
+        //             this.modalOpen = false;
+        //             return;
+        //         }
+        //         this.navController.back();
+        //     }
+        // });
+    }
 
-  resetChildForm(){
-    this.render = false;
-    setTimeout(() => {
-      //this.rows = this.data._rewards
-      // this.temp = [...this.data._rewards]
-      this.render = true;
-    }, 50);
-  }
+    ionViewDidEnter() {
+        this.data.setActiveAlias();
+        this.resetChildForm();
+    }
 
-  switchWallets() {
-    this.router.navigate(["/tabs/wallets"]);
-  }
+    modalNavigation() {
+
+    }
+
+    resetChildForm() {
+        this.render = false;
+        setTimeout(() => {
+            //this.rows = this.data._rewards
+            // this.temp = [...this.data._rewards]
+            this.render = true;
+        }, 50);
+    }
+
+    switchWallets() {
+        this.router.navigate(["/tabs/wallets"]);
+    }
 
 
-  requestWalletAccess() {
-    appManager.sendIntent("walletaccess", { elaaddress: { reason: 'Check staking rewards rewards' } }, {}, (res) => {
-      this.zone.run(() => {
-        console.log(res)
-        console.log(res.result)
-        if (res.result.elaaddress) {
-          this.address = res.result.elaaddress;
-          this.addressReturned = !this.addressReturned
-          this.data.updateInputAddress(this.address)
-          this.addWalletStorage();
-        } else if (res.result.walletinfo) {
-          this.address = res.result.walletinfo[0].elaaddress
-          this.addressReturned = !this.addressReturned
-          this.data.updateInputAddress(this.address)
-          this.addWalletStorage();
+    requestWalletAccess() {
+        appManager.sendIntent("walletaccess", { elaaddress: { reason: 'Check staking rewards rewards' } }, {}, (res) => {
+            this.zone.run(() => {
+                console.log(res)
+                console.log(res.result)
+                if (res.result.elaaddress) {
+                    this.address = res.result.elaaddress;
+                    this.addressReturned = !this.addressReturned
+                    this.data.updateInputAddress(this.address)
+                    this.addWalletStorage();
+                } else if (res.result.walletinfo) {
+                    this.address = res.result.walletinfo[0].elaaddress
+                    this.addressReturned = !this.addressReturned
+                    this.data.updateInputAddress(this.address)
+                    this.addWalletStorage();
+                } else {
+                    this.toastWalletErr();
+                }
+            });
+        }, (err) => {
+            console.log(err);
+            this.toastWalletErr();
+        });
+    }
+
+    async addWalletStorage() {
+        let address = (this.address).trim()
+
+        if (address.length !== 34) {
+            let translation = this.translate.instant('invalid-address-toast-error');
+            this.data.toastErrorConfirm(translation)
         } else {
-          this.toastWalletErr();
-        }
-      });
-    }, (err) => {
-      console.log(err);
-      this.toastWalletErr();
-    });
-  }
 
-  async addWalletStorage() {
-    let address = (this.address).trim()
-    
-    if (address.length !== 34) {
-        let translation = this.translate.instant('invalid-address-toast-error');
-        this.data.toastErrorConfirm(translation)
-    } else {
-    
 
-    let match: boolean = false
+            let match: boolean = false
 
-    this.data.wallets.forEach(wallet => {
-      if (wallet.address == address) {
-        match = true;
-        wallet.active = true;
-      } else {
-        wallet.active = false;
-      }
-    })
-    this.data.setActiveAlias();
-
-    if (!match) {
-
-      const alert = await this.alertController.create({
-        cssClass: 'firstAddWalletAlert',
-        header: this.translate.instant('save-alert-header'),
-        message: this.translate.instant('save-alert-message'),
-        buttons: [
-          {
-            text: this.translate.instant('no-alert'),
-            role: 'cancel',
-            handler: () => {
-              this.retrieveTxRewards();
-            }
-          }, {
-            text: this.translate.instant('yes-alert'),
-            cssClass: 'acceptButton',
-            handler: () => {
-              this.aliasAlert(address);
-            }
-          }
-        ]
-      });
-      await alert.present();
-
-    } else {
-      this.retrieveTxRewards();
-    }
-    
-    }
-  }
-
-  async aliasAlert(address) {
-    const alert = await this.alertController.create({
-      cssClass: 'addWalletAlert',
-      header: this.translate.instant('alias-alert'),
-      inputs: [
-        {
-          name: 'alias',
-          type: 'text',
-          id: 'alias-id',
-          placeholder: this.translate.instant('optional-alert'),
-        },
-      ],
-      buttons: [
-        {
-          text: this.translate.instant('no-thanks-alert'),
-          role: 'cancel',
-          handler: () => {
-            let data = { 'alias': address }
-            this.data.firstTimeStorage(data, address);
+            this.data.wallets.forEach(wallet => {
+                if (wallet.address == address) {
+                    match = true;
+                    wallet.active = true;
+                } else {
+                    wallet.active = false;
+                }
+            })
             this.data.setActiveAlias();
-          }
-        }, {
-          text: this.translate.instant('add-alert'),
-          cssClass: 'acceptButton',
-          handler: data => {
-            this.data.firstTimeStorage(data, address);
-            this.data.setActiveAlias();
-          }
+
+            if (!match) {
+
+                const alert = await this.alertController.create({
+                    cssClass: 'firstAddWalletAlert',
+                    header: this.translate.instant('save-alert-header'),
+                    message: this.translate.instant('save-alert-message'),
+                    buttons: [
+                        {
+                            text: this.translate.instant('no-alert'),
+                            role: 'cancel',
+                            handler: () => {
+                                this.retrieveTxRewards();
+                            }
+                        }, {
+                            text: this.translate.instant('yes-alert'),
+                            cssClass: 'acceptButton',
+                            handler: () => {
+                                this.aliasAlert(address);
+                            }
+                        }
+                    ]
+                });
+                await alert.present();
+
+            } else {
+                this.retrieveTxRewards();
+            }
+
         }
-      ]
-    });
-    await alert.present();
-  }
-
-  retrieveTxRewards() {
-    let address = (this.address).trim()
-    this.data.fetchWallet(address)
-  }
-
-  pasteAddress() {
-    this.clipboard.paste().then((resolve: string) => {
-      //console.log(resolve);
-      this.address = resolve
-      this.data.updateInputAddress(this.address)
-      this.addWalletStorage();
-
-    }, (reject: string) => {
-      console.error('Error: ' + reject);
     }
-    );
-  };
 
-  toggleExpandRow(row) {
-    console.log(row)
-    this.table.rowDetail.toggleExpandRow(row.selected[0]);
-    console.log(this.table.rowDetail)
-  }
+    async aliasAlert(address) {
+        const alert = await this.alertController.create({
+            cssClass: 'addWalletAlert',
+            header: this.translate.instant('alias-alert'),
+            inputs: [
+                {
+                    name: 'alias',
+                    type: 'text',
+                    id: 'alias-id',
+                    placeholder: this.translate.instant('optional-alert'),
+                },
+            ],
+            buttons: [
+                {
+                    text: this.translate.instant('no-thanks-alert'),
+                    role: 'cancel',
+                    handler: () => {
+                        let data = { 'alias': address }
+                        this.data.firstTimeStorage(data, address);
+                        this.data.setActiveAlias();
+                    }
+                }, {
+                    text: this.translate.instant('add-alert'),
+                    cssClass: 'acceptButton',
+                    handler: data => {
+                        this.data.firstTimeStorage(data, address);
+                        this.data.setActiveAlias();
+                    }
+                }
+            ]
+        });
+        await alert.present();
+    }
 
-  async toastWalletErr() {
-    this.closeToast();
-    this.toast = await this.toastController.create({
-      mode: 'ios',
-      header: this.translate.instant('access-fail-toast-header'),
-      message: this.translate.instant('access-fail-toast-message'),
-      position: "middle",
-      cssClass: 'toast-warn',
-      buttons: [
-        {
-          text: this.translate.instant('ok-toast'),
-          handler: () => {
+    retrieveTxRewards() {
+        let address = (this.address).trim()
+        this.data.fetchWallet(address)
+    }
+
+    pasteAddress() {
+        this.clipboard.paste().then((resolve: string) => {
+            //console.log(resolve);
+            this.address = resolve
+            this.data.updateInputAddress(this.address)
+            this.addWalletStorage();
+
+        }, (reject: string) => {
+            console.error('Error: ' + reject);
+        }
+        );
+    };
+
+    toggleExpandRow(row) {
+        console.log(row)
+        this.table.rowDetail.toggleExpandRow(row.selected[0]);
+        console.log(this.table.rowDetail)
+    }
+
+    async toastWalletErr() {
+        this.closeToast();
+        this.toast = await this.toastController.create({
+            mode: 'ios',
+            header: this.translate.instant('access-fail-toast-header'),
+            message: this.translate.instant('access-fail-toast-message'),
+            position: "middle",
+            cssClass: 'toast-warn',
+            buttons: [
+                {
+                    text: this.translate.instant('ok-toast'),
+                    handler: () => {
+                        this.toast.dismiss();
+                    }
+                }
+            ]
+        });
+        this.toast.present();
+    }
+
+    // If we get response from sendIntent, close the toast showed for timeout
+    closeToast() {
+        if (this.toast) {
             this.toast.dismiss();
-          }
+            this.toast = null;
         }
-      ]
-    });
-    this.toast.present();
-  }
-
-  // If we get response from sendIntent, close the toast showed for timeout
-  closeToast() {
-    if (this.toast) {
-      this.toast.dismiss();
-      this.toast = null;
     }
-  }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: RewardsChartComponent,
-      componentProps: {
-        balance: this.data._walletBalance,
-        historyChartData: this.data.historyChartData,
-        historyChartLabels: this.data.historyChartLabels,
-        firstPayout: this.data.firstPayout,
-        totalEarned: this.data.totalEarned,
-        totalPayouts: this.data.totalPayouts,
-        weekEarn: this.data.weekEarn,
-        weekARR: this.data.weekARR,
-        monthEarn: this.data.monthEarn,
-        monthARR: this.data.monthARR,
-        perNodeEarningsObject: this.data.perNodeEarningsObject
-      }
-    });
-    this.modalOpen = true;
-    return await modal.present();
-  }
+    async presentModal() {
+        const modal = await this.modalController.create({
+            component: RewardsChartComponent,
+            componentProps: {
+                balance: this.data._walletBalance,
+                historyChartData: this.data.historyChartData,
+                historyChartLabels: this.data.historyChartLabels,
+                firstPayout: this.data.firstPayout,
+                totalEarned: this.data.totalEarned,
+                totalPayouts: this.data.totalPayouts,
+                weekEarn: this.data.weekEarn,
+                weekARR: this.data.weekARR,
+                monthEarn: this.data.monthEarn,
+                monthARR: this.data.monthARR,
+                perNodeEarningsObject: this.data.perNodeEarningsObject
+            }
+        });
+        this.native.modalOpen = true;
+        return await modal.present();
+    }
 
 }

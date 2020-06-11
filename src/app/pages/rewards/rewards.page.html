@@ -1,20 +1,36 @@
 <ion-content>
-
-  <ion-item lines="none" style="--border-color: #a6a6a6" detail (click)="switchWallets()">
-    <ion-icon slot="start" style="font-size: 20px; margin-left: 0; margin-right: 4vw;" name="repeat"></ion-icon>
+  <ion-item
+    lines="none"
+    style="--border-color: #a6a6a6"
+    detail
+    (click)="switchWallets()"
+  >
+    <ion-icon
+      slot="start"
+      style="font-size: 20px; margin-left: 0; margin-right: 4vw;"
+      name="repeat"
+    ></ion-icon>
     <ion-label>
       <p style="color: #fff">{{ 'switch-wallet-text' | translate }}</p>
     </ion-label>
-    <ion-note style="color: #a6a6a6; margin-right: 4vw; white-space: no-wrap" slot="end">{{ alias }}</ion-note>
+    <ion-note
+      style="color: #a6a6a6; margin-right: 4vw; white-space: no-wrap"
+      slot="end"
+      >{{ alias }}</ion-note
+    >
   </ion-item>
 
   <ion-row style="padding-top: 0; padding-left: 10px; padding-right: 8px">
     <ion-col class="ion-no-margin address">
-      <h4 class="ion-no-margin" style="font-size: 0.8rem;">{{ 'address-text' | translate }}</h4>
+      <h4 class="ion-no-margin" style="font-size: 0.8rem;">
+        {{ 'address-text' | translate }}
+      </h4>
       &nbsp;&nbsp;
       <span class="ion-no-margin" (click)="requestWalletAccess()">
         <ion-icon name="wallet" style="color: #fff;"></ion-icon> &nbsp;
-        <p class="ion-no-margin">{{ '[' + ('access-wallet-text' | translate) + ']' }}</p>
+        <p class="ion-no-margin">
+          {{ '[' + ('access-wallet-text' | translate) + ']' }}
+        </p>
       </span>
     </ion-col>
   </ion-row>
@@ -26,10 +42,10 @@
     <ion-col class="ion-no-margin" style="padding-top: 0; padding-bottom: 0;">
       <div class="item ion-no-margin ion-no-padding ion-align-items-center">
         <ion-icon
-        class="paste"
-        (click)="pasteAddress()"
-        name="clipboard"
-      ></ion-icon>
+          class="paste"
+          (click)="pasteAddress()"
+          name="clipboard"
+        ></ion-icon>
         <ion-textarea
           [(ngModel)]="address"
           placeholder="{{ 'input-placeholder-text' | translate }}"
@@ -38,10 +54,10 @@
         >
         </ion-textarea>
         <ion-icon
-        class="search"
-        (click)="addWalletStorage()"
-        name="ios-search"
-      ></ion-icon>
+          class="search"
+          (click)="addWalletStorage()"
+          name="ios-search"
+        ></ion-icon>
       </div>
     </ion-col>
   </ion-row>
@@ -50,34 +66,47 @@
     <img-loader useImg
       ><img class="loading-gif" src="../../../assets/images/loading.gif"
     /></img-loader>
-    <p class="ion-no-margin ion-no-padding" style="font-weight: 500; font-size: 0.8rem;">{{ ('fetching-text' | translate) + '...' }}</p>
+    <p
+      class="ion-no-margin ion-no-padding"
+      style="font-weight: 500; font-size: 0.8rem;"
+    >
+      {{ ('fetching-text' | translate) + '...' }}
+    </p>
   </ion-list>
 
-  <ion-list *ngIf="data.rewardsObjectCreated && render && data.rewardsMatched" class="rewards-table-container">
+  <ion-list
+    *ngIf="data.rewardsObjectCreated && render && data.rewardsMatched"
+    class="rewards-table-container"
+  >
     <ion-row>
       <ion-col class="ion-no-margin" style="padding-bottom: 0;">
-      <ion-row class="ion-justify-content-center">
-      <ion-button class="blue-button" (click)="presentModal()" style="margin-bottom: 0;">
-        <ion-icon
-        name="stats"
-      ></ion-icon>
-        <strong style="font-size: 0.8rem; padding-left: 10px;">
-          {{ 'advanced-data-text' | translate }}
-        </strong>
-      </ion-button>
+        <ion-row class="ion-justify-content-center">
+          <ion-button
+            class="blue-button"
+            (click)="presentModal()"
+            style="margin-bottom: 0;"
+          >
+            <ion-icon name="stats"></ion-icon>
+            <strong style="font-size: 0.8rem; padding-left: 10px;">
+              {{ 'advanced-data-text' | translate }}
+            </strong>
+          </ion-button>
+        </ion-row>
+      </ion-col>
     </ion-row>
-    </ion-col>
-    </ion-row>
-  
-    <ion-row class="ion-align-items-center" style="padding-left: 8px; padding-right: 8px;">
+
+    <ion-row
+      class="ion-align-items-center"
+      style="padding-left: 8px; padding-right: 8px;"
+    >
       <ion-col class="ion-no-margin" style="padding-top: 0;">
-      <ion-textarea
-        class="filterDelegates"
-        type="text"
-        placeholder="Filter by name..."
-        (keyup)="data.updateFilter($event)"
-      >
-      </ion-textarea>
+        <ion-textarea
+          class="filterDelegates"
+          type="text"
+          placeholder="Filter by name..."
+          (keyup)="data.updateFilter($event)"
+        >
+        </ion-textarea>
       </ion-col>
     </ion-row>
 
@@ -92,30 +121,49 @@
       [selectionType]="'single'"
       (select)="toggleExpandRow($event)"
     >
-
-       <!-- Row Detail Template -->
-       <ngx-datatable-row-detail [rowHeight]="'auto'">
-        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+      <!-- Row Detail Template -->
+      <ngx-datatable-row-detail [rowHeight]="'auto'">
+        <ng-template
+          let-row="row"
+          let-expanded="expanded"
+          ngx-datatable-row-detail-template
+        >
           <div class="detail-container">
-              <ion-row class="ion-no-padding ion-no-margin">
-                <ion-col size="3.5" class="ion-no-padding ion-no-margin">
-                  <div style="padding-bottom: 1px; color: #fff">{{ 'memo-text' | translate }}</div>
-                  <div style="padding-bottom: 1px;">{{ 'payout-address-text' | translate }}</div>
-                  <div style="padding-bottom: 1px;">{{ 'height-text' | translate }}</div>
-                  <div>{{ 'txid-text' | translate }}</div>
-                </ion-col>
-                <ion-col size="8.5" class="ion-no-padding ion-no-margin">
-                  <div style="padding-bottom: 1px;">{{ row.Memo }}</div>
-                  <div style="padding-bottom: 1px;">{{ row.Address }}</div>
-                  <div style="padding-bottom: 1px;">{{ row.Height }}</div>
-                  <div>{{ row.Hash }}</div>
-                </ion-col>
-              </ion-row>
-          </div> 
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col size="3.5" class="ion-no-padding ion-no-margin">
+                <div style="padding-bottom: 1px; color: #fff">
+                  {{ 'memo-text' | translate }}
+                </div>
+                <div style="padding-bottom: 1px;">
+                  {{ 'payout-address-text' | translate }}
+                </div>
+                <div style="padding-bottom: 1px;">
+                  {{ 'height-text' | translate }}
+                </div>
+                <div>{{ 'txid-text' | translate }}</div>
+              </ion-col>
+              <ion-col size="8.5" class="ion-no-padding ion-no-margin">
+                <div class="detail-text" style="padding-bottom: 1px;">
+                  {{ row.Memo }}
+                </div>
+                <div class="detail-text" style="padding-bottom: 1px;">
+                  {{ row.Address }}
+                </div>
+                <div class="detail-text" style="padding-bottom: 1px;">
+                  {{ row.Height }}
+                </div>
+                <div class="detail-text">{{ row.Hash }}</div>
+              </ion-col>
+            </ion-row>
+          </div>
         </ng-template>
       </ngx-datatable-row-detail>
 
-      <ngx-datatable-column [name]=" 'table-date' | translate " prop="CreateTime" [flexGrow]="0.8">
+      <ngx-datatable-column
+        [name]=" 'table-date' | translate "
+        prop="CreateTime"
+        [flexGrow]="0.8"
+      >
         <ng-template
           let-row="row"
           let-value="value"
@@ -135,7 +183,11 @@
           /></img-loader>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]=" 'table-delegate' | translate"  prop="Delegate" [flexGrow]="1.2">
+      <ngx-datatable-column
+        [name]=" 'table-delegate' | translate"
+        prop="Delegate"
+        [flexGrow]="1.2"
+      >
         <ng-template
           let-row="row"
           let-value="value"

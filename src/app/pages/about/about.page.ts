@@ -7,45 +7,35 @@ declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.page.html',
-  styleUrls: ['./about.page.scss'],
+    selector: 'app-about',
+    templateUrl: './about.page.html',
+    styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
-  public version = "0.8.0";
+    public version = "0.8.0";
 
-  constructor(
-    private translate: TranslateService,
-    private navController: NavController,
-    private native: Native
-  ) { }
+    constructor(
+        private translate: TranslateService,
+        private navController: NavController,
+        private native: Native
+    ) { }
 
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    titleBarManager.setTitle(this.translate.instant('about-title'))
-    titleBarManager.setBackgroundColor("#000000");
-    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
-    appManager.setListener((ret) => {this.onMessageReceived(ret)});
-  }
-
-  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback") {
-      this.navController.back();
+    ngOnInit() {
     }
-  }
 
-  ionViewDidEnter() {
-  }
+    ionViewWillEnter() {
+        titleBarManager.setTitle(this.translate.instant('about-title'))
+    }
 
-  public goWebsite() {
-    this.native.openUrl("https://starfish-supernode.tech");
-  }
+    ionViewDidEnter() {
+    }
 
-  public goSocial(link: string) {
-    this.native.openUrl(link);
-  }
+    public goWebsite() {
+        this.native.openUrl("https://starfish-supernode.tech");
+    }
+
+    public goSocial(link: string) {
+        this.native.openUrl(link);
+    }
 
 }

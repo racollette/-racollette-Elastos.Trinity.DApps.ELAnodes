@@ -9,64 +9,61 @@ declare let appManager: any;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
-  selector: 'app-tutorial',
-  templateUrl: './tutorial.page.html',
-  styleUrls: ['./tutorial.page.scss'],
+    selector: 'app-tutorial',
+    templateUrl: './tutorial.page.html',
+    styleUrls: ['./tutorial.page.scss'],
 })
 export class TutorialPage implements OnInit {
 
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
+    slideOpts = {
+        initialSlide: 0,
+        speed: 400
+    };
 
-  next(slide) {
-    slide.slideNext();
-  }
-
-  prev(slide) {
-    slide.slidePrev();
-  }
-
-  constructor(
-    private router: Router,
-    private storageService: StorageService,
-    private navController: NavController,
-    private translate: TranslateService,
-    private nodesService: NodesService
-  ) {
-  }
-
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    appManager.setVisible("show", () => { }, (err) => { });
-    titleBarManager.setTitle(this.translate.instant('tutorial-title'))
-    titleBarManager.setBackgroundColor("#000000");
-    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
-    appManager.setListener((ret) => {this.onMessageReceived(ret)});
-  }
-
-  onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
-    if (ret.message == "navback" && this.nodesService.firstVisit) {
-      this.closeApp();
-    } else {
-      this.navController.back();
+    next(slide) {
+        slide.slideNext();
     }
-  }
 
-  ionViewDidEnter() {
-  }
+    prev(slide) {
+        slide.slidePrev();
+    }
 
-  goToSupernodes() {
-    this.storageService.setVisit(true);
-    this.router.navigate(['tabs/vote']);
-  }
+    constructor(
+        private router: Router,
+        private storageService: StorageService,
+        private navController: NavController,
+        private translate: TranslateService,
+        private nodesService: NodesService
+    ) {
+    }
 
-  closeApp() {
-    appManager.close();
-  }
+    ngOnInit() {
+    }
+
+    ionViewWillEnter() {
+        appManager.setVisible("show", () => { }, (err) => { });
+        titleBarManager.setTitle(this.translate.instant('tutorial-title'))
+        //appManager.setListener((ret) => { this.onMessageReceived(ret) });
+    }
+
+    // onMessageReceived(ret: AppManagerPlugin.ReceivedMessage) {
+    //     if (ret.message == "navback" && this.nodesService.firstVisit) {
+    //         this.closeApp();
+    //     } else {
+    //         this.navController.back();
+    //     }
+    // }
+
+    ionViewDidEnter() {
+    }
+
+    goToSupernodes() {
+        this.storageService.setVisit(true);
+        this.router.navigate(['tabs/vote']);
+    }
+
+    closeApp() {
+        appManager.close();
+    }
 
 }

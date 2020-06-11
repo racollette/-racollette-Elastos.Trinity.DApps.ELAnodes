@@ -24,7 +24,6 @@ export class SplashscreenPage implements OnInit {
     }
 
     ionViewWillEnter() {
-
         if (this.firstLoad) {
             console.log('SPLASHSCREEN WILL ENTER')
             appManager.setVisible("show", () => { }, (err) => { });
@@ -32,29 +31,7 @@ export class SplashscreenPage implements OnInit {
             titleBarManager.setBackgroundColor("#000000");
             titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
             titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
-            let menuItems = [
-                {
-                    key: "minimize",
-                    iconPath: "assets/icon/minimize.png",
-                    title: "Minimize"
-                },
-                {
-                    key: "close",
-                    iconPath: "assets/icon/close.png",
-                    title: "Close"
-                }
-            ];
-            titleBarManager.setupMenuItems(menuItems, (selectedMenuItem) => {
-                switch (selectedMenuItem.key) {
-                    case "minimize":
-                        appManager.launcher();
-                        break;
-                    case "close":
-                        appManager.close();
-                        break;
-                }
-            });
-
+            titleBarManager.setupMenuItems(null);
             this.firstLoad = false;
         } else {
             setTimeout(() => {
