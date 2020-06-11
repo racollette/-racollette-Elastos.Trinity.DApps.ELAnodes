@@ -2,5 +2,6 @@ node_modules/
 www/
 package-lock.json
 appdid/
-
+typings/
+.vscode/
 .bugs
