@@ -10,7 +10,9 @@
     </ion-item> -->
     <ion-item>
       <ion-label>{{ 'author-text' | translate }}</ion-label>
-      <ion-note slot="end" style="color: #a6a6a6;">{{ 'author-name' | translate }}</ion-note>
+      <ion-note slot="end" style="color: #a6a6a6;"
+        >{{ 'author-name' | translate }}</ion-note
+      >
     </ion-item>
     <ion-item lines="none" detail (click)="goWebsite()">
       <ion-label>
@@ -23,13 +25,55 @@
         <h2>{{ 'community-text-normal' | translate }}</h2>
       </ion-label>
     </ion-item>
-    <ion-item lines="none" style="--border-color: #1a1a1a;" class="ion-justify-content-evenly">
-        <ion-col (click)="goSocial('https://t.me/starfish_supernode')"><fa-icon style="color: #fff" [icon]="['fab', 'telegram']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('http://twitter.com/StarfishSN')"><fa-icon style="color: #fff" [icon]="['fab', 'twitter']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://medium.com/starfish-supernode')"><fa-icon style="color: #fff" [icon]="['fab', 'medium']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://www.reddit.com/user/starfish_supernode')"><fa-icon style="color: #fff"  [icon]="['fab', 'reddit-alien']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://www.youtube.com/channel/UCr_NyLSC2hiYQvPtQmhGyfw/videos')"><fa-icon style="color: #fff" [icon]="['fab', 'youtube']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('mailto:contact@starfish-supernode.tech')"><fa-icon style="color: #fff" [icon]="['fas', 'envelope']" size="2x"></fa-icon></ion-col>
+    <ion-item
+      lines="none"
+      style="--border-color: #1a1a1a;"
+      class="ion-justify-content-evenly"
+    >
+      <ion-col (click)="goSocial('https://t.me/starfish_labs')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'telegram']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('http://twitter.com/SF_Labs')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'twitter']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('https://medium.com/starfish-supernode')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'medium']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col
+        (click)="goSocial('https://www.reddit.com/user/starfish_supernode')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'reddit-alien']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col
+        (click)="goSocial('https://www.youtube.com/channel/UCr_NyLSC2hiYQvPtQmhGyfw/videos')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'youtube']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('mailto:hello@starfishlabs.dev')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fas', 'envelope']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
     </ion-item>
   </ion-list>
 </ion-content>
