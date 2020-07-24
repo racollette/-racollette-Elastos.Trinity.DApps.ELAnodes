@@ -39,6 +39,12 @@ export class SettingsPage implements OnInit {
             label: "Language",
             label_zh: "语言",
             icon: "md-globe",
+        },
+        {
+            route: "/tabs/notification",
+            label: "Notification Options",
+            label_zh: "通知选项",
+            icon: "notifications-outline",
         }
     ];
 

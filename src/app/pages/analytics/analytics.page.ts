@@ -294,29 +294,44 @@ export class AnalyticsPage {
 
     public switch1Y() {
         this.toggleColor('1Y');
+        let data = this.stakingData
+        let labels = this.stakingLabels
+        let stakingLabels1Y = []
+        let stakingData1Y = []
         let formatData1Y = []
 
+        for (let i = 0; i < labels.length; i++) {
+            if (labels[i] > (this.time - this.month * 12)) {
+                stakingLabels1Y.push(moment.unix(labels[i]).format('LL'))
+            }
+        }
+
         if (this.coinsActive) {
-            formatData1Y = this.stakingDataAll
+            this.data = this.stakingData
             this.axis = this.coinsAxis
             this.gradient = this.coinsGradient
             this.border = this.coinsBorder
+            stakingData1Y = this.data.slice(-1 * stakingLabels1Y.length)
+            formatData1Y = stakingData1Y.map(function(e) { return (e / 1000000).toFixed(2) })
         }
         if (this.supplyActive) {
-            formatData1Y = this.stakingSupplyDataAll
+            this.data = this.stakingSupplyData
             this.axis = this.supplyAxis
             this.gradient = this.supplyGradient
             this.border = this.supplyBorder
+            stakingData1Y = this.data.slice(-1 * stakingLabels1Y.length)
+            formatData1Y = stakingData1Y.map(function(e) { return (e) })
         }
         if (this.votersActive) {
-            formatData1Y = this.stakingVotersDataAll
+            this.data = this.stakingVotersData
             this.axis = this.votersAxis
             this.gradient = this.votersGradient
             this.border = this.votersBorder
+            stakingData1Y = this.data.slice(-1 * stakingLabels1Y.length)
+            formatData1Y = stakingData1Y.map(function(e) { return (e / 1000).toFixed(2) })
         }
 
-        // Switch to Year in June /// <<<<<<<<<<<<<<<
-        this.stakingChartMethod(this.stakingLabelsAll, formatData1Y, this.axis, this.gradient, this.border)
+        this.stakingChartMethod(stakingLabels1Y, formatData1Y, this.axis, this.gradient, this.border);
     }
 
     public switchAll() {

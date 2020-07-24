@@ -1,0 +1,70 @@
+<ion-content padding>
+  <ion-list style="padding-top: 0">
+    <ion-item>
+      <ion-label class="option">Health Check Frequency</ion-label>
+      <ion-select
+        [(ngModel)]="health"
+        okText="Okay"
+        cancelText="Dismiss"
+        interface="popover"
+        class="popover"
+        (ionChange)="healthCheckFrequency($event)"
+      >
+        <ion-select-option value="instant"
+          >{{ 'notification-instant' | translate }}</ion-select-option
+        >
+        <ion-select-option value="daily"
+          >{{ 'notification-daily' | translate }}</ion-select-option
+        >
+        <ion-select-option value="weekly"
+          >{{ 'notification-weekly' | translate }}</ion-select-option
+        >
+        <ion-select-option value="never"
+          >{{ 'notification-never' | translate }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label class="option">End of Week Report</ion-label>
+        <ion-toggle
+          [(ngModel)]="report"
+          (ionChange)="optionsToggle($event, 'report')"
+        ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="option">Payout Change Detection</ion-label>
+        <ion-toggle
+          [(ngModel)]="change"
+          (ionChange)="optionsToggle($event, 'change')"
+        ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="option">Optimal Configuration Detection</ion-label>
+        <ion-toggle
+          [(ngModel)]="optimal"
+          (ionChange)="optionsToggle($event, 'optimal')"
+        ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="option">Vote Cancellation Alerts</ion-label>
+        <ion-toggle
+          [(ngModel)]="revote"
+          (ionChange)="optionsToggle($event, 'revote')"
+        ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="option">Address Storage Alerts</ion-label>
+        <ion-toggle
+          [(ngModel)]="storedAddress"
+          (ionChange)="optionsToggle($event, 'storedAddress')"
+        ></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+</ion-content>

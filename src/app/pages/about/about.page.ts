@@ -12,7 +12,7 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
     styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
-    public version = "0.8.0";
+    public version = "0.8.2";
 
     constructor(
         private translate: TranslateService,
