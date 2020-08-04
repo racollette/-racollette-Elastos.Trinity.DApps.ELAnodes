@@ -53,16 +53,14 @@ export class MyApp {
                 if (startupInfo.startupMode === 'service') {
                     console.log("Capsule has been started as a service.");
                     this.notificationService.init();
-                    //this.intentService.init();
                 } else {
                     console.log("Capsule has been started to display UI");
+                    this.native.go('/splashscreen');
                     this.statusBar.styleDefault();
                     this.setupBackKeyNavigation();
-                    this.native.setRootRouter('/splashscreen');
-                    this.intentService.init();
                     this.nodesService.init();
                     this.data.init();
-
+                    this.intentService.init();
                 }
             });
         });

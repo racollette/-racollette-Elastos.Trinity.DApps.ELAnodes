@@ -1,6 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Native } from './native.service';
+import { DataService } from './data.service';
+import { NodesService } from './nodes.service';
 
 declare let appManager: AppManagerPlugin.AppManager;
 
@@ -12,9 +15,13 @@ export class IntentService {
 
     constructor(
         private zone: NgZone,
-        public events: Events
+        public events: Events,
+        public native: Native,
+        public nodesService: NodesService,
+        public data: DataService
     ) { }
 
+    static intentConfig: any;
     private isReceiveIntentReady = false;
 
     init() {
@@ -35,31 +42,40 @@ export class IntentService {
         console.log("Intent received message:", intent.action, ". params: ", intent.params, ". from: ", intent.from);
 
         switch (intent.action) {
-            case 'stakingtools':
-                this.handleStakingIntent(intent);
-                break;
-            case 'addwallet':
-                this.handleAddWalletIntent(intent);
-                break;
-            case 'viewreport':
-                this.handleWeeklyReportIntent(intent);
+            case 'elanodes-stakingtools':
+            case 'elanodes-addwallet':
+            case 'elanodes-viewreport':
+                this.handleRoutingIntent(intent);
                 break;
             default:
                 break;
         }
     }
 
-    handleStakingIntent(intent: AppManagerPlugin.ReceivedIntent) {
-        console.log('Staking intent')
-    }
+    handleRoutingIntent(intent: AppManagerPlugin.ReceivedIntent) {
 
-    handleAddWalletIntent(intent: AppManagerPlugin.ReceivedIntent) {
-        console.log('Add wallet intent')
-    }
+        switch (intent.action) {
+            case 'elanodes-stakingtools':
+                console.log('Open staking tools page');
+                this.native.go('/tabs/vote')
+                this.native.openMenu();
+                break;
+            case 'elanodes-addwallet':
+                console.log('Open address storage page');
+                this.native.go('/tabs/wallets')
+                this.native.closeMenu();
 
-    handleWeeklyReportIntent(intent: AppManagerPlugin.ReceivedIntent) {
-        console.log('Weekly report intent')
-    }
+                break;
+            case 'elanodes-viewreport':
+                console.log('Open rewards page');
+                this.native.go('/tabs/rewards')
+                this.native.closeMenu();
+                break;
+            default:
+                console.log('Unknown intent:', intent);
+                return;
+        }
 
+    }
 
 }

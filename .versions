@@ -1,0 +1,77 @@
+---------------------
+Release Version 0.8.3
+---------------------
+
+Bugs
+-Node slider scrolling below and showing node table
+-Blank supernode page bug. Seems to occur after first load?
+-Deleting last wallet shouldn't reload and display table
+-Staking tools menu selection count incorrect after selecting from slider and then opening from supernode page
+
+Features
+-Add sentry error handling
+-Advanced searching functionality. Specific time intervals like banks. Move rewards table to its own modal.
+
+---------------------
+Release Version 0.8.2
+---------------------
+
+Bugs
+-Node slider scrolling below and showing node table
+-Blank supernode page bug. Seems to occur after first load?
+-Deleting last wallet shouldn't reload and display table
+-Staking tools menu selection count incorrect after selecting from slider and then opening from supernode page
+-Activate rewards chart 1Y sorting for staking -- Confirm
+
+Features
+-Add sentry error handling
+-Push notifications. Weekly summaries and vote status health check? Warn if votes were canceled? -- Done
+-Options toggle for notification frequency. Weekly by default, optionally instant. -- Done
+-Cancellations instant notify. Sub36 notify weekly. -- Done
+-Advanced searching functionality. Specific time intervals like banks. Move rewards table to its own modal.
+
+---------------------
+Release Version 0.8.1
+---------------------
+
+Bugs
+-Node slider scrolling below and showing node table
+-Blank supernode page bug. Seems to occur after first load?
+-Staking tools menu display bug on Oneplus devices? -- Fixed
+-Text wrapping in staking tools menu. -- Fixed??
+-Deleting last wallet shouldn't reload and display table
+-Staking tools menu selection count incorrect after selecting from slider and then opening from supernode page
+-Back button navigation from node sliders -- Fixed
+-Rewards transaction details text-wrapping -- Fixed
+
+Features
+-Back key navigation. Router Outlet not popping off sibling pages?
+-Push notifications. Weekly summaries and vote status health check? Warn if votes were canceled?
+-Advanced searching functionality. Specific time intervals like banks. Move rewards table to its own modal.
+
+---------------------
+Release Version 0.8.0
+---------------------
+
+Bugs
+-Phone back buttons send to splashscreen -- Fixed --
+-Not setting alias to address when paste address -- Fixed? --
+-Open menu page in rewards dashbaord -- Not possible unless major structure change --
+-Marketplace add short description to manifest -- Fixed --
+-Rewards table detail bottom border -- Fixed --
+-Make node slider open hit box bigger -- Fixed --
+-Node slider scrolling below and showing node table
+-Blank supernode page bug. Seems to occur after first load?
+-Staking tools menu display bug on Oneplus devices? -- Maybe fixed? Confirm with user
+-Fix color of radio buttons and tutorial slider dots -- Fixed --
+-Deleting last wallet shouldn't reload and display table
+-No table entries when first load address. Likely related to filter -- Done --
+
+Features
+-Add time interval buttons to earnings for supernode -- Done --
+-Wallet page add a done button that sends you back to previous page -- Decided against --
+-Add nodes to voting list from slider -- Done --
+-Add search function for rewards table -- Done --
+-Highlight percent payout better in supernode table -- Done --
+-Display total wallet balance somewhere -- Done --
+-Push notifications. Weekly summaries and vote status health check? Warn if votes were canceled? -- Not yet possible --

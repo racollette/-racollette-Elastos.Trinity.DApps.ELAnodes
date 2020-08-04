@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { ToastController, LoadingController, NavController } from '@ionic/angular';
+import { ToastController, LoadingController, NavController, MenuController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Router } from '@angular/router';
 
@@ -11,28 +11,30 @@ export class Native {
 
     private loadingIsOpen: boolean = false;
     public modalOpen: boolean = false;
+    public menuOpen: boolean = false;
 
     constructor(
         private inappBrowser: InAppBrowser,
         private navController: NavController,
         private loadingCtrl: LoadingController,
         private router: Router,
-        private zone: NgZone
+        private zone: NgZone,
+        public menuCtrl: MenuController
     ) { }
+
+    public go(page: any, options: any = {}) {
+        console.log("Navigating to:", page);
+        this.zone.run(() => {
+            this.hideLoading();
+            this.navController.setDirection('forward');
+            this.router.navigate([page], { queryParams: options });
+        });
+    }
 
     public openUrl(url: string) {
         const target = "_system";
         const options = "location=no";
         this.inappBrowser.create(url, target, options);
-    }
-
-    public setRootRouter(page: any, options: any = {}) {
-        console.log("Setting root router path to:", page);
-        this.zone.run(() => {
-            this.hideLoading();
-            this.navController.setDirection('root');
-            this.router.navigate([page], { queryParams: options });
-        });
     }
 
     public async showLoading(content: string = '') {
@@ -48,5 +50,14 @@ export class Native {
     public hideLoading(): void {
         this.loadingIsOpen && this.loadingCtrl.dismiss();
         this.loadingIsOpen = false;
+    }
+
+    public openMenu() {
+        this.menuCtrl.open();
+
+    }
+
+    public closeMenu() {
+        this.menuCtrl.close();
     }
 }

@@ -8,6 +8,8 @@ import { Node } from '../models/nodes.model';
 import { Vote } from '../models/history.model';
 import { Mainchain, Voters, Price, Block } from '../models/stats.model';
 
+declare let appManager: AppManagerPlugin.AppManager;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -56,10 +58,10 @@ export class NodesService {
 
     async init() {
         console.log('NODE SERVICE INITIATED')
+        this.getVisit();
         const height: number = await this.fetchCurrentHeight();
         this.fetchNodes();
         this.fetchStats();
-
     }
 
     fetchStats() {
@@ -105,7 +107,6 @@ export class NodesService {
                 this.getNodeIcon();
                 this.getNodeDayChange();
                 this.nodeLoader(this._nodes)
-                this.getVisit();
                 console.log('Nodes retrieved..', this._nodes);
                 resolve();
             });
@@ -113,15 +114,23 @@ export class NodesService {
     }
 
     getVisit() {
-        this.storageService.getVisit().then(data => {
-            if (data || data === true) {
-                this.router.navigate(['/tabs/vote']);
-            } else {
-                this.firstVisit = true;
-                this.router.navigate(['/tutorial']);
+        appManager.hasPendingIntent((hasPendingIntent) => {
+            // Route your app to the right screen here: home screen, or intent screen.
+            console.log('PENDING INTENT?')
+            console.log(hasPendingIntent)
+            if (!hasPendingIntent) {
+                this.storageService.getVisit().then(data => {
+                    if (data || data === true) {
+                        this.router.navigate(['/tabs/vote']);
+                    } else {
+                        this.firstVisit = true;
+                        this.router.navigate(['/tutorial']);
+                    }
+                });
             }
         });
     }
+
 
     getNodeDayChange() {
         this._nodes.map(node => {

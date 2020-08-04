@@ -80,6 +80,10 @@ export class VotePage implements OnInit {
     }
 
     ionViewWillEnter() {
+        titleBarManager.setBackgroundColor("#000000");
+        titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+        titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
+        titleBarManager.setupMenuItems(null);
         this.atHome = true;
         titleBarManager.setTitle(this.translate.instant('Supernodes'))
         appManager.setListener((ret) => { this.onMessageReceived(ret) });
@@ -110,6 +114,7 @@ export class VotePage implements OnInit {
     }
 
     ionViewDidEnter() {
+        appManager.setVisible("show", () => { }, (err) => { });
     }
 
     ionViewDidLeave() {

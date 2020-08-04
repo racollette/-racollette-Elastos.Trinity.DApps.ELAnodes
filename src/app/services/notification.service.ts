@@ -288,7 +288,7 @@ export class NotificationService {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
             title: '',
-            url: 'stakingtools'
+            url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
 
         switch (type) {
@@ -301,6 +301,7 @@ export class NotificationService {
             case 'pass':
                 request.key = 'healthStatusPass'
                 request.title = this.translate.instant('notification-health-pass')
+                request.url = ''
                 notificationManager.sendNotification(request);
                 console.log('Pass')
                 break;
@@ -331,16 +332,17 @@ export class NotificationService {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: 'weeklyReport',
             title: this.translate.instant('notification-report'),
-            url: 'viewreport'
+            url: 'https://scheme.elastos.org/elanodes-viewreport?'
         };
         notificationManager.sendNotification(request);
     }
 
     changeDetection(data, votedNodes) {
+        console.log('change detection fired')
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
             title: '',
-            url: 'stakingtools'
+            url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
 
         votedNodes.forEach(storedNode => {
@@ -354,7 +356,8 @@ export class NotificationService {
                         if (match.deltaPayout.percent < 0) {
                             direction = this.translate.instant('notification-change-reduced')
                         }
-                        let elapsed = Date.now() - match.deltaPayout.time / 1000
+                        let elapsed = (Date.now() - match.deltaPayout.time) / 1000
+
                         if (elapsed < 604800) { // Within the last week
                             request.key = match.Nickname + '-changeDetection'
                             request.title = `${this.translate.instant('notification-change-1')} ${match.Nickname} ${this.translate.instant('notification-change-2')}  ${direction} ${this.translate.instant('notification-change-3')}  ${priorPayout}% ${this.translate.instant('notification-change-4')}  ${match.PercentPayout}%`
@@ -370,7 +373,7 @@ export class NotificationService {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
             title: '',
-            url: 'stakingtools'
+            url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
 
         let votedROI: number = 0
@@ -410,7 +413,7 @@ export class NotificationService {
             let request: NotificationManagerPlugin.NotificationRequest = {
                 key: 'cancellationDetection',
                 title: `${this.translate.instant('notification-cancellation-1')}  ${value} ${this.translate.instant('notification-cancellation-2')} ${date} ${this.translate.instant('notification-cancellation-3')}`,
-                url: 'stakingtools'
+                url: 'https://scheme.elastos.org/elanodes-stakingtools?'
             };
             notificationManager.sendNotification(request);
         }
@@ -420,7 +423,7 @@ export class NotificationService {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: 'addressStorage',
             title: this.translate.instant('notification-noAddress'),
-            url: 'addwallet'
+            url: 'https://scheme.elastos.org/elanodes-addwallet?'
         };
         notificationManager.sendNotification(request);
     }

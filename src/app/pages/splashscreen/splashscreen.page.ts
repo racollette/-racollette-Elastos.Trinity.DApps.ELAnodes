@@ -26,13 +26,13 @@ export class SplashscreenPage implements OnInit {
     ionViewWillEnter() {
         if (this.firstLoad) {
             console.log('SPLASHSCREEN WILL ENTER')
-            appManager.setVisible("show", () => { }, (err) => { });
             titleBarManager.setTitle(this.translate.instant('ELAnodes'))
             titleBarManager.setBackgroundColor("#000000");
             titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
             titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
             titleBarManager.setupMenuItems(null);
             this.firstLoad = false;
+            appManager.setVisible("show", () => { }, (err) => { });
         } else {
             setTimeout(() => {
                 this.router.navigate(['/tabs/vote']);

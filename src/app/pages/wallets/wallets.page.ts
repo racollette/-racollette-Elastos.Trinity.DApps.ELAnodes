@@ -29,7 +29,12 @@ export class WalletsPage implements OnInit {
     }
 
     ionViewWillEnter() {
+        appManager.setVisible("show", () => { }, (err) => { });
         titleBarManager.setTitle(this.translate.instant('wallets-title'))
+        titleBarManager.setBackgroundColor("#000000");
+        titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.LIGHT);
+        titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
+        titleBarManager.setupMenuItems(null);
     }
 
     toggleActiveWallet(item) {
