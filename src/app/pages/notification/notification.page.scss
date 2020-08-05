@@ -19,6 +19,7 @@ ion-list {
   }
   ion-label {
     font-size: 15px;
+    --color: #fff;
   }
   ion-note {
     font-size: 13px;
@@ -31,11 +32,7 @@ ion-list {
 }
 
 ion-radio {
-  --color: linear-gradient(
-    360deg,
-    rgb(0, 180, 204) 0%,
-    rgb(0, 135, 153) 100%
-  ) !important;
+  --color: linear-gradient(360deg, rgb(0, 180, 204) 0%, rgb(0, 135, 153) 100%) !important;
 }
 
 ion-toggle {

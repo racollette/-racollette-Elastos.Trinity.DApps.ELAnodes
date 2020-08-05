@@ -91,10 +91,15 @@ export const en = {
 
     // Notification Page
     "notification-title": "Notification Options",
+    "notification-health-title": "Health Check Frequency",
     "notification-instant": "Every Session",
     "notification-daily": "Daily",
     "notification-weekly": "Weekly",
-    "notification-never": "Never",
+    "notification-report-title": "End of Week Report",
+    "notification-change-title": "Payout Change Detection",
+    "notification-optimal-title": "Optimal Configuration Detection",
+    "notification-revote-title": "Vote Cancellation Alerts",
+    "notification-storedAddress-title": "Address Storage Alerts",
 
     // Notifications
     "notification-health-sub36-1": "Vote for",

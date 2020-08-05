@@ -1,50 +1,110 @@
 <ion-content>
   <ion-list lines="none">
     <ion-item style="--border-color: #1a1a1a;">
-      <ion-label style="margin-bottom: 0; margin-top: 0;">
-        <h2 style="font-size: 0.75rem; font-weight: 600">{{ 'general-text' | translate }}</h2>
+      <ion-label
+        style="margin-bottom: 0; margin-top: 0; font-size: 0.75rem; font-weight: 600"
+        >{{ 'general-text' | translate }}
       </ion-label>
     </ion-item>
-      <ion-item *ngFor="let item of general" detail [routerLink]="[item.route]" routerDirection="forward">
-          <ion-icon name="{{item.icon}}"></ion-icon>
-          <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
-          <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
-          <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
-      </ion-item>
-      <ion-item style="--border-color: #1a1a1a;">
-        <ion-label style="margin-bottom: 0; margin-top: 0;">
-          <h2 style="font-size: 0.75rem; font-weight: 600">{{ 'data-text' | translate }}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item *ngFor="let item of storage" detail [routerLink]="[item.route]" routerDirection="forward">
-        <ion-icon name="{{item.icon}}"></ion-icon>
-        <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
-        <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
-        <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
-    </ion-item>
-      <ion-item style="--border-color: #1a1a1a;">
-        <ion-label style="margin-bottom: 0; margin-top: 0;">
-          <h2 style="font-size: 0.75rem; font-weight: 600">{{ 'other-text' | translate }}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item *ngFor="let item of about" detail [routerLink]="[item.route]" routerDirection="forward">
-        <ion-icon name="{{item.icon}}"></ion-icon>
-        <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
-        <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
-        <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
+    <ion-item
+      *ngFor="let item of general"
+      detail
+      [routerLink]="[item.route]"
+      routerDirection="forward"
+    >
+      <ion-icon name="{{item.icon}}"></ion-icon>
+      <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
+      <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
+      <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
     </ion-item>
     <ion-item style="--border-color: #1a1a1a;">
-      <ion-label style="margin-bottom: 0; margin-top: 0;">
-        <h2 style="font-size: 0.75rem; font-weight: 600">{{ 'community-text' | translate }}</h2>
+      <ion-label
+        style="margin-bottom: 0; margin-top: 0; font-size: 0.75rem; font-weight: 600"
+        >{{ 'data-text' | translate }}
       </ion-label>
     </ion-item>
-    <ion-item style="--border-color: #1a1a1a;" class="ion-justify-content-evenly">
-        <ion-col (click)="goSocial('https://t.me/starfish_supernode')"><fa-icon style="color: #fff" [icon]="['fab', 'telegram']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('http://twitter.com/StarfishSN')"><fa-icon style="color: #fff" [icon]="['fab', 'twitter']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://medium.com/starfish-supernode')"><fa-icon style="color: #fff" [icon]="['fab', 'medium']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://www.reddit.com/user/starfish_supernode')"><fa-icon style="color: #fff"  [icon]="['fab', 'reddit-alien']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('https://www.youtube.com/channel/UCr_NyLSC2hiYQvPtQmhGyfw/videos')"><fa-icon style="color: #fff" [icon]="['fab', 'youtube']" size="2x"></fa-icon></ion-col>
-        <ion-col (click)="goSocial('mailto:contact@starfish-supernode.tech')"><fa-icon style="color: #fff" [icon]="['fas', 'envelope']" size="2x"></fa-icon></ion-col>
+    <ion-item
+      *ngFor="let item of storage"
+      detail
+      [routerLink]="[item.route]"
+      routerDirection="forward"
+    >
+      <ion-icon name="{{item.icon}}"></ion-icon>
+      <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
+      <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
+      <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
+    </ion-item>
+    <ion-item style="--border-color: #1a1a1a;">
+      <ion-label
+        style="margin-bottom: 0; margin-top: 0; font-size: 0.75rem; font-weight: 600"
+        >{{ 'other-text' | translate }}
+      </ion-label>
+    </ion-item>
+    <ion-item
+      *ngFor="let item of about"
+      detail
+      [routerLink]="[item.route]"
+      routerDirection="forward"
+    >
+      <ion-icon name="{{item.icon}}"></ion-icon>
+      <ion-label *ngIf="data.language == 'en'">{{ item.label }}</ion-label>
+      <ion-label *ngIf="data.language == 'zh'">{{ item.label_zh }}</ion-label>
+      <!-- <ion-note slot="end">{{item.note}}</ion-note> -->
+    </ion-item>
+    <ion-item style="--border-color: #1a1a1a;">
+      <ion-label
+        style="margin-bottom: 0; margin-top: 0; font-size: 0.75rem; font-weight: 600"
+        >{{ 'community-text' | translate }}
+      </ion-label>
+    </ion-item>
+    <ion-item
+      style="--border-color: #1a1a1a;"
+      class="ion-justify-content-evenly"
+    >
+      <ion-col (click)="goSocial('https://t.me/starfish_supernode')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'telegram']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('http://twitter.com/StarfishSN')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'twitter']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('https://medium.com/starfish-supernode')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'medium']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col
+        (click)="goSocial('https://www.reddit.com/user/starfish_supernode')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'reddit-alien']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col
+        (click)="goSocial('https://www.youtube.com/channel/UCr_NyLSC2hiYQvPtQmhGyfw/videos')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fab', 'youtube']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
+      <ion-col (click)="goSocial('mailto:contact@starfish-supernode.tech')"
+        ><fa-icon
+          style="color: #fff"
+          [icon]="['fas', 'envelope']"
+          size="2x"
+        ></fa-icon
+      ></ion-col>
     </ion-item>
   </ion-list>
 </ion-content>

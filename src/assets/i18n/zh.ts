@@ -91,10 +91,16 @@ export const zh = {
 
     // Notification Page
     "notification-title": "通知选项",
+    "notification-health-title": "健康检查频率",
     "notification-instant": "每次创业",
     "notification-daily": "日常",
     "notification-weekly": "每周",
     "notification-never": "决不",
+    "notification-report-title": "周末报告",
+    "notification-change-title": "支付变更检测",
+    "notification-optimal-title": "最佳配置检测",
+    "notification-revote-title": "投票取消通知",
+    "notification-storedAddress-title": "地址存储警报",
 
     // Notifications
     "notification-health-sub36-1": "投票给",

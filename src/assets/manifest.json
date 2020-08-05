@@ -1,7 +1,7 @@
 {
   "id": "starfish.labs.elanodes",
   "version": "0.8.2",
-  "version_code": 12,
+  "version_code": 13,
   "name": "ELAnodes",
   "short_name": "ELAnodes",
   "short_description": "Staking & rewards utilities",

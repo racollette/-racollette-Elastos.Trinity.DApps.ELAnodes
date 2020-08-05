@@ -1,7 +1,9 @@
 <ion-content padding>
   <ion-list style="padding-top: 0">
     <ion-item>
-      <ion-label class="option">Health Check Frequency</ion-label>
+      <ion-label class="option"
+        >{{ 'notification-health-title' | translate }}</ion-label
+      >
       <ion-select
         [(ngModel)]="health"
         okText="Okay"
@@ -27,7 +29,9 @@
 
     <ion-list>
       <ion-item>
-        <ion-label class="option">End of Week Report</ion-label>
+        <ion-label class="option"
+          >{{ 'notification-report-title' | translate }}</ion-label
+        >
         <ion-toggle
           [(ngModel)]="report"
           (ionChange)="optionsToggle($event, 'report')"
@@ -35,7 +39,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-label class="option">Payout Change Detection</ion-label>
+        <ion-label class="option"
+          >{{ 'notification-change-title' | translate }}</ion-label
+        >
         <ion-toggle
           [(ngModel)]="change"
           (ionChange)="optionsToggle($event, 'change')"
@@ -43,7 +49,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-label class="option">Optimal Configuration Detection</ion-label>
+        <ion-label class="option"
+          >{{ 'notification-optimal-title' | translate }}</ion-label
+        >
         <ion-toggle
           [(ngModel)]="optimal"
           (ionChange)="optionsToggle($event, 'optimal')"
@@ -51,7 +59,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-label class="option">Vote Cancellation Alerts</ion-label>
+        <ion-label class="option"
+          >{{ 'notification-revote-title' | translate }}</ion-label
+        >
         <ion-toggle
           [(ngModel)]="revote"
           (ionChange)="optionsToggle($event, 'revote')"
@@ -59,7 +69,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-label class="option">Address Storage Alerts</ion-label>
+        <ion-label class="option"
+          >{{ 'notification-storedAddress-title' | translate }}</ion-label
+        >
         <ion-toggle
           [(ngModel)]="storedAddress"
           (ionChange)="optionsToggle($event, 'storedAddress')"
