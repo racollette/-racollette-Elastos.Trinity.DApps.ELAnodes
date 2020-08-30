@@ -218,7 +218,9 @@ export class NodesService {
                 || node.Nickname === 'Elastos.info'
                 || node.Nickname === 'Elate.ch'
                 || node.Nickname === '链世界'
-                || node.Nickname === 'Dragonela 2.0') {
+                || node.Nickname === 'Dragonela 2.0'
+                || node.Nickname === 'ElaboxSN1'
+            ) {
                 node.imageUrl = '../../assets/logos/' + node.Nickname + '.png'
             }
             if (node.Nickname === '韩锋/SunnyFengHan') {
@@ -298,7 +300,9 @@ export class NodesService {
             || name === 'Elate.ch'
             || name === 'Elastos.info'
             || name === '链世界'
-            || name === 'Dragonela 2.0') {
+            || name === 'Dragonela 2.0'
+            || name === 'ElaBoxSN1'
+        ) {
             return '../../assets/logos/' + name + '.png'
         }
         if (name === '韩锋/SunnyFengHan') {

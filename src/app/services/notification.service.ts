@@ -287,39 +287,41 @@ export class NotificationService {
     sendHealthCheckNotification(type, name) {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
-            title: '',
+            title: this.translate.instant('notification-health-header'),
+            message: '',
             url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
+
 
         switch (type) {
             case 'sub36':
                 request.key = 'sub36Alert'
-                request.title = this.translate.instant('notification-health-sub36-1') + ' ' + name + ' ' + this.translate.instant('notification-health-sub36-2')
+                request.message = this.translate.instant('notification-health-sub36-1') + ' ' + name + ' ' + this.translate.instant('notification-health-sub36-2')
                 notificationManager.sendNotification(request);
                 console.log('Sub36')
                 break;
             case 'pass':
                 request.key = 'healthStatusPass'
-                request.title = this.translate.instant('notification-health-pass')
+                request.message = this.translate.instant('notification-health-pass')
                 request.url = ''
                 notificationManager.sendNotification(request);
                 console.log('Pass')
                 break;
             case 'offline':
                 request.key = name + '-offlineAlert'
-                request.title = this.translate.instant('notification-health-offline-1') + ' ' + name + ' ' + this.translate.instant('notification-health-offline-1')
+                request.message = name + ' ' + this.translate.instant('notification-health-offline-2')
                 notificationManager.sendNotification(request);
                 console.log('Inactive')
                 break;
             case 'canceled':
                 request.key = name + '-canceledAlert'
-                request.title = this.translate.instant('notification-health-canceled-1') + ' ' + name + ' ' + this.translate.instant('notification-health-canceled-2')
+                request.message = name + ' ' + this.translate.instant('notification-health-canceled-2')
                 notificationManager.sendNotification(request);
                 console.log('Canceled')
                 break;
             case 'illegal':
                 request.key = name + '-illegalAlert'
-                request.title = this.translate.instant('notification-health-illegal-1') + ' ' + name + ' ' + this.translate.instant('notification-health-illegal-2')
+                request.message = name + ' ' + this.translate.instant('notification-health-illegal-2')
                 notificationManager.sendNotification(request);
                 console.log('Illegal')
                 break;
@@ -331,7 +333,8 @@ export class NotificationService {
     weeklyReportNotification() {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: 'weeklyReport',
-            title: this.translate.instant('notification-report'),
+            title: this.translate.instant('notification-report-header'),
+            message: this.translate.instant('notification-report'),
             url: 'https://scheme.elastos.org/elanodes-viewreport?'
         };
         notificationManager.sendNotification(request);
@@ -341,7 +344,8 @@ export class NotificationService {
         console.log('change detection fired')
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
-            title: '',
+            title: this.translate.instant('notification-change-header'),
+            message: '',
             url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
 
@@ -360,7 +364,7 @@ export class NotificationService {
 
                         if (elapsed < 604800) { // Within the last week
                             request.key = match.Nickname + '-changeDetection'
-                            request.title = `${this.translate.instant('notification-change-1')} ${match.Nickname} ${this.translate.instant('notification-change-2')}  ${direction} ${this.translate.instant('notification-change-3')}  ${priorPayout}% ${this.translate.instant('notification-change-4')}  ${match.PercentPayout}%`
+                            request.message = `${match.Nickname} ${this.translate.instant('notification-change-2')}  ${direction} ${this.translate.instant('notification-change-3')}  ${priorPayout}% ${this.translate.instant('notification-change-4')}  ${match.PercentPayout}%`
                             notificationManager.sendNotification(request);
                         }
                     }
@@ -372,7 +376,8 @@ export class NotificationService {
     optimalConfiguration(data, votedNodes) {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: '',
-            title: '',
+            title: this.translate.instant('notification-optimal-header'),
+            message: '',
             url: 'https://scheme.elastos.org/elanodes-stakingtools?'
         };
 
@@ -393,7 +398,7 @@ export class NotificationService {
 
         if (difference > 0.25) {
             request.key = 'optimalConfiguration'
-            request.title = `${this.translate.instant('notification-optimal')}  ${difference.toFixed(2)}%`
+            request.message = `${this.translate.instant('notification-optimal')}  ${difference.toFixed(2)}%`
             notificationManager.sendNotification(request);
         }
     }
@@ -403,7 +408,6 @@ export class NotificationService {
     }
 
     cancellationDetection(history) {
-        console.log('Cancellation detection')
         let filterHistory = this.filterHistory(history)
 
         if (filterHistory.length > 0) {
@@ -412,7 +416,8 @@ export class NotificationService {
             let date = new Date(tx.CreateTime * 1000).toDateString();
             let request: NotificationManagerPlugin.NotificationRequest = {
                 key: 'cancellationDetection',
-                title: `${this.translate.instant('notification-cancellation-1')}  ${value} ${this.translate.instant('notification-cancellation-2')} ${date} ${this.translate.instant('notification-cancellation-3')}`,
+                title: this.translate.instant('notification-cancellation-header'),
+                message: `${this.translate.instant('notification-cancellation-1')}  ${value} ${this.translate.instant('notification-cancellation-2')} ${date} ${this.translate.instant('notification-cancellation-3')}`,
                 url: 'https://scheme.elastos.org/elanodes-stakingtools?'
             };
             notificationManager.sendNotification(request);
@@ -422,7 +427,8 @@ export class NotificationService {
     noAddressStored() {
         let request: NotificationManagerPlugin.NotificationRequest = {
             key: 'addressStorage',
-            title: this.translate.instant('notification-noAddress'),
+            title: this.translate.instant('notification-noAddress-header'),
+            message: this.translate.instant('notification-noAddress'),
             url: 'https://scheme.elastos.org/elanodes-addwallet?'
         };
         notificationManager.sendNotification(request);

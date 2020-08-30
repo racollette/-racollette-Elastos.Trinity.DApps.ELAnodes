@@ -33,57 +33,43 @@ export class SettingsPage implements OnInit {
     ionViewDidEnter() {
     }
 
-    general = [
-        {
-            route: "/tabs/language",
-            label: "Language",
-            label_zh: "语言",
-            icon: "md-globe",
-        },
-        {
-            route: "/tabs/notification",
-            label: "Notification Options",
-            label_zh: "通知选项",
-            icon: "notifications-outline",
-        }
-    ];
+    // general = [
+    //     {
+    //         route: "/tabs/language",
+    //         icon: "md-globe"
+    //     },
+    //     {
+    //         route: "/tabs/notification",
+    //         icon: "notifications-outline"
+    //     }
+    // ];
 
-    storage = [
-        {
-            route: "/tabs/wallets",
-            label: "Wallets",
-            label_zh: "皮夹",
-            icon: "wallet",
-        },
-    ];
+    // storage = [
+    //     {
+    //         route: "/tabs/wallets",
+    //         icon: "wallet"
+    //     },
+    // ];
 
-    about = [
-        {
-            route: "/tabs/about",
-            label: "About",
-            label_zh: "关于",
-            icon: "md-alert",
-            note: "v1.0",
-        },
-        {
-            route: "/tutorial",
-            label: "Tutorial",
-            label_zh: "讲解",
-            icon: "md-photos",
-        },
-        {
-            route: "/tabs/faq",
-            label: "F.A.Q.",
-            label_zh: "常问问题",
-            icon: "help-circle",
-        },
-        {
-            route: "/tabs/donate",
-            label: "Donate",
-            label_zh: "捐",
-            icon: "thumbs-up",
-        },
-    ];
+    // about = [
+    //     {
+    //         route: "/tabs/about",
+    //         icon: "md-alert",
+    //         note: "v1.0"
+    //     },
+    //     {
+    //         route: "/tutorial",
+    //         icon: "md-photos"
+    //     },
+    //     {
+    //         route: "/tabs/faq",
+    //         icon: "help-circle"
+    //     },
+    //     {
+    //         route: "/tabs/donate",
+    //         icon: "thumbs-up"
+    //     },
+    // ];
 
     public goWebsite() {
         this.native.openUrl("https://starfish-supernode.tech");
