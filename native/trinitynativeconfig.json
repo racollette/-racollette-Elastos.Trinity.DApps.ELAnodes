@@ -1,0 +1,20 @@
+{
+    "build": {
+        "root": "..",
+        "out": "../native-out"
+    },
+    "application": {
+        "name": "ELAnodes",
+        "nativepackageid": "starfish.labs.elanodes",
+        "icon": "./logo.png",
+        "splashscreen": "./splash.png",
+        "intentscheme": {
+            "scheme": "https",
+            "path": "starfish.labs.elanodes"
+        },
+        "version": {
+            "code": 101,
+            "name": "1.0.1"
+        }
+    }
+}

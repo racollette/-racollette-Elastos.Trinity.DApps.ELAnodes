@@ -5,3 +5,4 @@ appdid/
 typings/
 .vscode/
 .bugs
+native-out/
